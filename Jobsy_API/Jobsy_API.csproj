@@ -246,6 +246,16 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DATA_L\DATA_L.csproj">
+      <Project>{e647e661-e2ab-46a1-bcd6-bc3ed5aa456e}</Project>
+      <Name>DATA_L</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ENTITY_L\ENTITY_L.csproj">
+      <Project>{61d5ccb9-be3c-4f13-a756-34482a797dd4}</Project>
+      <Name>ENTITY_L</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
