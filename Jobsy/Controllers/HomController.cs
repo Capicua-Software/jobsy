@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Jobsy.Controllers
 {
-    public class HomeController : Controller
+    public class HomController : Controller
     {
         public ActionResult Index()
         {
