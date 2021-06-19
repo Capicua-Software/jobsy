@@ -144,6 +144,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\HomController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,6 +156,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Index\GLogo.svg" />
+    <Content Include="Content\Index\header_wallpaper.png" />
+    <Content Include="Content\Index\Logo.svg" />
+    <Content Include="Content\Index\nodes-animation.js" />
+    <Content Include="Content\Index\style.css" />
+    <Content Include="Content\Index\typing-effect.js" />
+    <Content Include="Content\Index\waves.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -186,6 +194,8 @@
     <Content Include="Views\Hom\About.cshtml" />
     <Content Include="Views\Hom\Contact.cshtml" />
     <Content Include="Views\Hom\Index.cshtml" />
+    <Content Include="Views\Shared\IndexShared\_IndexNavbar.cshtml" />
+    <Content Include="Views\Index\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
