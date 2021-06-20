@@ -322,6 +322,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationD\AuthenticationD.cs" />
+    <Compile Include="AuthenticationD\FirebaseCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
