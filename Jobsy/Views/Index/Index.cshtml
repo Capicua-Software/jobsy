@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+   
+</head>
+<body>
+    <!-- Background image -->
+    <div class="p-5 text-center bg-image"
+         style="
+            background-image: url('https://www.mediafire.com/convkey/e31f/v1g45ihj21urf7c9g.jpg');
+            height: 500px;
+        ">
+        <canvas id="canvas"></canvas>
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
+            <div class="d-flex justify-content-center align-items-center container" style="height:35rem;">
+                <div class="text-white ">
+                    <h1 class="mb-0 header-title">Encuentra el empleo ideal como</h1>
+
+                    <div class="mt-2 d-flex ">
+                        <h1 class="mb-6 header-subtitle"><span class="typed-text"></span><span class="header-subtitle-thin cursor">&nbsp;</span></h1>
+                    </div>
+
+                    <form class="form" action="">
+                        <div class="input-icons">
+                            <i class="ri-search-line icon"></i>
+                            <input type="text" placeholder="Titulo, Empresa, Categoría, Ubicación">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Background image -->
+    <!--======RECENT JOBS=======-->
+    <section>
+        <div class="wave-container mb-4">
+            <div class="d-flex justify-content-center">
+                <h1 class="h1-wave container">Empleos recientes</h1>
+            </div>
+            <!--<p class="p-wave">Los empleos mas jevis 😎</p>-->
+
+            <svg viewBox="0 0 1440 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 101.979L60 93.4545C120 85.2484 240 67.7207 360 80.7071C480 93.2155 600 136.238 720 135.999C840 136.238 960 93.2155 1080 80.7071C1200 67.7207 1320 85.2484 1380 93.4545L1440 101.979V-4.35233e-06H1380C1320 -4.35233e-06 1200 -4.35233e-06 1080 -4.35233e-06C960 -4.35233e-06 840 -4.35233e-06 720 -4.35233e-06C600 -4.35233e-06 480 -4.35233e-06 360 -4.35233e-06C240 -4.35233e-06 120 -4.35233e-06 60 -4.35233e-06H0L0 101.979Z" fill="#933368" fill-opacity="0.05" />
+            </svg>
+        </div>
+
+        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
+                <div class=" rounded-3">
+                    <a href="" class="">
+                        <div class="card-body">
+
+                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <script type="text/javascript" src="~/Content/Index/typing-effect.js"></script>
+    <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
+</body>
+</html>
+
