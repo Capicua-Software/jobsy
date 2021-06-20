@@ -1,0 +1,126 @@
+﻿@model ENTITY_L.Models.Authentication.SignUpModel
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+}
+
+<!-- Background image -->
+<div class="bg-image"
+     style="background-image: url('https://www.mediafire.com/convkey/8ef1/irtrm9kc2r9hgxb9g.jpg'); height: 100vh ">
+
+    <div class="container col-md-5 login-vertical-center" style="margin-top:3rem;">
+        <!-- Pills navs -->
+        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link"
+                   id="tab-login"
+                   href="@Url.Action("Login", "Auth")"
+                   role="tab"
+                   aria-controls="pills-login"
+                   aria-selected="false">Login</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active"
+                   id="tab-register"
+                   data-mdb-toggle="pill"
+                   href="#pills-register"
+                   role="tab"
+                   aria-controls="pills-register"
+                   aria-selected="true">Register</a>
+            </li>
+        </ul>
+        <!-- Pills navs -->
+        <!-- Pills content -->
+        @using (Html.BeginForm("SignUp", "Auth", FormMethod.Post))
+        {
+            <div class="tab-content shadow p-5 rounded bg-white">
+
+                <div class="tab-pane fade show active"
+                     id="pills-register"
+                     role="tabpanel"
+                     aria-labelledby="tab-register">
+                    <form>
+                        <div class="text-center mb-3">
+                            <p>Sign up with:</p>
+                            <button type="button" class="btn btn-primary btn-floating mx-1">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-primary btn-floating mx-1">
+                                <i class="fab fa-google"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-primary btn-floating mx-1">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+
+                            <button type="button" class="btn btn-primary btn-floating mx-1">
+                                <i class="fab fa-github"></i>
+                            </button>
+                        </div>
+
+                        <p class="text-center">or:</p>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <!-- Name input -->
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        <div class="form-outline mb-4">
+                            <input type="text" id="registerName" name="Name" class="form-control" />
+                            <label class="form-label" for="registerName">Nombre</label>
+                        </div>
+
+                        <!-- Email input -->
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        <div class="form-outline mb-4">
+                            <input type="email" id="registerEmail" name="Email" class="form-control" />
+                            <label class="form-label" for="registerEmail">Email</label>
+                        </div>
+
+                        <!-- Password input -->
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <div class="form-outline mb-4">
+                            <input type="password" id="registerPassword" name="Password" class="form-control" />
+                            <label class="form-label" for="registerPassword">Password</label>
+                        </div>
+
+
+                        <!-- Checkbox -->
+                        <div class="row">
+                            <div class="form-check col d-flex justify-content-center mb-4">
+                                <input class="form-check-input me-2"
+                                       type="checkbox"
+                                       value="true"
+                                       name="Employer"
+                                       id="registerCheck"
+                                       aria-describedby="registerCheckHelpText" />
+                                <label class="form-check-label" for="registerCheck">
+                                    Soy empleador
+                                </label>
+                            </div>
+
+                            <div class="form-check col d-flex justify-content-center mb-4">
+                                <input class="form-check-input me-2"
+                                       type="checkbox"
+                                       value=""
+                                       id="registerCheck2"
+                                       checked
+                                       aria-describedby="registerCheckHelpText" />
+                                <label class="form-check-label" for="registerCheck2">
+                                    Acepto los términos y condiciones
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-3">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <!-- Pills content -->
+    </div>
+
+
+</div>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENTITY_L.Models.User
 {
-    class UserModel
+    public class UserModel
     {
 
     }

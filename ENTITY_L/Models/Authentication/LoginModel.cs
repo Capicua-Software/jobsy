@@ -9,7 +9,7 @@ using Firebase.Auth;
 
 namespace ENTITY_L.Models.Authentication
 {
-    class LoginModel
+    public class LoginModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]
