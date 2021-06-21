@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+
+:root{
+    /*BUTTONS*/
+    --primary-color: #933368;
+    --primary-active: #70274f;
+
+    /*BOX SHADOW*/
+    --box-shadow-1: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    /*FONTS TO USE*/
+    --navbar-font: 'Raleway';
+
+    /*HEADER TITLES*/
+    --h1: 'Raleway';
+
+    /*FONT-WEIGHT*/
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-light: 300;
+    --font-bold: 700;
+}
+
+.primary-color-button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: var(--box-shadow-1);
+}
+.primary-color-button:hover{
+    background-color: var(--primary-active);
+    color: #ffffff;
+    box-shadow: var(--box-shadow-1);
+}
+    .primary-color-button:focus {
+        background-color: var(--primary-active);
+        color: #ffffff;
+        box-shadow: var(--box-shadow-1);
+    }
+
+
+
+
+body {
+    background-color: #FBFBFB;
+}
+
+/*==HEADERS==*/
+h1{
+    font-family: var(--h1);
+}
+
+/*BUTTONS*/
+.btn{
+    font-family: var(--navbar-font);
+    font-weight: var(--font-semi-bold);
+    text-transform: initial;
+}
+
+.btn-link{
+    font-weight: var(--font-bold);
+}
+/*CHECKBOXES*/
+
+
+/*NAV BAR*/
+.navbar-links{
+    font-family: var(--navbar-font);
+    font-weight: var(--font-medium);
+    margin-left: 3rem;
+    
+}
+
+.link-active{
+    font-style: bold;
+}
+
+/*LINK NAVBAR BUTTON*/
+.navbar-link-button{
+    color: var(--primary-color);
+    font-size: 15px;
+}
+.navbar-link-button:hover{
+    color: var(--primary-color);
+    background-color: #ffeff7;
+    
+}
+.navbar-link-button:focus{
+    color: var(--primary-color);
+    background-color: #ffeff7;
+    
+}
+
+
+/*OUTLINED NAVBAR BUTTON*/
+.navbar-button{
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-size: 15px;
+}
+.navbar-button:hover{
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: var(--box-shadow-1);
+}
+.navbar-button:focus{
+    border-color: var(--primary-color);
+    background-color: var(--primary-active);
+    color: #ffffff;
+}
+
+
+/*====HEADER BACKGROUND=====*/
+.header-title{
+    font-size: 60px;
+    font-weight: var(--font-light);
+}
+.header-subtitle{
+    font-size: 60px;
+    font-weight: var(--font-bold);
+}
+.header-subtitle-thin{
+    font-size: 60px;
+    font-weight: var(--font-light);
+    
+}
+
+
+/*TYPING TEXT EFFECT*/
+h1 span.typed-text {
+    font-weight: var(--font-bold);
+    color: #fff;
+  }
+h1 span.cursor {
+    font-size: 60px;
+    font-weight: var(--font-light);
+    display: inline-block;
+    background-color: #ccc;
+    margin-left: 0.1rem;
+    width: 3px;
+    animation: blink 1s infinite;
+  }
+h1 span.cursor.typing {
+    animation: none;
+  }
+  @keyframes blink {
+    0%  { background-color: #ccc; }
+    49% { background-color: #ccc; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100%  { background-color: #ccc; }
+  }
+
+
+  .form input {
+    font-family: var(--navbar-font);
+    font-weight: var(--font-medium);
+    outline: 0;
+    background: #FBFBFB;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 20px;
+    padding-left: 5.2rem;
+    box-sizing: border-box;
+    font-size: 18px;
+    /*border-radius: 35px;*/
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-1);
+    transition: 0.3s;
+}
+
+.form input:hover{
+    background: #ececec;
+    transition: 0.3s;
+}
+
+.input-icons i {
+    position: absolute;
+    color: rgb(145, 145, 145);
+}
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.icon {
+    padding: 14px;
+    padding-left: 1.8rem;
+    min-width: 40px;
+    font-size: 24px;
+}
+
+
+/*================RECENT JOBS SECTION=================*/
+
+
+  .wave-container {
+    position: relative;
+    color: var(--primary-color);
+    text-align: center;
+    overflow: hidden;
+    z-index: -10;
+  }
+
+
+.h1-wave{
+    position: absolute;
+    padding-top: 3%;
+    font-family: var(--navbar-font);
+    font-weight: var(--font-bold);
+    font-size: 35px;
+    color: #492B6E;
+
+}
+.p-wave{
+    position: absolute;
+    margin-top: 5.8rem;
+    font-family: var(--navbar-font);
+    font-weight: var(--font-bold);
+    
+    color: #492B6E;
+}
+
+@keyframes animateWave {
+    0% {
+      transform: scale(10,1);
+    }
+    50% {
+      transform: scale(1,1);
+    }
+
+  }
+  .wave-container > svg {
+    display: block;
+    transform-origin: top;
+    animation: animateWave 5000ms;
+    animation-duration: 3000ms;
+    
+  }
+
+  /*=====RECENT JOBS CARDS====*/
+.card-jobs{
+    box-shadow: rgba(0, 0, 0, 0.192) 0px 2px 4px;
+    transition:300ms;
+    background-color: white;
+}
+.card-jobs:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition:300ms;
+}
+.card-jobs:focus{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition:300ms;
+}
+
+
+footer{
+    background: linear-gradient(0.20turn, #C33764, #1D2671);
+}
+
+
+
+/*======LOGIN=======*/
+.login-vertical-center {
+   
+    position: relative;
+    top: 50%;
+
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
