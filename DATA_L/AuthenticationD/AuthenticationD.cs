@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ENTITY_L.Models.Authentication;
 using Firebase.Auth;
+using Google.Cloud.Firestore;
 
 namespace DATA_L.Authentication
 {
@@ -24,8 +25,35 @@ namespace DATA_L.Authentication
         {
             model.auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             model.a = await model.auth.CreateUserWithEmailAndPasswordAsync(model.Email, model.Password, model.Name, true);
-
+            await SendUserInfoToFirestore(model);
             return model;
+        }
+
+        public async 
+        Task
+        SendUserInfoToFirestore(SignUpModel model)
+        {
+            OpenFirestoreConnection();
+            Dictionary<string, object> user = new Dictionary<string, object>
+            {
+                {"Name", model.Name },
+                {"Email", model.Email },
+                {"Employer", model.Employer }
+            };
+
+            switch (model.Employer)
+            {
+                case false:
+                    docRef = db.Collection("Users").Document(model.Email);
+                    await docRef.SetAsync(user);
+                    break;
+
+                case true:
+                    docRef = db.Collection("Employers").Document(model.Email);
+                    await docRef.SetAsync(user);
+                    break;
+            }
+
         }
     }
 }
