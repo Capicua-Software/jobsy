@@ -1,0 +1,97 @@
+﻿@model List<ENTITY_L.Models.Jobs.JobsModel>
+
+@{
+    List<ENTITY_L.Models.Jobs.JobsModel> AllJobs = (List<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.AllJobs; // Llama al metodo que se encuenta en la API
+
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoadJobsAsync</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+            Company
+            </th>
+            <th>
+            Email
+            </th>
+            <th>
+           Tipo de Empleo
+            </th>
+            <th>
+            Logo
+            </th>
+            <th>
+              URL
+            </th>
+            <th>
+            Posicion
+            </th>
+            <th>
+            Ubicacion
+            </th>
+            <th>
+            Categoria
+            </th>
+            <th>
+            Descripcion del trabajo
+            </th>
+            <th>
+             Requerimientos
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in AllJobs) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.URL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Job)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requirements)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id=item.Id}) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
