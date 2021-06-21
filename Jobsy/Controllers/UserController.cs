@@ -12,8 +12,8 @@ namespace Jobsy.Controllers
         // GET: User
         public ActionResult UserDashboard()
         {
-            string email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
-            System.Diagnostics.Debug.WriteLine(email);
+            //string email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+            //System.Diagnostics.Debug.WriteLine(email);
             return View();
         }
     }
