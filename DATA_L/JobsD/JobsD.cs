@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ENTITY_L.Models.Jobs;
 using Google.Cloud.Firestore;
+using Newtonsoft.Json;
 
 namespace DATA_L.JobsD
 {
@@ -18,15 +19,15 @@ namespace DATA_L.JobsD
             {
              Dictionary<string, object> job = new Dictionary<string, object> //Diccionario de datos con los campos y sus respectivos valores
             {
-                { "Compañía", model.Company },
-                { "Tipo de Empleo", model.JobType },
+                { "Company", model.Company },
+                { "JobType", model.JobType },
                 { "Logo", model.Logo },
                 { "URL", model.URL },
-                { "Posición", model.Job },
-                { "Ubicación", model.Location },
-                { "Categoría", model.Category },
-                { "Descripción del trabajo", model.JobDescription },
-                { "Cómo aplicar", model.Requirements },
+                { "Job", model.Job },
+                { "Location", model.Location },
+                { "Category", model.Category },
+                { "JobDescription", model.JobDescription },
+                { "Requirements", model.Requirements },
                 { "Email", model.Email }
             };
 
@@ -39,6 +40,30 @@ namespace DATA_L.JobsD
                 throw;
             }
           
+        }
+
+
+        public async Task<List<JobsModel>> LoadJobsAsync() // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            Query allJobsQuery = db.Collection("Jobs"); // Consulta que toma todas las collecciones en la base de datos
+            QuerySnapshot allJobsQuerySnapshot = await allJobsQuery.GetSnapshotAsync(); // Ehecuta la consulta
+            List<JobsModel> lstJobs = new List<JobsModel>(); // Declaramos una lista para guardar los datos 
+            foreach (DocumentSnapshot documentSnapshot in allJobsQuerySnapshot.Documents) //Recorremos el resultado de la consulta y lo añadimos a la lista
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
+                  
+                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
+                    JobsModel newJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
+                    newJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    lstJobs.Add(newJob); // Se agrega a la lista el objeto
+
+                }
+            }
+            return lstJobs; // Retorna la lista
+
         }
     }
 }

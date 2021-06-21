@@ -31,10 +31,28 @@ namespace Jobsy.Controllers
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.Message);//Lanza un mensaje en la consola en caso de error
             }
 
-            return View();
+            return View();//Retorna la vista
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> LoadJobsAsync() // Metodo para devolver una vista con todos los empleaos 
+        {
+            try
+            {
+                List<JobsModel> AllJobs = await job.LoadJobsAsync(); // Llama al metodo que se encuenta en la API
+                ViewBag.AllJobs = AllJobs; //Guardamos el resultado del metodo en el Viewbag
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+            }
+
+            return View(); //Retorna la vista
         }
     }
 }

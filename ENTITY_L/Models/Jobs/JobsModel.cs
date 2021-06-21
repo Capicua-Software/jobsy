@@ -9,14 +9,14 @@ namespace ENTITY_L.Models.Jobs
 {
     public class JobsModel
     {
-        [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Company")]
-        public string Company { get; set; }
+        public string Id { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email")]
+        [DataType(DataType.Text)]
+        public string Company { get; set; }
+
+        [Required]     
         public string Email { get; set; }
 
         [Required]
@@ -24,6 +24,8 @@ namespace ENTITY_L.Models.Jobs
         public string JobType { get; set; }
 
         public string Logo { get; set; }
+
+        [DataType(DataType.Url)]
         public string URL { get; set; }
 
         [Required]
