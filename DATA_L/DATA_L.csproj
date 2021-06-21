@@ -392,7 +392,10 @@
   <ItemGroup>
     <Compile Include="AuthenticationD\AuthenticationD.cs" />
     <Compile Include="FirebaseCore.cs" />
+<<<<<<< Updated upstream
     <Compile Include="JobsD\JobsD.cs" />
+=======
+>>>>>>> Stashed changes
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
