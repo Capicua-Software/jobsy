@@ -23,6 +23,29 @@
     --font-bold: 700;
 }
 
+.primary-color-button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: var(--box-shadow-1);
+}
+.primary-color-button:hover{
+    background-color: var(--primary-active);
+    color: #ffffff;
+    box-shadow: var(--box-shadow-1);
+}
+    .primary-color-button:focus {
+        background-color: var(--primary-active);
+        color: #ffffff;
+        box-shadow: var(--box-shadow-1);
+    }
+
+
+
+
+body {
+    background-color: #FBFBFB;
+}
+
 /*==HEADERS==*/
 h1{
     font-family: var(--h1);
@@ -38,6 +61,7 @@ h1{
 .btn-link{
     font-weight: var(--font-bold);
 }
+/*CHECKBOXES*/
 
 
 /*NAV BAR*/
@@ -220,6 +244,7 @@ h1 span.cursor.typing {
 .card-jobs{
     box-shadow: rgba(0, 0, 0, 0.192) 0px 2px 4px;
     transition:300ms;
+    background-color: white;
 }
 .card-jobs:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -233,4 +258,16 @@ h1 span.cursor.typing {
 
 footer{
     background: linear-gradient(0.20turn, #C33764, #1D2671);
+}
+
+
+
+/*======LOGIN=======*/
+.login-vertical-center {
+   
+    position: relative;
+    top: 50%;
+
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }

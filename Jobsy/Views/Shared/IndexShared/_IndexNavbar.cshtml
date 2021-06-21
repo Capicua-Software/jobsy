@@ -4,9 +4,6 @@
 }
 
 <!DOCTYPE html>
-
-<html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,7 +32,7 @@
         <!-- Container wrapper -->
         <div class="container">
             <!-- Navbar brand -->
-            <a class="navbar-brand me-2" href="">
+            <a class="navbar-brand me-2" href="@Url.Action("Index", "Index")">
                 <img src="~/Content/Index/Logo.svg"
                      height="42"
                      alt=""
@@ -71,12 +68,20 @@
                 <!-- Left links -->
 
                 <div class="d-flex align-items-center">
-                    <button type="button" class="btn btn-link navbar-link-button btn-rounded px-3 me-2">
+                    <a href="@Url.Action("Login", "Auth")" id="LoginBtn" class="btn btn-link navbar-link-button btn-rounded px-3 me-2">
                         Iniciar sesión
-                    </button>
-                    <button type="button" class="btn btn-outline-primary btn-rounded me-3 navbar-button">
+                    </a>
+
+                    <a href="@Url.Action("SignUp", "Auth")" id="RegisterBtn" class="btn btn-outline-primary btn-rounded me-3 navbar-button">
                         <strong>Registrarse</strong>
-                    </button>
+                    </a>
+
+                    <script>
+                        function hideButtons() {
+                            //document.getElementById('LoginBtn').classList.add('d-none');
+                            //document.getElementById('RegisterBtn').classList.add('d-none');
+                        }
+                    </script>
 
                 </div>
             </div>
@@ -90,9 +95,8 @@
         @RenderBody()
     </div>
 
-
     <!-- Footer -->
-    <footer class="text-center text-white mt-5">
+    <footer class="text-center text-white" style="">
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->
