@@ -152,6 +152,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\Jobs\JobsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,6 +206,7 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\SignUp.cshtml" />
     <Content Include="Views\User\UserDashboard.cshtml" />
+    <Content Include="Views\Jobs\PostAJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
