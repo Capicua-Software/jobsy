@@ -47,6 +47,14 @@ namespace Jobsy_API.Controllers
             return Job; //Retorna una lista 
         }
 
+        [HttpPost]
+        [Route("api/Jobs/Editjob")]  // Ruta de la API
+        public async Task<JobsModel> Editjob(JobsModel job) // Método para cargar todos los Empleos
+        {
+            var _job = await jobs.Editjob(job);
+            return _job;
+        }
+
 
         [HttpPost]
         [Route("api/Jobs/Deletejob")]  // Ruta de la API
