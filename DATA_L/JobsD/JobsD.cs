@@ -95,5 +95,20 @@ namespace DATA_L.JobsD
             }
 
         }
+
+        public void Deletejob(string id)
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                DocumentReference empRef = db.Collection("Jobs").Document(id);
+                empRef.DeleteAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
     }
 }
