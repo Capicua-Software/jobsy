@@ -1,13 +1,15 @@
-﻿
+﻿@model List<ENTITY_L.Models.Jobs.JobsModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    IEnumerable<ENTITY_L.Models.Jobs.JobsModel> LastJobs = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.LastJobs; // Llama al metodo que se encuenta en la API
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-   
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
 </head>
 <body>
     <!-- Background image -->
@@ -52,90 +54,51 @@
             </svg>
         </div>
 
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
+        @foreach (var item in LastJobs)
+        {
 
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
+            <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
 
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+                <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+                    <div class=" rounded-3">
+                        <a href="@Url.Action("Details", "Jobs/Details", new {id=item.Id})" class="">
 
-                        </div>
-                    </a>
+                            <div class="row">
+                                <div style="margin: 1.5rem;" class="col-sm-3 mt-5">
+                                    <img src="@item.Logo" height="90px" class="mt-2" alt="mdb logo">
+                                </div>
+                                <div class="col-md-5">
+                                    @* <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo"> *@
+                                    <h3 class="Job col">@item.Job</h3>
+                                    <span class="Company">@item.Company</span>
+                                    @* Para cada puesto de trabajo, sólola ubicación, la posición, y la empresa se muestran. *@
+
+                                    <p class="card-text ">
+                                        <h6 class="Title col-md-12">Ubicación</h6>
+                                    <p class="Subtitle col-md-12">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg> @item.Location
+                                    </p>
+                                    <h6 class="Title col-md-12">Publicación</h6>
+                                    <p class="Subtitle col-md-12">
+                                        @item.Date
+                                    </p>
+                                    <div class="rectangulo"><p class="">@item.JobType</p></div>
+                                </div>
+                            </div>
+
+
+
+                        </a>
+                    </div>
                 </div>
+
+
+
             </div>
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
+        }
     </section>
 
 
@@ -143,4 +106,3 @@
     <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
 </body>
 </html>
-

@@ -67,9 +67,15 @@ namespace DATA_L.JobsD
 
         }
 
+        public async Task<IEnumerable<JobsModel>> GetLastJobsAsync(int index) // Método para cargar en inicio los N ultimos empleos
+        {
+            List<JobsModel> jobs = await LoadJobsAsync(); // Se guarda en una lista todos los empleos que se encuentran en la bd  
+            var job = jobs.OrderByDescending(x => x.Date).Take(index);  // Se ordena la lista por fecha en orden descendiente y se toma N cantidad de empleos
+            return job; // Se retorna la lista
+        }
 
 
-        
+
         public async Task<JobsModel> Loadjob(string id) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -109,6 +115,8 @@ namespace DATA_L.JobsD
                 throw;
             }
         }
+
+
 
     }
 }

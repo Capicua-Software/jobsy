@@ -30,6 +30,7 @@ namespace ENTITY_L.Models.Jobs
         public string JobType { get; set; }
 
         [FirestoreProperty]
+        [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
 
         [DataType(DataType.Url)]
@@ -62,7 +63,7 @@ namespace ENTITY_L.Models.Jobs
         public string Requirements { get; set; }
 
         [Required]
-        [DataType(DataType.Text)]
+        [DataType(DataType.Date)]
         [FirestoreProperty]
         public string Date { get; set; }
 
