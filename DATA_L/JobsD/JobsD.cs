@@ -67,9 +67,15 @@ namespace DATA_L.JobsD
 
         }
 
+        public async Task<IEnumerable<JobsModel>> GetLastJobsAsync(int index) // Método para cargar en inicio los N ultimos empleos
+        {
+            List<JobsModel> jobs = await LoadJobsAsync(); // Se guarda en una lista todos los empleos que se encuentran en la bd  
+            var job = jobs.OrderByDescending(x => x.Date).Take(index);  // Se ordena la lista por fecha en orden descendiente y se toma N cantidad de empleos
+            return job; // Se retorna la lista
+        }
 
 
-        
+
         public async Task<JobsModel> Loadjob(string id) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -96,6 +102,23 @@ namespace DATA_L.JobsD
 
         }
 
+        public async Task<JobsModel> Editjob(JobsModel job) // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                DocumentReference jobRef = db.Collection("Jobs").Document(job.Id);
+                var _job = await jobRef.SetAsync(job, SetOptions.Overwrite);
+                return job;
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+
         public void Deletejob(string id)
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -108,6 +131,50 @@ namespace DATA_L.JobsD
             {
                 throw;
             }
+        }
+
+
+
+        public async Task<List<JobsModel>> Searchjob(string keyword)
+        {
+            OpenFirestoreConnection(); 
+            Query Query = db.Collection("Jobs").WhereEqualTo("Company", keyword).WhereEqualTo("Location", keyword).WhereEqualTo("Category", keyword);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
+                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
+                    JobsModel everyJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
+                    everyJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+
+                }
+            }
+            return jobsfound;
+        }
+
+        public async Task<List<JobsModel>> Searchbycategory(string keyword)
+        {
+            OpenFirestoreConnection();
+            Query Query = db.Collection("Jobs").WhereEqualTo("Category", keyword);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
+                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
+                    JobsModel everyJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
+                    everyJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+
+                }
+            }
+            return jobsfound;
         }
 
     }

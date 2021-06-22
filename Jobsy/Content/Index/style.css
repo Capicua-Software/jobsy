@@ -239,12 +239,20 @@ h1 span.cursor.typing {
     animation-duration: 3000ms;
     
   }
+.two {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    max-width: 960px;
+    margin: 5px;
+}
 
   /*=====RECENT JOBS CARDS====*/
-.card-jobs{
+.card-jobs {
     box-shadow: rgba(0, 0, 0, 0.192) 0px 2px 4px;
-    transition:300ms;
+    transition: 300ms;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 .card-jobs:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -270,4 +278,82 @@ footer{
 
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+}
+
+
+
+.Job {
+    width: 200%;
+    height: auto;
+    left: auto;
+    margin-top: 10px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 30px;
+    color: #2E2E2E;
+}
+
+.Company {
+
+    width: auto;
+    height: 15px;
+    left: 186px;
+    top: 54px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 12px;
+    color: #2E2E2E;
+}
+
+
+.Title {
+    width: auto;
+    height: auto;
+    left: 186px;
+    top: 73px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 12px;
+    color: #2E2E2E;
+}
+
+.Subtitle {
+
+    width: auto;
+    height: auto;
+    left: 198px;
+    top: 88px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 12px;
+    color: #7B7B7B;
+}
+
+.imagen {
+    width: 108px;
+    height: 108px;
+    left: 34px;
+    top: 34px;
+    background: #F5F0F3;
+}
+
+.rectangulo {
+    width: 73px;
+    height: 20px;
+    background: #3193F4;
+    border-radius: 2px;
+    font-family: var(--navbar-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: center;
 }

@@ -17,7 +17,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     
     
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit","Jobs", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         
@@ -30,70 +30,70 @@
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Company</label>
-                    <input class="form-control" value= @job.Company />
+                    <input class="form-control" name="Company" value= @job.Company />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Email</label>
-                    <input class="form-control" value=@job.Email />
+                    <input class="form-control" name="Email" value=@job.Email />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Job Type</label>
-                    <input class="form-control" value=@job.JobType />
+                    <input class="form-control" name="JobType" value=@job.JobType />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Logo</label>
-                    <input class="form-control" value=@job.Logo />
+                    <input class="form-control" name="Logo" value=@job.Logo />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">URL</label>
-                    <input class="form-control" value=@job.URL />
+                    <input class="form-control" name="URL" value=@job.URL />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Job</label>
-                    <input class="form-control" value=@job.Job />
+                    <input class="form-control" name="Job" value=@job.Job />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Location</label>
-                    <input class="form-control" value=@job.Location />
+                    <input class="form-control" name="Location" value=@job.Location />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Category</label>
-                    <input class="form-control" value=@job.Category />
+                    <input class="form-control" name="Category" value=@job.Category />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Job Description</label>
-                    <input class="form-control" value=@job.JobDescription />
+                    <input class="form-control" name="JobDescription" value=@job.JobDescription />
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="col-md-10">
                     <label class="control-label col-md-2">Requirements</label>
-                    <input class="form-control" value=@job.Requirements />
+                    <input class="form-control" name="Requirements" value=@job.Requirements />
                 </div>
             </div>
     
