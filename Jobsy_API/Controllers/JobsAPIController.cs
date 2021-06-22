@@ -31,5 +31,15 @@ namespace Jobsy_API.Controllers
             return lstJobs; //Retorna una lista 
         }
 
+
+        [HttpGet]
+        [Route("api/Jobs/ReadData")]  // Ruta de la API
+        public async Task<JobsModel> Loadjob(string id)
+        {
+            JobsModel Job = await jobs.Loadjob(id); 
+
+            return Job; //Retorna una lista 
+        }
+
     }
 }
