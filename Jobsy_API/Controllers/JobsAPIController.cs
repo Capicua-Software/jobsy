@@ -13,8 +13,8 @@ namespace Jobsy_API.Controllers
     public class JobsAPIController : ApiController
     {
         JobsD jobs = new JobsD(); // Objeto de la clase Jobs en la capa de datos
-       
-        [HttpPost] 
+
+        [HttpPost]
         [Route("api/Jobs/PostAJob")]  // Ruta de la API
         public Task<JobsModel> PostAJob(JobsModel model)  // Este metodo sirve para llamar al metodo de la capa datos que se encarga de guardar un empleo
         {
@@ -33,12 +33,20 @@ namespace Jobsy_API.Controllers
 
 
         [HttpGet]
-        [Route("api/Jobs/ReadData")]  // Ruta de la API
+        [Route("api/Jobs/Loadjob")]  // Ruta de la API
         public async Task<JobsModel> Loadjob(string id)
         {
-            JobsModel Job = await jobs.Loadjob(id); 
+            JobsModel Job = await jobs.Loadjob(id);
 
             return Job; //Retorna una lista 
+        }
+
+
+        [HttpPost]
+        [Route("api/Jobs/Deletejob")]  // Ruta de la API
+        public void Deletejob(string id)
+        {
+            jobs.Deletejob(id);
         }
 
     }

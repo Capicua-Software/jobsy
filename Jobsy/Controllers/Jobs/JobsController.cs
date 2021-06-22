@@ -73,5 +73,23 @@ namespace Jobsy.Controllers
 
             return View(); 
         }
+
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Deletejob(string id)
+        {
+            try
+            {
+                job.Deletejob(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("LoadJobsAsync");
+        }
     }
 }
