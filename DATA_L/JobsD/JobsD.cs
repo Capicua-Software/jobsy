@@ -102,6 +102,23 @@ namespace DATA_L.JobsD
 
         }
 
+        public async Task<JobsModel> Editjob(JobsModel job) // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                DocumentReference jobRef = db.Collection("Jobs").Document(job.Id);
+                var _job = await jobRef.SetAsync(job, SetOptions.Overwrite);
+                return job;
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+
         public void Deletejob(string id)
         {
             OpenFirestoreConnection(); // Establece la conexión
