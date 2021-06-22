@@ -62,7 +62,37 @@ namespace DATA_L.JobsD
 
                 }
             }
+            
             return lstJobs; // Retorna la lista
+
+        }
+
+
+
+        
+        public async Task<JobsModel> Loadjob(string id) // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                DocumentReference docRef = db.Collection("Jobs").Document(id);
+                DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+
+                if (snapshot.Exists)
+                {
+                    JobsModel job = snapshot.ConvertTo<JobsModel>();
+                    job.Id = snapshot.Id;
+                    return job;
+                }
+                else
+                {
+                    return new JobsModel();
+                }
+            }
+            catch
+            {
+                throw;
+            }
 
         }
     }

@@ -208,6 +208,7 @@
     <Content Include="Views\User\UserDashboard.cshtml" />
     <Content Include="Views\Jobs\PostAJob.cshtml" />
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
+    <Content Include="Views\Jobs\EditJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

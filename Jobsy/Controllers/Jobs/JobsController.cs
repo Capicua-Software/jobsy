@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using ENTITY_L.Models.Jobs;
 using Jobsy_API.Controllers;
 using Microsoft.Owin.Security;
+using System.IO;
 
 namespace Jobsy.Controllers
 {
@@ -53,6 +54,24 @@ namespace Jobsy.Controllers
             }
 
             return View(); //Retorna la vista
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditJob(string id) 
+        {
+            try
+            {
+                JobsModel ajob = await job.Loadjob(id);
+                ViewBag.ajob = ajob; 
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); 
+            }
+
+            return View(); 
         }
     }
 }
