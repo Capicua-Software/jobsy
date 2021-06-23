@@ -13,12 +13,39 @@ namespace Jobsy.Controllers
     {
 
         JobsAPIController job = new JobsAPIController();
+        static IEnumerable<JobsModel> LastJobs = null;
         // GET: Index
         public async Task<ActionResult> Index()
         {
+            if (LastJobs == null)
+            {
+                try
+                {
+                    IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(3); // Llama al metodo que se encuenta en la API
+                    ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+                }
+            }
+            else
+            {
+                ViewBag.LastJobs = LastJobs;
+                LastJobs = null;
+            }
+            
+
+            return View(); //Retorna la vista
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Searchjobs(string keyword) // Metodo para devolver una vista con todos los empleaos 
+        {
             try
             {
-                IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(3); // Llama al metodo que se encuenta en la API
+                LastJobs = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
                 ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
             }
             catch (Exception ex)
@@ -26,10 +53,8 @@ namespace Jobsy.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
             }
 
-            return View(); //Retorna la vista
+            return RedirectToAction("Index"); //Retorna la vista
         }
-
-
 
     }
 }
