@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using ENTITY_L.Models.Jobs;
 using Jobsy_API.Controllers;
 using Microsoft.Owin.Security;
-using System.IO;
 
 namespace Jobsy.Controllers
 {
