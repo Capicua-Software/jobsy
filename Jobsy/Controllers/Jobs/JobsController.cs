@@ -76,6 +76,25 @@ namespace Jobsy.Controllers
 
 
 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Edit(JobsModel jobtoedit)
+        {
+            try
+            {
+               await job.Editjob(jobtoedit);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("LoadJobsAsync");
+        }
+
+
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Deletejob(string id)
@@ -91,5 +110,8 @@ namespace Jobsy.Controllers
 
             return RedirectToAction("LoadJobsAsync");
         }
+
+
+        
     }
 }
