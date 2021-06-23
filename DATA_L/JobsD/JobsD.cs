@@ -138,7 +138,7 @@ namespace DATA_L.JobsD
         public async Task<List<JobsModel>> Searchjob(string keyword)
         {
             OpenFirestoreConnection(); 
-            Query Query = db.Collection("Jobs").WhereEqualTo("Company", keyword).WhereEqualTo("Location", keyword).WhereEqualTo("Category", keyword);
+            Query Query = db.Collection("Jobs").WhereEqualTo("Company", keyword);
             QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
             List<JobsModel> jobsfound = new List<JobsModel>();
             foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
