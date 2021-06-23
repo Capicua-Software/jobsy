@@ -28,14 +28,15 @@
                         <h1 class="mb-6 header-subtitle"><span class="typed-text"></span><span class="header-subtitle-thin cursor">&nbsp;</span></h1>
                     </div>
 
-                    <form class="form" action="">
+                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+                    {
                         <div class="input-icons">
                             <i class="ri-search-line icon"></i>
-                            <input type="text" placeholder="Titulo, Empresa, Categoría, Ubicación">
+                            <input type="text" name="keyword" placeholder="Titulo, Empresa, Categoría, Ubicación">
                         </div>
-                    </form>
+                    }
 
-                </div>
+                    </div>
             </div>
 
         </div>

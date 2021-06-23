@@ -135,5 +135,47 @@ namespace DATA_L.JobsD
 
 
 
+        public async Task<List<JobsModel>> Searchjob(string keyword)
+        {
+            OpenFirestoreConnection(); 
+            Query Query = db.Collection("Jobs").WhereEqualTo("Company", keyword).WhereEqualTo("Location", keyword).WhereEqualTo("Category", keyword);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
+                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
+                    JobsModel everyJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
+                    everyJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+
+                }
+            }
+            return jobsfound;
+        }
+
+        public async Task<List<JobsModel>> Searchbycategory(string keyword)
+        {
+            OpenFirestoreConnection();
+            Query Query = db.Collection("Jobs").WhereEqualTo("Category", keyword);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
+                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
+                    JobsModel everyJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
+                    everyJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+
+                }
+            }
+            return jobsfound;
+        }
+
     }
 }
