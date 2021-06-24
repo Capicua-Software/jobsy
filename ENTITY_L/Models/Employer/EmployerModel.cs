@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENTITY_L.Models.Employer
 {
-    class EmployerModel
+    public class EmployerModel
     {
     }
 }
