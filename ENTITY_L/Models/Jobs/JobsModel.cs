@@ -62,8 +62,11 @@ namespace ENTITY_L.Models.Jobs
         [FirestoreProperty]
         public string Requirements { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
+        [FirestoreProperty]
+        public DateTime date { get; set; }
+
+        [DataType(DataType.Text)]
         [FirestoreProperty]
         public string Date { get; set; }
 

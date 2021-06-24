@@ -14,6 +14,7 @@ namespace DATA_L.Authentication
     {
         public async Task<LoginModel> LoginAsync(LoginModel model)
         {
+            model = await GetUserInfo(model);
             model.auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             model.ab = await model.auth.SignInWithEmailAndPasswordAsync(model.Email, model.Password);
             model.token = model.ab.FirebaseToken;
@@ -29,26 +30,78 @@ namespace DATA_L.Authentication
             return model;
         }
 
-        public async 
-        Task
-        SendUserInfoToFirestore(SignUpModel model)
+        //Returns user info based on Id
+        public async Task<LoginModel> GetUserInfo(LoginModel model)
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                //docRef = db.Collection("Users").Document(model.Email);
+
+                DocumentSnapshot snapshot = await GetDocSnapshot(model.Email);
+
+                if (snapshot.Exists)
+                {
+                    //model = snapshot.ConvertTo<LoginModel>();
+                    Dictionary<string, object> user = snapshot.ToDictionary();
+                    model.Role = (string)user["Role"];
+                    
+
+
+                    return model;
+                }
+                else
+                {
+                    return new LoginModel();
+                }
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+            return model;
+        }
+
+        //This method returns an existing snapshot in the different roles that are in DB
+        public async Task<DocumentSnapshot> GetDocSnapshot(string Id)
+        {
+            docRef = db.Collection("Admin").Document(Id);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists) { return snapshot; }
+
+            docRef = db.Collection("Users").Document(Id);
+            snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists) { return snapshot; }
+
+            docRef = db.Collection("Employers").Document(Id);
+            snapshot = await docRef.GetSnapshotAsync();
+            if (snapshot.Exists) { return snapshot; }
+
+            return snapshot;
+
+        } 
+
+        public async Task SendUserInfoToFirestore(SignUpModel model)
         {
             OpenFirestoreConnection();
             Dictionary<string, object> user = new Dictionary<string, object>
             {
                 {"Name", model.Name },
                 {"Email", model.Email },
-                {"Employer", model.Employer }
+                {"Employer", model.Employer },
+                {"Role", model.Role }
             };
 
             switch (model.Employer)
             {
                 case false:
+                    user["Role"] = "User";
                     docRef = db.Collection("Users").Document(model.Email);
                     await docRef.SetAsync(user);
                     break;
 
                 case true:
+                    user["Role"] = "Employer";
                     docRef = db.Collection("Employers").Document(model.Email);
                     await docRef.SetAsync(user);
                     break;

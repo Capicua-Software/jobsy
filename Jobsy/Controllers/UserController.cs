@@ -14,6 +14,25 @@ namespace Jobsy.Controllers
         {
             //string email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
             //System.Diagnostics.Debug.WriteLine(email);
+            try
+            {
+                // Verification.
+                if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "User")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Info
+                Console.Write(ex);
+            }
+
+            // Info.
             return View();
         }
     }

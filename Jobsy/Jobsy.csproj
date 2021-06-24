@@ -210,12 +210,12 @@
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
     <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Jobs\Deletejob.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
+    <Content Include="Views\Employer\EmployerDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Employer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
