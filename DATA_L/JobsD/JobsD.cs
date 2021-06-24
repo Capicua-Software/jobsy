@@ -130,7 +130,7 @@ namespace DATA_L.JobsD
         {
             string keyword = key.ToLower();
             OpenFirestoreConnection();
-            List<JobsModel> jobs = await LoadJobsAsync();
+            List<JobsModel> jobs = await LoadJobsAsync(); // Una lista
             List<JobsModel> jobsfound =new List<JobsModel>();
 
             foreach (JobsModel item in jobs) // Recorremos los datos que se encuentran en la lista
@@ -154,10 +154,7 @@ namespace DATA_L.JobsD
             {
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
-                    Dictionary<string, object> _jobs = documentSnapshot.ToDictionary(); // Se guarda el resultado en un diccionario de datos
-                    string json = JsonConvert.SerializeObject(_jobs); // Se conviere a jsopon el resultado
-                    JobsModel everyJob = JsonConvert.DeserializeObject<JobsModel>(json); // Se crea un objeto que es igual a ese Json Deserializado 
-                    everyJob.Id = documentSnapshot.Id; // Se guarda el ID del documento en una parte de la lista
+                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();                   
                     jobsfound.Add(everyJob); // Se agrega a la lista el objeto
 
                 }
