@@ -248,6 +248,7 @@ h1 span.cursor.typing {
 
   /*=====RECENT JOBS CARDS====*/
 .card-jobs {
+    display: flex;
     box-shadow: rgba(0, 0, 0, 0.192) 0px 2px 4px;
     transition: 300ms;
     background-color: white;
