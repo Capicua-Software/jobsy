@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+using System.Security.Claims;
 
 namespace Jobsy.Controllers
 {
@@ -25,6 +26,12 @@ namespace Jobsy.Controllers
                 {
                     IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(3); // Llama al metodo que se encuenta en la API
                     ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        ViewBag.Name = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
+                        ViewBag.Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+                    }                    
+
                 }
                 catch (Exception ex)
                 {

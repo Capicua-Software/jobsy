@@ -117,6 +117,7 @@ namespace Jobsy.Controllers
                 claims.Add(new Claim(ClaimTypes.Email, userData.Email));
                 claims.Add(new Claim(ClaimTypes.Authentication, userData.token));
                 claims.Add(new Claim(ClaimTypes.Role, userData.Role));
+                claims.Add(new Claim(ClaimTypes.Name, userData.UserName));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;
@@ -128,6 +129,23 @@ namespace Jobsy.Controllers
                 // Info
                 throw ex;
             }
+        }
+
+        public ActionResult Redirect()
+        {
+            string Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+
+            switch (Role)
+            {
+                case "Admin":
+                    return this.RedirectToAction("AdminDashboard", "Admin");
+                case "Employer":
+                    return this.RedirectToAction("EmployerDashboard", "Employer");
+                case "User":
+                    return this.RedirectToAction("UserDashboard", "User");
+            }
+
+            return RedirectToAction("Index", "Index");
         }
 
         private ActionResult RedirectToLocal(string Role ,string returnUrl)

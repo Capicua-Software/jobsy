@@ -67,23 +67,15 @@
                 </ul>
                 <!-- Left links -->
 
-                <div class="d-flex align-items-center">
-                    <a href="@Url.Action("Login", "Auth")" id="LoginBtn" class="btn btn-link navbar-link-button btn-rounded px-3 me-2">
-                        Iniciar sesión
-                    </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/logged_in.cshtml")
+                }
+                else
+                {
+                    @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/not_logged_in.cshtml")
+                }
 
-                    <a href="@Url.Action("SignUp", "Auth")" id="RegisterBtn" class="btn btn-outline-primary btn-rounded me-3 navbar-button">
-                        <strong>Registrarse</strong>
-                    </a>
-
-                    <script>
-                        function hideButtons() {
-                            //document.getElementById('LoginBtn').classList.add('d-none');
-                            //document.getElementById('RegisterBtn').classList.add('d-none');
-                        }
-                    </script>
-
-                </div>
             </div>
             <!-- Collapsible wrapper -->
         </div>
@@ -269,6 +261,7 @@
     <!-- Footer -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+
     <!--TIDIO INTEGRATION-->
     <script src="//code.tidio.co/6vjzg8cdqnaigy4dbodpaxw2erlutorc.js" async></script>
 </body>
