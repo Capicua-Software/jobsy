@@ -172,6 +172,9 @@
     <Content Include="Content\Index\style.css" />
     <Content Include="Content\Index\typing-effect.js" />
     <Content Include="Content\Index\waves.svg" />
+    <Content Include="Content\Loading\loading.css" />
+    <Content Include="Content\Loading\loading.js" />
+    <Content Include="Content\Loading\logo.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -212,6 +215,7 @@
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
     <Content Include="Views\Jobs\PostAJob.cshtml" />
+    <Content Include="Views\Shared\IndexShared\Loading\Preloading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

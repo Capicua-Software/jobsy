@@ -2,6 +2,7 @@
 @{
     Layout = null;
 }
+@Html.Partial("~/Views/Shared/IndexShared/Loading/Preloading.cshtml")
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +27,6 @@
     <link rel="stylesheet" href="~/Content/Index/style.css" />
 </head>
 <body>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <!-- Container wrapper -->
@@ -56,13 +56,13 @@
                 <!-- Left links -->
                 <ul class="navbar-nav navbar-links me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="nav-link">Inicio</span></a>
+                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">Inicio</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="nav-link">¿Cómo funciona?</span></a>
+                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">¿Cómo funciona?</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><span class="nav-link">Sobre nosotros</span></a>
+                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">Sobre nosotros</span></a>
                     </li>
                 </ul>
                 <!-- Left links -->
@@ -167,12 +167,7 @@
             </section>
             <!-- Section: Form -->
             <!-- Section: Text -->
-            <section class="mb-4">
-                <p>
-                    <strong>Jobsy</strong> es una aplicación web que permite conectar tanto empleadores como usuarios que quieren conseguir trabajo tener una conexión directa,
-                    de esta forma los empleadores consiguen el empleado ideal y los empleados el trabajo ideal.
-                </p>
-            </section>
+
             <!-- Section: Text -->
             <!-- Section: Links -->
             <section class="">
