@@ -22,8 +22,11 @@ namespace DATA_L.JobsD
             {
                 docRef = db.Collection("Jobs").Document(); // Creamos el documento para obtener el id
 
-                model.Logo = await SaveImage(docRef.Id, model.Logo);
+                if (model.Logo != null) model.Logo = await SaveImage(docRef.Id, model.Logo);
+                else model.Logo = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
+
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
+
 
                 Dictionary<string, object> job = new Dictionary<string, object> //Diccionario de datos con los campos y sus respectivos valores
             {
