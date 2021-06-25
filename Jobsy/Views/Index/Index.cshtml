@@ -3,15 +3,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     IEnumerable<ENTITY_L.Models.Jobs.JobsModel> LastJobs = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.LastJobs; // Llama al metodo que se encuenta en la API
-
     int i = 2;
 }
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
+    <title>Jobsy - A job listing website</title>
 </head>
 <body>
     <!-- Background image -->
@@ -38,7 +37,7 @@
                         </div>
                     }
 
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -61,11 +60,11 @@
 
         @foreach (var item in LastJobs)
         {
-         
+
             if (i == 2)
             {
-            @MvcHtmlString.Create("<div class='row-cols-2 mb-3 container d-flex justify-content-center space-between'>");
-             
+                @MvcHtmlString.Create("<div class='row-cols-2 mb-3 container d-flex justify-content-center space-between'>");
+
             }
             i++;
 
@@ -76,7 +75,7 @@
 
                         <div class="row">
                             <div style="margin: 1.5rem;" class="col-sm-3 mt-5">
-                                <img src="@item.Logo" height="90px" class="mt-2" alt="mdb logo">
+                                <img src="@item.Logo" height="90px"  class="mt-2" alt="mdb logo">
                             </div>
                             <div class="col-md-5">
                                 @* <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo"> *@
@@ -106,13 +105,13 @@
                 </div>
             </div>
 
-            if (i==4)
+            if (i == 4)
             {
                 @MvcHtmlString.Create("</div>")
                 i = 2;
             }
 
-          
+
         }
 
     </section>

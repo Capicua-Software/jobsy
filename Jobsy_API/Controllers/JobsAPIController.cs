@@ -72,5 +72,6 @@ namespace Jobsy_API.Controllers
             return jobsfound; //Retorna una lista 
         }
 
+
     }
 }
