@@ -15,6 +15,8 @@ namespace Jobsy.Controllers
         JobsAPIController job = new JobsAPIController();
         static IEnumerable<JobsModel> LastJobs = null;
         // GET: Index
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
             if (LastJobs == null)

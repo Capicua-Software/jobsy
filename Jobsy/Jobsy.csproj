@@ -206,12 +206,12 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\SignUp.cshtml" />
     <Content Include="Views\User\UserDashboard.cshtml" />
-    <Content Include="Views\Jobs\PostAJob.cshtml" />
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
     <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Jobs\Deletejob.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
+    <Content Include="Views\Jobs\PostAJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
