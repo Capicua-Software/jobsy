@@ -172,6 +172,9 @@
     <Content Include="Content\Index\style.css" />
     <Content Include="Content\Index\typing-effect.js" />
     <Content Include="Content\Index\waves.svg" />
+    <Content Include="Content\Loading\loading.css" />
+    <Content Include="Content\Loading\loading.js" />
+    <Content Include="Content\Loading\logo.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -206,16 +209,17 @@
     <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Auth\SignUp.cshtml" />
     <Content Include="Views\User\UserDashboard.cshtml" />
-    <Content Include="Views\Jobs\PostAJob.cshtml" />
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
     <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Jobs\Deletejob.cshtml" />
+    <Content Include="Views\Admin\AdminDashboard.cshtml" />
+    <Content Include="Views\Employer\EmployerDashboard.cshtml" />
+    <Content Include="Views\Jobs\PostAJob.cshtml" />
+    <Content Include="Views\Shared\IndexShared\Loading\Preloading.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Employer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

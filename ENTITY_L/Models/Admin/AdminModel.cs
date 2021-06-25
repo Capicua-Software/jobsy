@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ENTITY_L.Models.Admin
 {
-    class AdminModel
+    public class AdminModel
     {
     }
 }
