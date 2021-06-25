@@ -170,6 +170,7 @@
     <Content Include="Content\Index\Logo.svg" />
     <Content Include="Content\Index\nodes-animation.js" />
     <Content Include="Content\Index\style.css" />
+    <Content Include="Content\Index\tidio.js" />
     <Content Include="Content\Index\typing-effect.js" />
     <Content Include="Content\Index\waves.svg" />
     <Content Include="favicon.ico" />
@@ -212,6 +213,8 @@
     <Content Include="Views\Jobs\Deletejob.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
+    <Content Include="Views\Shared\IndexShared\NavBarPartial\logged_in.cshtml" />
+    <Content Include="Views\Shared\IndexShared\NavBarPartial\not_logged_in.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

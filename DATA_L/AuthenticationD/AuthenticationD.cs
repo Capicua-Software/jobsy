@@ -45,6 +45,7 @@ namespace DATA_L.Authentication
                     //model = snapshot.ConvertTo<LoginModel>();
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     model.Role = (string)user["Role"];
+                    model.UserName = (string)user["Name"];
                     
 
 
