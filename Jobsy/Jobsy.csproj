@@ -165,6 +165,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cookies\scricookies.js" />
+    <Content Include="Content\Cookies\stylecookies.css" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -215,13 +217,11 @@
     <Content Include="Views\Jobs\Deletejob.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
-
     <Content Include="Views\Jobs\PostAJob.cshtml" />
     <Content Include="Views\Shared\IndexShared\Loading\Preloading.cshtml" />
-
     <Content Include="Views\Shared\IndexShared\NavBarPartial\logged_in.cshtml" />
     <Content Include="Views\Shared\IndexShared\NavBarPartial\not_logged_in.cshtml" />
-
+    <Content Include="Views\Shared\Cookies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
