@@ -150,6 +150,7 @@
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\Category\CategoryController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\Jobs\JobsController.cs" />
@@ -213,7 +214,6 @@
     <Content Include="Views\Auth\SignUp.cshtml" />
     <Content Include="Views\User\UserDashboard.cshtml" />
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
-    <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Jobs\Deletejob.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
@@ -222,6 +222,10 @@
     <Content Include="Views\Shared\IndexShared\NavBarPartial\logged_in.cshtml" />
     <Content Include="Views\Shared\IndexShared\NavBarPartial\not_logged_in.cshtml" />
     <Content Include="Views\Shared\Cookies.cshtml" />
+    <Content Include="Views\Category\LoadCategoryAsync.cshtml" />
+    <Content Include="Views\Category\PostCategory.cshtml" />
+    <Content Include="Views\Category\EditCategory.cshtml" />
+    <Content Include="Views\Jobs\EditJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
