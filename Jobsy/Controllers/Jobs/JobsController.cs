@@ -44,8 +44,8 @@ namespace Jobsy.Controllers
         {
             try
             {
-                List<JobsModel> AllJobs = await job.LoadJobsAsync(); // Llama al metodo que se encuenta en la API
-                ViewBag.AllJobs = AllJobs; //Guardamos el resultado del metodo en el Viewbag
+               
+                ViewBag.AllJobs = await AllJobs(); //Guardamos el resultado del metodo en el Viewbag
             }
             catch (Exception ex)
             {
@@ -56,14 +56,20 @@ namespace Jobsy.Controllers
         }
 
 
+        public async Task<List<JobsModel>> AllJobs()
+        {
+            List<JobsModel> AllJobs = await job.LoadJobsAsync();// Llama al metodo que se encuenta en la API;
+            return AllJobs; 
+        }
+
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> EditJob(string id) 
         {
             try
-            {
-                JobsModel ajob = await job.Loadjob(id); 
-                ViewBag.ajob = ajob; 
+            {               
+                ViewBag.ajob = await LoadJob(id); 
             }
             catch (Exception ex)
             {
@@ -71,6 +77,13 @@ namespace Jobsy.Controllers
             }
 
             return View(); 
+        }
+
+
+        public async Task<JobsModel> LoadJob(string id)
+        {
+            JobsModel ajob = await job.Loadjob(id);
+            return ajob;
         }
 
 
@@ -100,7 +113,7 @@ namespace Jobsy.Controllers
         {
             try
             {
-                job.Deletejob(id);
+                DeleteAJob(id);
             }
             catch (Exception ex)
             {
@@ -108,6 +121,11 @@ namespace Jobsy.Controllers
             }
 
             return RedirectToAction("LoadJobsAsync");
+        }
+
+        public void DeleteAJob(string id)
+        {
+          job.Deletejob(id);
         }
 
        
