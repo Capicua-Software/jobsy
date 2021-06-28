@@ -15,6 +15,7 @@ namespace DATA_L.JobsD
 {
     public class JobsD:FirebaseCore
     {
+        static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
         public async Task<JobsModel> PostJobsAsync(JobsModel model)  // Metodo para guardar un empleo en Firestore
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -23,13 +24,13 @@ namespace DATA_L.JobsD
                 docRef = db.Collection("Jobs").Document(); // Creamos el documento para obtener el id
 
                 if (model.Logo != null) model.Logo = await SaveImage(docRef.Id, model.Logo);
-                else model.Logo = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
+                else model.Logo = Default;
 
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
 
 
                 Dictionary<string, object> job = new Dictionary<string, object> //Diccionario de datos con los campos y sus respectivos valores
-            {
+            {               
                 { "Company", model.Company },
                 { "JobType", model.JobType },
                 { "Logo", model.Logo },
@@ -69,6 +70,7 @@ namespace DATA_L.JobsD
                 {
                     JobsModel job = documentSnapshot.ConvertTo<JobsModel>(); // Creamos un nuevo objeto que sera igual al resultado del query
                     job.Fecha = DateTime.ParseExact(job.Date, "dd/MM/yyyy", null); //Se realiza una conversion de la fecha a datetime
+                    job.Id = documentSnapshot.Id;
                     lstJobs.Add(job); // Se agrega a la lista el objeto               
                 }
             }
@@ -88,7 +90,7 @@ namespace DATA_L.JobsD
             OpenFirestoreConnection(); // Establece la conexión
             try
             {
-                DocumentReference docRef = db.Collection("Jobs").Document(id);
+                docRef = db.Collection("Jobs").Document(id);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
 
                 if (snapshot.Exists)
@@ -109,14 +111,41 @@ namespace DATA_L.JobsD
 
         }
 
-        public async Task<JobsModel> Editjob(JobsModel job) // Método para cargar todos los Empleos
+        public async Task<JobsModel> Editjob(JobsModel model) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection(); // Establece la conexión
             try
             {
-                DocumentReference jobRef = db.Collection("Jobs").Document(job.Id);
-                var _job = await jobRef.SetAsync(job, SetOptions.Overwrite);
-                return job;
+                docRef = db.Collection("Jobs").Document(model.Id);
+                JobsModel search = await Loadjob(model.Id);
+
+                if (model.Logo != null) model.Logo = await SaveImage(model.Id, model.Logo);
+                else model.Logo = search.Logo;
+
+                if (search.Logo==null) model.Logo = Default;
+
+                model.Date = DateTime.Now.ToString("dd/MM/yyyy");
+
+             
+                Dictionary<string, object> update = new Dictionary<string, object>
+                {
+                { "Company", model.Company },
+                { "JobType", model.JobType },
+                { "Logo", model.Logo },
+                { "URL", model.URL },
+                { "Job", model.Job },
+                { "Location", model.Location },
+                { "Category", model.Category },
+                { "JobDescription", model.JobDescription },
+                { "Requirements", model.Requirements },
+                { "Email", model.Email },
+                { "Date", model.Date }
+                };
+              
+
+
+                await docRef.UpdateAsync(update);
+                return model; // Retorna el modelo
             }
             catch
             {

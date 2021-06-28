@@ -400,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationD\AuthenticationD.cs" />
+    <Compile Include="Category\CategoryD.cs" />
     <Compile Include="FirebaseCore.cs" />
     <Compile Include="JobsD\JobsD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
