@@ -13,89 +13,87 @@
     <title>EditJob</title>
 </head>
 <body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    
-    
-    @using (Html.BeginForm("Edit","Jobs", FormMethod.Post))
+    @using (Html.BeginForm("Edit", "Jobs", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         
         <div class="form-horizontal">
-            <h4></h4>
+            <h4>JobsModel</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.Id)
     
             <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Company</label>
-                    <input class="form-control" name="Company" value= @job.Company />
+                @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">                  
+                   <input name="Company" value="@job.Company">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Email</label>
-                    <input class="form-control" name="Email" value=@job.Email />
+                    <input name="Email" value="@job.Email">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.JobType, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Job Type</label>
-                    <input class="form-control" name="JobType" value=@job.JobType />
+                    <input name="JobType" value="@job.JobType">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Logo</label>
-                    <input class="form-control" name="Logo" value=@job.Logo />
+                    <input type="file" accept="image/*" name="Logo" value="@job.Logo">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">URL</label>
-                    <input class="form-control" name="URL" value=@job.URL />
+                    <input name="URL" value="@job.URL">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Job, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Job</label>
-                    <input class="form-control" name="Job" value=@job.Job />
+                    <input name="Job" value="@job.Job">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Location</label>
-                    <input class="form-control" name="Location" value=@job.Location />
+                    <input name="Location" value="@job.Location">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Category</label>
-                    <input class="form-control" name="Category" value=@job.Category />
+                    <input name="Category" value="@job.Category">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.JobDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Job Description</label>
-                    <input class="form-control" name="JobDescription" value=@job.JobDescription />
+                    <input name="JobDescription" value="@job.JobDescription">
                 </div>
             </div>
     
             <div class="form-group">
+                @Html.LabelFor(model => model.Requirements, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <label class="control-label col-md-2">Requirements</label>
-                    <input class="form-control" name="Requirements" value=@job.Requirements />
+                    <input name="Requirements" value="@job.Requirements">
                 </div>
-            </div>
+            </div>    
+         
+    
     
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">

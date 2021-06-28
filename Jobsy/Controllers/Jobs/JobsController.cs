@@ -26,16 +26,14 @@ namespace Jobsy.Controllers
         [AllowAnonymous] 
         public async Task<ActionResult> PostAJob(JobsModel model, HttpPostedFileBase Logo) // Este metodo se llama al enviar el formulario
         {
-            try
-            {
-                if (Logo != null)   model.Logo = Logo.FileName; Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+            
+                if (Logo != null) 
+                { 
+                    model.Logo = Logo.FileName;
+                    Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+                }
                 await job.PostAJob(model); // Llama al metodo que se encuenta en la API
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);//Lanza un mensaje en la consola en caso de error
-            }
-
+          
             return View();//Retorna la vista
         }
 
@@ -64,12 +62,12 @@ namespace Jobsy.Controllers
         {
             try
             {
-                JobsModel ajob = await job.Loadjob(id);
+                JobsModel ajob = await job.Loadjob(id); 
                 ViewBag.ajob = ajob; 
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message); 
+                System.Diagnostics.Debug.WriteLine(ex); 
             }
 
             return View(); 

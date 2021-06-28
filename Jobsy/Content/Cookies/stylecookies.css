@@ -1,0 +1,331 @@
+/* import webfonts */
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+/* vars */
+/* mixins */
+
+@media (max-width: 600px) {
+    header {
+        padding: 0 1rem;
+    }
+}
+
+#cookies-module {
+    margin: 0;
+    padding: 0 2rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+    display: flex;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    ;
+    border-radius: 4px;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+    #cookies-module h3 {
+        margin: 0 0 0.5rem;
+        padding: 0;
+        font-family: "Raleway", normal;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #933368;
+    }
+
+    #cookies-module h4 {
+        margin: 0 0 0.25rem;
+        padding: 0;
+        font-family: "Raleway", normal;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #000000;
+    }
+
+        #cookies-module h4 #cookie-status {
+            color: #13b664;
+            transition: color 0.25s ease;
+        }
+
+    #cookies-module p {
+        margin: 0 0 1rem;
+        padding: 0;
+        font-family: "Raleway", normal;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: #000000;
+        line-height: 150%;
+    }
+
+        #cookies-module p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        #cookies-module p a {
+            color: #933368;
+        }
+
+    #cookies-module section:first-of-type {
+        margin: 1.75rem 2rem 1.75rem 0;
+    }
+
+    #cookies-module section:last-of-type {
+        margin: 0.75rem 0;
+        padding: 1rem;
+        box-sizing: border-box;
+        width: 40%;
+        background-color: #9c366e0c;
+        border-radius: 8px;
+        border: dashed 2px #933368a8;
+        ;
+        flex: 0 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+        #cookies-module section:last-of-type .content {
+            margin: 0 2rem 0 0;
+            width: 100%;
+        }
+
+            #cookies-module section:last-of-type .content p {
+                margin: 0;
+            }
+
+            #cookies-module section:last-of-type .content .on-content {
+                display: block;
+            }
+
+            #cookies-module section:last-of-type .content .off-content {
+                display: none;
+            }
+
+        #cookies-module section:last-of-type #cookie-toggle {
+            width: 150px;
+            height: 100px;
+            position: relative;
+            flex: 0 0 auto;
+            /*position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);*/
+        }
+
+            #cookies-module section:last-of-type #cookie-toggle #plate {
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 50%;
+                right: 0%;
+                transform: translate(0, -50%);
+                z-index: 0;
+                background-image: radial-gradient(50% 50%, #E6E6E6 50%, #FFFFFF 100%);
+                background-image: none;
+                background: #FFF;
+                border-radius: 50%;
+                box-shadow: -3px 5px 0 rgba(0, 0, 0, 0.1);
+                transition: box-shadow 0.5s ease;
+            }
+
+                #cookies-module section:last-of-type #cookie-toggle #plate span {
+                    width: 67%;
+                    height: 67%;
+                    background-color: #F2F2F2;
+                    border-radius: 50%;
+                    background-image: radial-gradient(50% 50%, #FFFFFF 50%, #F2F2F2 100%);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                #cookies-module section:last-of-type #cookie-toggle #plate:before, #cookies-module section:last-of-type #cookie-toggle #plate:after {
+                    content: "";
+                    border: solid 0.3px #933368;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    transition: border-color 0.5s linear;
+                }
+
+                #cookies-module section:last-of-type #cookie-toggle #plate:before {
+                    content: "";
+                    width: 89%;
+                    height: 89%;
+                }
+
+                #cookies-module section:last-of-type #cookie-toggle #plate:after {
+                    content: "";
+                    width: 94%;
+                    height: 94%;
+                }
+
+                #cookies-module section:last-of-type #cookie-toggle #plate #cookie-svg {
+                    width: 67%;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1;
+                    pointer-events: none;
+                }
+
+                    #cookies-module section:last-of-type #cookie-toggle #plate #cookie-svg div {
+                        padding-bottom: 100%;
+                        width: 100%;
+                        height: 0;
+                        position: relative;
+                    }
+
+                        #cookies-module section:last-of-type #cookie-toggle #plate #cookie-svg div svg {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            overflow: visible;
+                        }
+
+            #cookies-module section:last-of-type #cookie-toggle #track {
+                width: 100%;
+                height: 50px;
+                border-radius: 25px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                overflow: hidden;
+                background-image: linear-gradient(0deg, #1AEF85 0%, #1DC675 100%);
+                /*background-image: linear-gradient(0deg, #14E27C 0%, #11B867 100%);*/
+            }
+
+                #cookies-module section:last-of-type #cookie-toggle #track:before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: linear-gradient(0deg, #E2E2E2 0%, #B8B8B8 100%);
+                    opacity: 0;
+                    transition: opacity 0.5s ease-out;
+                }
+
+                #cookies-module section:last-of-type #cookie-toggle #track p {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 0.75rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    color: #FFF;
+                    line-height: 100%;
+                    text-align: center;
+                    display: inline-block;
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: calc(100% - 100px);
+                    transition: opacity 0.5s ease-out;
+                    pointer-events: none;
+                }
+
+                    #cookies-module section:last-of-type #cookie-toggle #track p.on {
+                        left: 0px;
+                        opacity: 1;
+                    }
+
+                    #cookies-module section:last-of-type #cookie-toggle #track p.off {
+                        right: 0px;
+                        opacity: 0;
+                        color: #000000;
+                    }
+
+    #cookies-module.off h4 #cookie-status {
+        color: #bdbdbd;
+    }
+
+    #cookies-module.off section:last-of-type .content .on-content {
+        display: none;
+    }
+
+    #cookies-module.off section:last-of-type .content .off-content {
+        display: block;
+    }
+
+    #cookies-module.off section:last-of-type #cookie-toggle #plate {
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.1);
+        /*transform: translate(-50px,-50%);*/
+    }
+
+        #cookies-module.off section:last-of-type #cookie-toggle #plate:before, #cookies-module.off section:last-of-type #cookie-toggle #plate:after {
+            border-color: #a3a3a3;
+        }
+
+    #cookies-module.off section:last-of-type #cookie-toggle #track:before {
+        opacity: 1;
+    }
+
+    #cookies-module.off section:last-of-type #cookie-toggle #track p.on {
+        opacity: 0;
+    }
+
+    #cookies-module.off section:last-of-type #cookie-toggle #track p.off {
+        opacity: 1;
+    }
+
+@media (max-width: 900px) {
+    #cookies-module section:last-of-type {
+        width: 50%;
+    }
+}
+
+@media (max-width: 700px) {
+    #cookies-module section:last-of-type {
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+
+        #cookies-module section:last-of-type .content div {
+            margin: 0 0 1rem;
+        }
+}
+
+@media (max-width: 600px) {
+    #cookies-module {
+        padding: 0 1rem;
+        flex-flow: row wrap;
+    }
+
+        #cookies-module section:first-of-type {
+            margin: 1.75rem 0rem 0.5rem 0;
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+        #cookies-module section:last-of-type {
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+            #cookies-module section:last-of-type .content {
+                margin: 0;
+            }
+}
+
+.cookiesContent button.close {
+    width: 30px;
+    font-size: 20px;
+    color: #c0c5cb;
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+    margin-bottom: 5px;
+}
