@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Jobsy_API.Controllers;
+using ENTITY_L.Models.Jobs;
 
 namespace Jobsy.Controllers
 {
     public class AdminController : Controller
     {
         // GET: Admin
+        JobsController job = new JobsController();
         public ActionResult AdminDashboard()
         {
             try
@@ -44,10 +48,47 @@ namespace Jobsy.Controllers
             return View();
         }
 
-        public ActionResult Jobs()
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Jobs()
         {
+            ViewBag.AllJobs = await job.AllJobs(); //Guardamos el resultado del metodo en el Viewbag
             return View();
         }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Deletejob(string id)
+        {
+            try
+            {
+                job.DeleteAJob(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("Jobs");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditJob(string id)
+        {
+            try
+            {
+                ViewBag.ajob = await job.LoadJob(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+
+            return View("JobEdit");
+        }
+
 
         public ActionResult Admins()
         {
