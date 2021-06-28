@@ -13,55 +13,18 @@
 
         <div class="container col-md-5 login-vertical-center" style="margin-top:3rem;">
             <!-- Pills navs -->
-            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active"
-                       id="tab-login"
-                       data-mdb-toggle="pill"
-                       href="#pills-login"
-                       role="tab"
-                       aria-controls="pills-login"
-                       aria-selected="true">Login</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link"
-                       id="tab-register"
-                       href="@Url.Action("SignUp", "Auth")"
-                       role="tab"
-                       aria-controls="pills-register"
-                       aria-selected="false">Register</a>
-                </li>
-            </ul>
+           
             <!-- Pills navs -->
             <!-- Pills content -->
             @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
             {
-
+              
 
                 <div class="tab-content shadow p-5 rounded bg-white">
-                    <div class="tab-pane fade show active"
-                         id="pills-login"
-                         role="tabpanel"
-                         aria-labelledby="tab-login">
+                    <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                        <header class="text-capitalize text-center">Iniciar Sesión</header>
                         <form>
-                            <div class="text-center mb-3">
-                                <p>Sign in with:</p>
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
 
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-google"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-github"></i>
-                                </button>
-                            </div>
 
                             <p class="text-center">or:</p>
 
@@ -106,6 +69,24 @@
                             <!-- Register buttons -->
                             <div class="text-center">
                                 <p>No tienes cuenta? <a href="#!">Registrate</a></p>
+                            </div>
+                            <div class="text-center mb-3">
+                                <p>O inicia sesión con:</p>
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
                             </div>
                         </form>
                     </div>

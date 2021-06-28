@@ -150,6 +150,7 @@
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\Category\CategoryController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\Jobs\JobsController.cs" />
@@ -166,6 +167,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Dashboard\style.css" />
+    <Content Include="Content\Cookies\scricookies.js" />
+    <Content Include="Content\Cookies\stylecookies.css" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -489,7 +492,6 @@
     <Content Include="Views\Auth\SignUp.cshtml" />
     <Content Include="Views\User\UserDashboard.cshtml" />
     <Content Include="Views\Jobs\LoadJobsAsync.cshtml" />
-    <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Jobs\Deletejob.cshtml" />
     <Content Include="Views\Admin\AdminDashboard.cshtml" />
     <Content Include="Views\Employer\EmployerDashboard.cshtml" />
@@ -506,6 +508,12 @@
     <Content Include="Views\Admin\Admins.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Shared\Cookies.cshtml" />
+    <Content Include="Views\Category\LoadCategoryAsync.cshtml" />
+    <Content Include="Views\Category\PostCategory.cshtml" />
+    <Content Include="Views\Category\EditCategory.cshtml" />
+    <Content Include="Views\Jobs\EditJob.cshtml" />
+    <Content Include="Views\Admin\JobEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,16 +26,14 @@ namespace Jobsy.Controllers
         [AllowAnonymous] 
         public async Task<ActionResult> PostAJob(JobsModel model, HttpPostedFileBase Logo) // Este metodo se llama al enviar el formulario
         {
-            try
-            {
-                if (Logo != null)   model.Logo = Logo.FileName; Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+            
+                if (Logo != null) 
+                { 
+                    model.Logo = Logo.FileName;
+                    Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+                }
                 await job.PostAJob(model); // Llama al metodo que se encuenta en la API
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);//Lanza un mensaje en la consola en caso de error
-            }
-
+          
             return View();//Retorna la vista
         }
 
@@ -46,8 +44,8 @@ namespace Jobsy.Controllers
         {
             try
             {
-                List<JobsModel> AllJobs = await job.LoadJobsAsync(); // Llama al metodo que se encuenta en la API
-                ViewBag.AllJobs = AllJobs; //Guardamos el resultado del metodo en el Viewbag
+               
+                ViewBag.AllJobs = await AllJobs(); //Guardamos el resultado del metodo en el Viewbag
             }
             catch (Exception ex)
             {
@@ -58,21 +56,34 @@ namespace Jobsy.Controllers
         }
 
 
+        public async Task<List<JobsModel>> AllJobs()
+        {
+            List<JobsModel> AllJobs = await job.LoadJobsAsync();// Llama al metodo que se encuenta en la API;
+            return AllJobs; 
+        }
+
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> EditJob(string id) 
         {
             try
-            {
-                JobsModel ajob = await job.Loadjob(id);
-                ViewBag.ajob = ajob; 
+            {               
+                ViewBag.ajob = await LoadJob(id); 
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message); 
+                System.Diagnostics.Debug.WriteLine(ex); 
             }
 
             return View(); 
+        }
+
+
+        public async Task<JobsModel> LoadJob(string id)
+        {
+            JobsModel ajob = await job.Loadjob(id);
+            return ajob;
         }
 
 
@@ -102,7 +113,7 @@ namespace Jobsy.Controllers
         {
             try
             {
-                job.Deletejob(id);
+                DeleteAJob(id);
             }
             catch (Exception ex)
             {
@@ -110,6 +121,11 @@ namespace Jobsy.Controllers
             }
 
             return RedirectToAction("LoadJobsAsync");
+        }
+
+        public void DeleteAJob(string id)
+        {
+          job.Deletejob(id);
         }
 
        
