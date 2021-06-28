@@ -74,10 +74,21 @@
                     <a href="@Url.Action("Details", "Jobs/Details", new {id=item.Id})" class="">
 
                         <div class="row">
-                            <div style="margin: 1.5rem;" class="col-sm-3 mt-5">
-                                <img src="@item.Logo" height="90px"  class="mt-2" alt="mdb logo">
+                            <div style="margin: 1rem; margin-right: 4%" class="col-sm-3 mt-5">
+                                <img src="@item.Logo" height="110px" class="" alt="mdb logo">
                             </div>
-                            <div class="col-md-5">
+                            <style>
+                                .vl {
+                                    border-left: 1.9px solid #dedede;
+                                    height: 100%;
+                                }
+                            </style>
+
+                            <div class="col d-flex align-items-center" style="">
+                                <div class="vl"></div>
+                            </div>
+
+                            <div class="col-7" style="margin-right: 2%">
                                 @* <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo"> *@
                                 <h3 class="Job col">@item.Job</h3>
                                 <span class="Company">@item.Company</span>

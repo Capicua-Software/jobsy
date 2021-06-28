@@ -40,8 +40,6 @@
     }
 
 
-
-
 body {
     background-color: #FBFBFB;
 }
@@ -291,7 +289,7 @@ footer{
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 30px;
     color: #2E2E2E;
 }
@@ -305,7 +303,7 @@ footer{
     font-family: Raleway;
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 12px;
     color: #2E2E2E;
 }
@@ -319,7 +317,7 @@ footer{
     font-family: Raleway;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 12px;
     color: #2E2E2E;
 }
