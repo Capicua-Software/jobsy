@@ -73,20 +73,28 @@ namespace Jobsy.Controllers
             return RedirectToAction("Jobs");
         }
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> EditJob(string id)
+        public async Task<ActionResult> EditJob(JobsModel model)
         {
             try
             {
-                ViewBag.ajob = await job.LoadJob(id);
+                await job.Edit(model);
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex);
             }
 
-            return View("JobEdit");
+            return RedirectToAction("Jobs");
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetJobById(string id)
+        {
+            var JobInfo = await job.LoadJob(id);
+
+            return Json(JobInfo, JsonRequestBehavior.AllowGet);
         }
 
 
