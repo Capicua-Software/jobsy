@@ -57,7 +57,7 @@ namespace Jobsy.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public ActionResult Deletejob(string id)
         {

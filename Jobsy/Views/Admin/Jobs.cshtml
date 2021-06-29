@@ -5,14 +5,14 @@
     List<ENTITY_L.Models.Jobs.JobsModel> AllJobs = (List<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.AllJobs; // Llama al metodo que se encuenta en la API
 
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
 <h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleos</h1>
 
-<div class="card container mt-5">
+<div class=" container" style="padding-top: 3rem">
 
-
-    <div class="datatable container ps--scrolling-x mt-2" data-hover="true">
-        <table>
+    <div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
             <thead>
                 <tr>
                     <th>Compañía</th>
@@ -44,9 +44,10 @@
                                 <i class="fas fa-pen"></i>
                             </a>
 
-                            <a href="@Url.Action("Deletejob","Admin", new {id=item.Id})" class="col-md-4 btn btn-danger btn-floating" style="margin-left: 3%;">
+                            <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
+
 
                         </td>
                     </tr>
@@ -58,8 +59,52 @@
             </tbody>
 
         </table>
+
     </div>
 </div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+
+
+
+<script>
+
+    function ConfirmDelete(JobId) {
+        $("#hiddenTxt").val(JobId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+
+        var jobId = $("#hiddenTxt").val();
+
+        $.ajax({
+            type: "POST",
+            url: "Deletejob",
+            data: { id: jobId },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + jobId).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript" src="~/Content/MDB/js/mdb.min.js"></script>
+<script>
+    $('.mydatatable').DataTable();
+</script>
 
 
 
