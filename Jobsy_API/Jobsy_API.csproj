@@ -153,6 +153,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CategoryAPIController .cs" />
+    <Compile Include="Controllers\EmployerAPIController.cs" />
+    <Compile Include="Controllers\UsersAPIController.cs" />
     <Compile Include="Controllers\JobsAPIController.cs" />
     <Compile Include="Controllers\AuthenticationAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

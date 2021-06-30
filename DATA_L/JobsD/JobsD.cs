@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Firebase.Storage;
 using System.IO;
 using Firebase.Auth;
+using System.Security.Claims;
 
 namespace DATA_L.JobsD
 {
@@ -207,6 +208,7 @@ namespace DATA_L.JobsD
         public async Task<string>  SaveImage(string ID, string route)
         {
             OpenFirestoreConnection();
+            var Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
             // Buscar la imagen en la carpeta upload del proyecto
             var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Uploads\" + route);
             // Abrir la imagen
@@ -215,7 +217,7 @@ namespace DATA_L.JobsD
             
             //autenticancion
             var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
-            var a = await auth.SignInWithEmailAndPasswordAsync("jannabelramos@gmail.com", "hannah27");
+            var a = await auth.SignInWithEmailAndPasswordAsync("capicuasoftware@gmail.com", "capicuasoftware");
 
             // Constructor FirebaseStorage, define la ruta de FirebaseStorage donde se guardara el archivo
             var task = new FirebaseStorage(
@@ -226,6 +228,7 @@ namespace DATA_L.JobsD
                      AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
                      ThrowOnCancel = true,
                  })
+                .Child(Email)
                 .Child("Jobs")
                 .Child(ID)
                 .PutAsync(stream);

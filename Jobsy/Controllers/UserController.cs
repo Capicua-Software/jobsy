@@ -4,12 +4,17 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using ENTITY_L.Models.User;
+using Jobsy_API.Controllers;
+using Microsoft.Owin.Security;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Jobsy.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
+        UsersAPIController user = new UsersAPIController();
         public ActionResult UserDashboard()
         {
             //string email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
@@ -35,5 +40,113 @@ namespace Jobsy.Controllers
             // Info.
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<List<UserModel>> LoadUsersAsync() // Metodo para devolver una vista con todos los empleaos 
+        {
+            try
+            {
+                return await user.LoadUsersAsync(); //Guardamos el resultado del metodo en el Viewbag
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+            }
+
+            return null;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> LoadUser(string id)
+        {
+            try
+            {              
+                ViewBag.auser = await UserLoad(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<UserModel> UserLoad(string id)
+        {
+            try
+            {
+                UserModel auser = await user.LoadUser(id);
+                return auser;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex);
+            }
+            return null;
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditUser(UserModel usertoedit)
+        {
+            try
+            {
+               await Edit(usertoedit);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("LoadUsersAsync");
+        }
+
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<UserModel> Edit(UserModel usertoedit)
+        {
+            await user.EditUser(usertoedit);
+            return usertoedit;
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult DeleteUser(string id)
+        {
+            try
+            {
+                Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("LoadUsersAsync");
+        }
+
+        public void Delete(string id)
+        {
+            try
+            {
+                user.DeleteUser(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+
     }
 }
