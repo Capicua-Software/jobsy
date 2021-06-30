@@ -515,7 +515,9 @@
     <Content Include="Views\Jobs\EditJob.cshtml" />
     <Content Include="Views\Admin\JobEdit.cshtml" />
     <Content Include="Views\ModalViews\DeleteModal.cshtml" />
+    <Content Include="Views\User\LoadUsersAsync.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditJobModal.cshtml" />
+    <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

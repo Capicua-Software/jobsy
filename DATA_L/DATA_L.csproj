@@ -401,9 +401,11 @@
   <ItemGroup>
     <Compile Include="AuthenticationD\AuthenticationD.cs" />
     <Compile Include="Category\CategoryD.cs" />
+    <Compile Include="EmployerD\EmployerD.cs" />
     <Compile Include="FirebaseCore.cs" />
     <Compile Include="JobsD\JobsD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserD\UserD.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ENTITY_L\ENTITY_L.csproj">

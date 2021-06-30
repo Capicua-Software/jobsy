@@ -7,13 +7,18 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+using ENTITY_L.Models.User;
 
 namespace Jobsy.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+
         JobsController job = new JobsController();
+        UserController user = new UserController();
+        EmployerController employer = new EmployerController();
+
+        // GET: Admin
         public ActionResult AdminDashboard()
         {
             try
@@ -38,15 +43,8 @@ namespace Jobsy.Controllers
             return View();
         }
 
-        public ActionResult Users()
-        {
-            return View();
-        }
 
-        public ActionResult Employers()
-        {
-            return View();
-        }
+      
 
         [HttpGet]
         [AllowAnonymous]
@@ -97,6 +95,58 @@ namespace Jobsy.Controllers
             return Json(JobInfo, JsonRequestBehavior.AllowGet);
         }
 
+        // Users
+        public async Task<ActionResult> Users()
+        {
+            ViewBag.AllUsers = await user.LoadUsersAsync();
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DeleteUser(string id)
+        {
+            try
+            {
+              user.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("Users");
+        }
+
+
+        // Employers
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Employers()
+        {
+            ViewBag.AllEmployers = await employer.LoadEmployerAsync();
+            return View();
+        }      
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DeleteEmployer(string id)
+        {
+            try
+            {
+                employer.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("Employers");
+        }
+
+
+
 
         public ActionResult Admins()
         {
@@ -111,5 +161,8 @@ namespace Jobsy.Controllers
         {
             return View();
         }
+
+
+
     }
 }
