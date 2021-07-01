@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -29,21 +29,11 @@ namespace Jobsy.Controllers
             {
                 return RedirectToAction("Index", "Index");
             }
-
-            return View();
         }
 
         JobsController job = new JobsController();
         UserController user = new UserController();
         EmployerController employer = new EmployerController();
-
-        // GET: Admin
-        public ActionResult AdminDashboard()
-        {
-            // Info.
-            return ValidateRole("AdminDashboard");
-        }
-
 
         // GET: Admin
 
@@ -65,11 +55,6 @@ namespace Jobsy.Controllers
         }
         
 
-        public ActionResult Employers()
-        {
-            return ValidateRole("Employers");
-        }
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -85,6 +70,14 @@ namespace Jobsy.Controllers
             return ValidateRole("Admins");
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Employers()
+        {
+            ViewBag.AllEmployers = await employer.LoadEmployerAsync();
+            return ValidateRole("Employers");
+        }
+
         public ActionResult Settings()
         {
             return ValidateRole("Settings");
@@ -96,7 +89,7 @@ namespace Jobsy.Controllers
 
         #endregion
 
-
+        //USERS
         [HttpPost]
         [AllowAnonymous]
         public ActionResult DeleteUser(string id)
@@ -115,14 +108,6 @@ namespace Jobsy.Controllers
 
 
         // Employers
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> Employers()
-        {
-            ViewBag.AllEmployers = await employer.LoadEmployerAsync();
-            return View();
-        }      
 
         [HttpPost]
         [AllowAnonymous]
