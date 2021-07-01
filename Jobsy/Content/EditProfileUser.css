@@ -3,27 +3,23 @@
 }
 
 
-.tipo{
-    position: absolute;
-    top: 57%;
-    left: 23%;
+.tipo {
+    position: relative;
     background-color: #3193F4;
     border-radius: 2.5px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 2px;
+    padding-top: 4px;
     padding-bottom: 2px;
 }
 
-.category{
-    top: 57%;
-    left: 34%;
-    position: absolute;
+.category {
+    position: relative;
     background-color: #EB8F3A;
     border-radius: 2.5px;
     padding-left: 25px;
     padding-right: 25px;
-    padding-top: 2px;
+    padding-top: 4px;
     padding-bottom: 2px;
 }
 
