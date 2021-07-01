@@ -30,6 +30,21 @@ namespace Jobsy.Controllers
 
         public ActionResult SignUp()
         {
+            try
+            {
+                // Verification.
+                if (this.Request.IsAuthenticated)
+                {
+                    return RedirectToAction("Index", "Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Info
+                Console.Write(ex);
+            }
+
+            // Info.
             return View();
         }
 
@@ -44,8 +59,7 @@ namespace Jobsy.Controllers
                 // Verification.
                 if (this.Request.IsAuthenticated)
                 {
-
-                    return RedirectToAction("UserDashboard", "User");
+                    return RedirectToAction("Index", "Index");
                 }
             }
             catch (Exception ex)
@@ -71,8 +85,8 @@ namespace Jobsy.Controllers
 
                     if (_model.token != "")
                     {
-                        this.SignInUser(_model.Email, _model.token, false);
-                        return RedirectToLocal(returnUrl);
+                        this.SignInUser(_model, false);
+                        return RedirectToLocal(model.Role,returnUrl);
                     }
                     else
                     {
@@ -92,7 +106,7 @@ namespace Jobsy.Controllers
         }
 
         //Cookie
-        private void SignInUser(string email, string token, bool isPersistent)
+        private void SignInUser(LoginModel userData, bool isPersistent)
         {
             // Initialization.
             var claims = new List<Claim>();
@@ -100,8 +114,10 @@ namespace Jobsy.Controllers
             try
             {
                 // Setting
-                claims.Add(new Claim(ClaimTypes.Email, email));
-                claims.Add(new Claim(ClaimTypes.Authentication, token));
+                claims.Add(new Claim(ClaimTypes.Email, userData.Email));
+                claims.Add(new Claim(ClaimTypes.Authentication, userData.token));
+                claims.Add(new Claim(ClaimTypes.Role, userData.Role));
+                claims.Add(new Claim(ClaimTypes.Name, userData.UserName));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
                 var authenticationManager = ctx.Authentication;
@@ -115,17 +131,40 @@ namespace Jobsy.Controllers
             }
         }
 
+        public ActionResult Redirect()
+        {
+            string Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
 
-        private ActionResult RedirectToLocal(string returnUrl)
+            switch (Role)
+            {
+                case "Admin":
+                    return this.RedirectToAction("AdminDashboard", "Admin");
+                case "Employer":
+                    return this.RedirectToAction("EmployerDashboard", "Employer");
+                case "User":
+                    return this.RedirectToAction("UserDashboard", "User");
+            }
+
+            return RedirectToAction("Index", "Index");
+        }
+
+        private ActionResult RedirectToLocal(string Role ,string returnUrl)
         {
             try
             {
                 // Verification.
                 if (!Url.IsLocalUrl(returnUrl))
                 {
-                    // Info.
-                    return this.RedirectToAction("UserDashboard", "User");
-
+                    switch (Role)
+                    {
+                        case "Admin":
+                            return this.RedirectToAction("AdminDashboard", "Admin");
+                        case "Employer":
+                            return this.RedirectToAction("EmployerDashboard", "Employer");
+                        case "User":
+                            return this.RedirectToAction("UserDashboard", "User");
+                    }
+                    
                 }
                 else if (Url.IsLocalUrl(returnUrl))
                 {

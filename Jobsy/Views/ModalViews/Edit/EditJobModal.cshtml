@@ -1,0 +1,77 @@
+﻿@using(Html.BeginForm("EditJob", "Admin", FormMethod.Post)){
+
+<div class="modal fade show" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+
+                <form>
+
+                    <!--ID-->
+                    <input type="text" id="Id" name="Id" hidden />
+
+                    <!-- COLUMNA -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <!-- COMPANY -->
+                            <div class="form-outline" style="border:1px solid">
+                                <input type="text" id="Company" name="Company" class="form-control" placeholder="Empresa" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- EMAIL -->
+                            <div class="form-outline">
+                                <input type="email" id="Email" name="Email" class="form-control" placeholder="Correo electrónico" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JOB -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Job" name="Job" class="form-control" placeholder="Titulo del empleo" />
+                    </div>
+
+                    <!-- JOBTYPE -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="JobType" name="JobType" class="form-control" placeholder="Tipo de trabajo" />
+                    </div>
+
+                    <!-- CATEGORY -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Category" name="Category" class="form-control" placeholder="Categoría" />
+                    </div>
+
+                    <!-- LOCATION -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Location" name="Location" class="form-control" placeholder="Ubicación" />
+                    </div>
+
+                    <!-- URL -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="URL" name="URL" class="form-control" placeholder="URL" />
+                    </div>
+
+                    <!-- REQUIREMENTS -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Requirements" name="Requirements" class="form-control" placeholder="Requerimientos" />
+                    </div>
+
+                    <!-- JOB DESCRIPTION -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="JobDescription" name="JobDescription" rows="4" placeholder="Descripción del puesto"></textarea>
+                    </div>
+
+
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Editar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+}

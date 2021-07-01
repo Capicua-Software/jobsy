@@ -1,0 +1,89 @@
+﻿@model List<ENTITY_L.Models.Employer.EmployerModel>
+@{
+    ViewBag.Title = "Employers";
+    Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    List<ENTITY_L.Models.Employer.EmployerModel> AllEmployers = (List<ENTITY_L.Models.Employer.EmployerModel>)ViewBag.AllEmployers; // Llama al metodo que se encuenta en la API
+
+}
+
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleos</h1>
+
+<div class=" container" style="padding-top: 3rem">
+
+    <div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
+            <thead>
+                <tr>
+                    <th>Compañía</th>
+                    <th>Email</th>
+                    <th>RNC</th>
+                    <th>Telefono</th>
+                    <th>Pagina Web</th>
+                    <th>Ubicación</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in AllEmployers)
+                {
+                    <tr>
+                        <td>@item.Company</td>
+                        <td>@item.Email</td>
+                        <td>@item.RNC</td>
+                        <td>@item.Tel</td>
+                        <td>@item.URL</td>
+                        <td>@item.Location</td>
+                        <td class="row">
+                            <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                }
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(EmployerId) {
+        $("#hiddenTxt").val(EmployerId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+
+        var EmployerId = $("#hiddenTxt").val();
+
+        $.ajax({
+            type: "POST",
+            url: "DeleteEmployer",
+            data: { id: EmployerId },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + EmployerId).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+

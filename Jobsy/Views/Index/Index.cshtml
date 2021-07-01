@@ -1,13 +1,16 @@
-﻿
+@model List<ENTITY_L.Models.Jobs.JobsModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    IEnumerable<ENTITY_L.Models.Jobs.JobsModel> LastJobs = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.LastJobs; // Llama al metodo que se encuenta en la API
+    int i = 2;
 }
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   
+    <title>Jobsy - A job listing website</title>
 </head>
 <body>
     <!-- Background image -->
@@ -26,12 +29,13 @@
                         <h1 class="mb-6 header-subtitle"><span class="typed-text"></span><span class="header-subtitle-thin cursor">&nbsp;</span></h1>
                     </div>
 
-                    <form class="form" action="">
+                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+                    {
                         <div class="input-icons">
                             <i class="ri-search-line icon"></i>
-                            <input type="text" placeholder="Titulo, Empresa, Categoría, Ubicación">
+                            <input type="text" name="keyword" class="SearchInput" placeholder="Titulo, Empresa, Categoría, Ubicación">
                         </div>
-                    </form>
+                    }
 
                 </div>
             </div>
@@ -52,89 +56,74 @@
             </svg>
         </div>
 
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
 
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+
+        @foreach (var item in LastJobs)
+        {
+
+            if (i == 2)
+            {
+                @MvcHtmlString.Create("<div class='row-cols-2 mb-3 container d-flex justify-content-center space-between'>");
+
+            }
+            i++;
+
+
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 2%;">
                 <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
+                    <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
 
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
+                        <div class="row">
+                            <div style="margin: 1rem; margin-right: 4%" class="col-sm-3 mt-5">
+                                <img src="@item.Logo" height="110px" class="" alt="mdb logo">
+                            </div>
+                            <style>
+                                .vl {
+                                    border-left: 1.9px solid #dedede;
+                                    height: 100%;
+                                }
+                            </style>
 
+                            <div class="col d-flex align-items-center" style="">
+                                <div class="vl"></div>
+                            </div>
+
+                            <div class="col-7" style="margin-right: 2%">
+                                @* <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo"> *@
+                                <h3 class="Job col">@item.Job</h3>
+                                <span class="Company">@item.Company</span>
+                                @* Para cada puesto de trabajo, sólola ubicación, la posición, y la empresa se muestran. *@
+
+                                <p class="card-text ">
+                                    <h6 class="Title col-md-12">Ubicación</h6>
+                                <p class="Subtitle col-md-12">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg> @item.Location
+                                </p>
+                                <h6 class="Title col-md-12">Publicación</h6>
+                                <p class="Subtitle col-md-12">
+                                    @item.Date
+                                </p>
+                                <div class="rectangulo"><p class="">@item.JobType</p></div>
+                            </div>
                         </div>
+
+
+
                     </a>
                 </div>
             </div>
 
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
+            if (i == 4)
+            {
+                @MvcHtmlString.Create("</div>")
+                i = 2;
+            }
 
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
 
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row-cols-2 mb-3 container d-flex justify-content-center space-between">
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-left: 1%;">
-                <div class=" rounded-3">
-                    <a href="" class="">
-                        <div class="card-body">
-
-                            <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo">
-
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        </div>
+        }
 
     </section>
 
@@ -143,4 +132,3 @@
     <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
 </body>
 </html>
-

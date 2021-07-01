@@ -1,0 +1,225 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Dashboard - Admin</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <!-- MDB -->
+
+    <link rel="stylesheet" href="~/Content/MDB/css/mdb.min.css" />
+    <!-- STYLE -->
+    <link rel="stylesheet" href="~/Content/MDB/css/style.css" />
+    <!-- PRISM -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+
+
+
+
+
+    <!-- Custom styles -->
+    <style>
+        .page-intro {
+            background-color: white;
+            width: 100vw;
+            min-height: 100vh;
+        }
+
+        img {
+            max-width: 80%;
+        }
+
+        .mdb-page-content {
+            padding-left: 240px;
+            transition: padding 0.3s linear;
+        }
+
+        #toggler {
+            display: none;
+        }
+
+        @@media (max-width: 660px) {
+            .mdb-page-content {
+                padding-left: 0px;
+            }
+
+            #toggler {
+                display: unset;
+            }
+
+            .mask img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="body-design">
+    <div id="full-screen-example"
+         class="sidenav sidenav-style bg-dark"
+         data-color="dark"
+         data-mode="side"
+         data-hidden="false"
+         data-scroll-container="#scrollContainer">
+        <div class="mt-4">
+            <div id="header-content" class="pl-3 d-flex justify-content-center" style="margin-right: 2rem;">
+                <div class="">
+                    <img src="~/Content/MDB/img/Logo.svg"
+                         alt="avatar"
+                         class=" img-fluid mb-3" />
+                </div>
+
+
+
+
+            </div>
+            <hr class="mb-0" />
+        </div>
+
+        @Html.Partial("~/Views/Shared/Dashboard/Roles/AdminSideBar.cshtml")
+
+        <div class="text-center" style="height: 100px;">
+            <hr class="mb-4 mt-0" />
+            <p>Jobsy Inc.</p>
+        </div>
+    </div>
+
+    <div class="mdb-page-content page-intro bg-light">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 1%;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> Ir a Inicio</a>
+                        </li>
+
+
+                    </ul>
+                    <!-- Left links -->
+
+                </div>
+                <!-- Collapsible wrapper -->
+                <!-- Right elements -->
+                <style>
+                    .navbar-user-text {
+                        color: var(--primary-color);
+                        font-family: var(--navbar-font);
+                        font-weight: var(--font-bold);
+                        text-transform: initial;
+                    }
+
+                    .dropdown-user-text {
+                        font-family: var(--navbar-font);
+                        font-weight: var(--font-semi-bold);
+                        text-transform: initial;
+                    }
+                </style>
+
+
+                <span class="navbar-user-text" style="margin-right: 2rem;">admin@admin.com</span>
+
+                <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+
+        <!-- Navbar -->
+        <div class=" py-1">
+
+            @RenderBody()
+
+
+            <!--THIS IS THE NAVBAR BUTTON WHEN MOBILE VERSION IS ACTIVE-->
+            <button id="toggler"
+                    class="btn btn-dark mt-5"
+                    data-toggle="sidenav"
+                    data-target="#full-screen-example">
+                <i class="fas fa-bars"></i>
+            </button>
+
+
+        </div>
+    </div>
+
+    <!-- PRISM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- MDB SNIPPET -->
+    <script type="text/javascript" src="~/Content/MDB/js/mdbsnippet.min.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="~/Content/MDB/js/mdb.min.js"></script>
+    <script type="text/javascript" src="~/Content/MDB/src/js/bootstrap/src/modal.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script type="text/javascript">
+        const sidenav = document.getElementById('full-screen-example');
+        const instance = mdb.Sidenav.getInstance(sidenav);
+
+        let innerWidth = null;
+
+        const setMode = (e) => {
+            // Check necessary for Android devices
+            if (window.innerWidth === innerWidth) {
+                return;
+            }
+
+            innerWidth = window.innerWidth;
+
+            if (window.innerWidth < 660) {
+                instance.changeMode('over');
+                instance.hide();
+            } else {
+                instance.changeMode('side');
+                instance.show();
+            }
+        };
+
+        setMode();
+
+        // Event listeners
+
+        window.addEventListener('resize', setMode);
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/MDB/js/mdb.min.js"></script>
+    <script>
+        $('.mydatatable').DataTable();
+    </script>
+
+
+</body>
+</html>

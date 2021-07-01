@@ -26,6 +26,7 @@ namespace ENTITY_L.Models.Authentication
         public string Password { get; set; }
 
         public bool Employer { get; set; }
+        public string Role { get; set; }
 
         public FirebaseAuthProvider auth { get; set; }
         public FirebaseAuthLink a { get; set; }
