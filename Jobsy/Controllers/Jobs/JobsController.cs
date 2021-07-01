@@ -15,10 +15,14 @@ namespace Jobsy.Controllers
     public class JobsController : Controller
     {
         JobsAPIController job = new JobsAPIController();
-
-
-        public ActionResult PostAJob()
-        {
+        UsersAPIController user = new UsersAPIController();
+        EmployerController employer = new EmployerController();
+        CategoryController category = new CategoryController();
+        static string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+        public async Task<ActionResult> PostAJob()
+        {           
+            ViewBag.Employer= await employer.EmployerLoad(Email);
+            ViewBag.AllCategory = await category.LoadCategories();
             return View();
         }
             
@@ -33,8 +37,8 @@ namespace Jobsy.Controllers
                     Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
                 }
                 await job.PostAJob(model); // Llama al metodo que se encuenta en la API
-          
-            return View();//Retorna la vista
+
+            return RedirectToAction("Index", "Index");
         }
 
 
@@ -68,7 +72,9 @@ namespace Jobsy.Controllers
         public async Task<ActionResult> EditJob(string id) 
         {
             try
-            {               
+            {
+                ViewBag.Employer = await employer.EmployerLoad(Email);
+                ViewBag.AllCategory = await category.LoadCategories();
                 ViewBag.ajob = await LoadJob(id); 
             }
             catch (Exception ex)
@@ -102,12 +108,12 @@ namespace Jobsy.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("LoadJobsAsync");
+            return RedirectToAction("EditJob");
         }
 
 
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public ActionResult Deletejob(string id)
         {
@@ -120,7 +126,7 @@ namespace Jobsy.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("LoadJobsAsync");
+            return RedirectToAction("Index", "Index");
         }
 
         public void DeleteAJob(string id)
@@ -128,7 +134,31 @@ namespace Jobsy.Controllers
           job.Deletejob(id);
         }
 
-       
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> JobDescription(string id)
+        {
+            try
+            {
+                ViewBag.ajob = await LoadJob(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetUserById(string id)
+        {
+            var JobInfo = await user.LoadUser(id);
+
+            return Json(JobInfo, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }
