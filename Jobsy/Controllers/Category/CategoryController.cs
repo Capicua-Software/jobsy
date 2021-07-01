@@ -49,8 +49,8 @@ namespace Jobsy.Controllers
         {
             try
             {
-                List<CategoryModel> Category = await category.LoadCategoryAsync(); // Llama al metodo que se encuenta en la API
-                ViewBag.AllCategory = Category; //Guardamos el resultado del metodo en el Viewbag
+               
+                ViewBag.AllCategory = await LoadCategories(); //Guardamos el resultado del metodo en el Viewbag
             }
             catch (Exception ex)
             {
@@ -59,6 +59,26 @@ namespace Jobsy.Controllers
 
             return View(); //Retorna la vista
         }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<List<CategoryModel>> LoadCategories() // Metodo para devolver una vista con todos los empleaos 
+        {
+            try
+            {
+                List<CategoryModel> Category = await category.LoadCategoryAsync(); // Llama al metodo que se encuenta en la API
+                return Category;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+            }
+
+            return null;
+        }
+
+
 
 
         [HttpGet]

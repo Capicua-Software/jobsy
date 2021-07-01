@@ -30,7 +30,7 @@
                     {
                         <div class="input-icons">
                             <i class="ri-search-line icon"></i>
-                            <input type="text" name="keyword" placeholder="Titulo, Empresa, Categoría, Ubicación">
+                            <input type="text" name="keyword" class="SearchInput" placeholder="Titulo, Empresa, Categoría, Ubicación">
                         </div>
                     }
 
@@ -68,7 +68,7 @@
 
             <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 2%;">
                 <div class=" rounded-3">
-                    <a href="@Url.Action("Details", "Jobs/Details", new {id=item.Id})" class="">
+                    <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
 
                         <div class="row">
                             <div style="margin: 1rem; margin-right: 4%" class="col-sm-3 mt-5">

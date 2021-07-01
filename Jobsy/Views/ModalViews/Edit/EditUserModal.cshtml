@@ -1,4 +1,4 @@
-﻿@using(Html.BeginForm("ExecuteJobProcess", "Admin")){
+﻿@using(Html.BeginForm("EditUser", "Admin", FormMethod.Post)){
 
 <div class="modal fade show" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-xl">
@@ -10,8 +10,6 @@
             <div class="modal-body p-4">
 
                 <form>
-                    <!--PROCESS-->
-                    <input type="text" id="process" name="process" value="Edit" hidden />
 
                     <!--ID-->
                     <input type="text" id="Id" name="Id" hidden />
@@ -20,8 +18,14 @@
                     <div class="row mb-4">
                         <div class="col">
                             <!-- COMPANY -->
-                            <div class="form-outline" style="border:1px solid">
-                                <input type="text" id="Company" name="Company" class="form-control" placeholder="Empresa" />
+                            <div class="form-outline">
+                                <input type="text" id="Name" name="Name" class="form-control" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- COMPANY -->
+                            <div class="form-outline">
+                                <input type="text" id="LastName" name="LastName" class="form-control" placeholder="Apellidos" />
                             </div>
                         </div>
                         <div class="col">
@@ -34,17 +38,17 @@
 
                     <!-- JOB -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="Job" name="Job" class="form-control" placeholder="Titulo del empleo" />
+                        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Cedula" />
                     </div>
 
                     <!-- JOBTYPE -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="JobType" name="JobType" class="form-control" placeholder="Tipo de trabajo" />
+                        <textarea type="text" id="Bio" name="Bio" class="form-control" placeholder="Biografia"></textarea>
                     </div>
 
                     <!-- CATEGORY -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="Category" name="Category" class="form-control" placeholder="Categoría" />
+                        <input type="text" id="Instagram" name="Instagram" class="form-control" placeholder="Instagram" />
                     </div>
 
                     <!-- LOCATION -->
@@ -54,12 +58,12 @@
 
                     <!-- URL -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="URL" name="URL" class="form-control" placeholder="URL" />
+                        <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Facebook" />
                     </div>
 
                     <!-- REQUIREMENTS -->
                     <div class="form-outline mb-4">
-                        <input type="text" id="Requirements" name="Requirements" class="form-control" placeholder="Requerimientos" />
+                        <input type="text" id="Linkedin" name="Linkedin" class="form-control" placeholder="Linkedin" />
                     </div>
 
                     <!-- JOB DESCRIPTION -->

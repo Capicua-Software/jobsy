@@ -1,69 +1,91 @@
-﻿@model ENTITY_L.Models.User.UserModel
-
+﻿@model List<ENTITY_L.Models.User.UserModel>
 @{
     ViewBag.Title = "Users";
     Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    List<ENTITY_L.Models.User.UserModel> AllUsers = (List<ENTITY_L.Models.User.UserModel>)ViewBag.AllUsers; // Llama al metodo que se encuenta en la API
+
 }
 
-<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Usuarios</h1>
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleos</h1>
 
-<div class="card container mt-5">
+<div class=" container" style="padding-top: 3rem">
 
-    <div style="margin-top: 1rem;">
-        <a type="button" href="DataTable-Add.php" class="btn btn-primary m-2 ">
-            <i class="fas fa-plus"></i>
-            Crear
-        </a>
-
-    </div>
-
-    <div class="datatable container ps--scrolling-x mt-2" data-hover="true">
-        <table>
+    <div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Compañía</th>
                     <th>Email</th>
-                    <th>Empleo</th>
-                    <th>Tipo de trabajo</th>
-                    <th>Categoría</th>
+                    <th>RNC</th>
+                    <th>Telefono</th>
+                    <th>Pagina Web</th>
                     <th>Ubicación</th>
                     <th></th>
                 </tr>
             </thead>
 
             <tbody>
-
+                @foreach (var item in AllUsers)
+                {
                 <tr>
-                    <td>Clc8edmCx9WptQlwg5XY</td>
-                    <td>Jobsy</td>
-                    <td>support@jobsy.tech</td>
-                    <td>Operador</td>
-                    <td>Part-Time</td>
-                    <td>Tecnología</td>
-                    <td>Los Mina</td>
+                    <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Cedula</td>
+                    <td>@item.Cel</td>
+                    <td>@item.Tel</td>
+                    <td>@item.Linkedin</td>
+                    <td>@item.Cel</td>
                     <td class="row">
-                        <a href="" class="col-md-4 btn btn-dark btn-floating">
+                        <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">
                             <i class="fas fa-eye"></i>
                         </a>
-
-                        <a href="" class="col-md-4 btn btn-primary btn-floating" style="margin-left: 3%;">
-                            <i class="fas fa-pen"></i>
-                        </a>
-
-                        <a href="" class="col-md-4 btn btn-danger btn-floating" style="margin-left: 3%;">
+                        <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
                             <i class="fas fa-trash-alt"></i>
                         </a>
-
                     </td>
                 </tr>
 
-                <?php }  ?>
+                }
 
 
 
             </tbody>
 
         </table>
+
     </div>
 </div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(UserId) {
+        $("#hiddenTxt").val(UserId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+
+        var UserId = $("#hiddenTxt").val();
+
+        $.ajax({
+            type: "POST",
+            url: "DeleteUser",
+            data: { id: UserId },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + UserId).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+
