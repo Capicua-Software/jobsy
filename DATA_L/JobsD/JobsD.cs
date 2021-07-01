@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using Firebase.Storage;
 using System.IO;
 using Firebase.Auth;
+using System.Security.Claims;
 
 namespace DATA_L.JobsD
 {
@@ -22,9 +23,6 @@ namespace DATA_L.JobsD
             try
             {
                 docRef = db.Collection("Jobs").Document(); // Creamos el documento para obtener el id
-
-                if (model.Logo != null) model.Logo = await SaveImage(docRef.Id, model.Logo);
-                else model.Logo = Default;
 
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
 
@@ -117,13 +115,7 @@ namespace DATA_L.JobsD
             try
             {
                 docRef = db.Collection("Jobs").Document(model.Id);
-                JobsModel search = await Loadjob(model.Id);
-
-                if (model.Logo != null) model.Logo = await SaveImage(model.Id, model.Logo);
-                else model.Logo = search.Logo;
-
-                if (search.Logo==null) model.Logo = Default;
-
+              
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
 
              
@@ -196,46 +188,14 @@ namespace DATA_L.JobsD
             {
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
-                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();                   
+                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();
                     jobsfound.Add(everyJob); // Se agrega a la lista el objeto
                 }
             }
             return jobsfound;
         }
+  
 
-
-        public async Task<string>  SaveImage(string ID, string route)
-        {
-            OpenFirestoreConnection();
-            // Buscar la imagen en la carpeta upload del proyecto
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Uploads\" + route);
-            // Abrir la imagen
-            var stream = File.Open(path, FileMode.Open);
-
-            
-            //autenticancion
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
-            var a = await auth.SignInWithEmailAndPasswordAsync("jannabelramos@gmail.com", "hannah27");
-
-            // Constructor FirebaseStorage, define la ruta de FirebaseStorage donde se guardara el archivo
-            var task = new FirebaseStorage(
-                Bucket,
-            
-                 new FirebaseStorageOptions
-                 {
-                     AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
-                     ThrowOnCancel = true,
-                 })
-                .Child("Jobs")
-                .Child(ID)
-                .PutAsync(stream);
-          
-
-            var downloadUrl = await task;
-
-            return downloadUrl; //Retorna el link de descarga de la foto
-
-        }
 
     }
 }

@@ -7,7 +7,11 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+
 using Jobsy.Admin.Jobs;
+
+using ENTITY_L.Models.User;
+
 
 namespace Jobsy.Controllers
 {
@@ -29,8 +33,19 @@ namespace Jobsy.Controllers
             return View();
         }
 
-        // GET: Admin
         JobsController job = new JobsController();
+        UserController user = new UserController();
+        EmployerController employer = new EmployerController();
+
+        // GET: Admin
+        public ActionResult AdminDashboard()
+        {
+            // Info.
+            return ValidateRole("AdminDashboard");
+        }
+
+
+        // GET: Admin
 
         Jobs _jobs = new Jobs();
 
@@ -42,15 +57,19 @@ namespace Jobsy.Controllers
             return ValidateRole("AdminDashboard");
         }
 
-        public ActionResult Users()
+        // Users
+        public async Task<ActionResult> Users()
         {
-            return ValidateRole("Users");
+            ViewBag.AllUsers = await user.LoadUsersAsync();
+             return ValidateRole("Users");
         }
+        
 
         public ActionResult Employers()
         {
             return ValidateRole("Employers");
         }
+
 
         [HttpGet]
         [AllowAnonymous]
@@ -77,6 +96,53 @@ namespace Jobsy.Controllers
 
         #endregion
 
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DeleteUser(string id)
+        {
+            try
+            {
+              user.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("Users");
+        }
+
+
+        // Employers
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Employers()
+        {
+            ViewBag.AllEmployers = await employer.LoadEmployerAsync();
+            return View();
+        }      
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult DeleteEmployer(string id)
+        {
+            try
+            {
+                employer.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("Employers");
+        }
+
+
+
+
         //JOB PROCESSES
         public async Task<ActionResult> ExecuteJobProcess(string process, string id, JobsModel model)
         {
@@ -99,6 +165,5 @@ namespace Jobsy.Controllers
             return RedirectToAction("Jobs");
         }
 
-        
     }
 }
