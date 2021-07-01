@@ -171,6 +171,7 @@
     <Content Include="Content\Dashboard\style.css" />
     <Content Include="Content\Cookies\scricookies.js" />
     <Content Include="Content\Cookies\stylecookies.css" />
+    <Content Include="Content\EditProfileEmployer.css" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -528,6 +529,7 @@
     <Content Include="Views\Jobs\JobDescription.cshtml" />
     <Content Include="Views\ModalViews\SuccessModal.cshtml" />
     <Content Include="Views\User\EditProfileUser.cshtml" />
+    <Content Include="Views\Employer\EditProfileEmployer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
