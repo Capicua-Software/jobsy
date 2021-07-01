@@ -185,6 +185,7 @@
     <Content Include="Content\Loading\logo.svg" />
     <Content Include="Content\MDB\css\mdb.min.css" />
     <Content Include="Content\MDB\css\style.css" />
+    <Content Include="Content\EditProfileUser.css" />
     <Content Include="Content\MDB\img\Logo.svg" />
     <Content Include="Content\MDB\js\mdb.min.js" />
     <Content Include="Content\MDB\js\mdbsnippet.min.js" />
@@ -521,12 +522,12 @@
     <Content Include="Views\ModalViews\DeleteModal.cshtml" />
     <Content Include="Views\User\LoadUsersAsync.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditJobModal.cshtml" />
-
     <Content Include="Views\Index\Searchjobs.cshtml" />
     <Content Include="Views\Admin\ExecuteJobProcess.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
     <Content Include="Views\Jobs\JobDescription.cshtml" />
     <Content Include="Views\ModalViews\SuccessModal.cshtml" />
+    <Content Include="Views\User\EditProfileUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
