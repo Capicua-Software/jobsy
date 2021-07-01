@@ -373,6 +373,7 @@
     <Compile Include="Models\Category\CategoryModel.cs" />
     <Compile Include="Models\Employer\EmployerModel.cs" />
     <Compile Include="Models\Jobs\JobsModel.cs" />
+    <Compile Include="Models\Request\RequestModel.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

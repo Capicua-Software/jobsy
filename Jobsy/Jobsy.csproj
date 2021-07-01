@@ -154,6 +154,7 @@
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\Jobs\JobsController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +178,7 @@
     <Content Include="Content\Index\tidio.js" />
     <Content Include="Content\Index\typing-effect.js" />
     <Content Include="Content\Index\waves.svg" />
+    <Content Include="Content\jobdescription.css" />
     <Content Include="Content\Loading\loading.css" />
     <Content Include="Content\Loading\loading.js" />
     <Content Include="Content\Loading\logo.svg" />
@@ -295,6 +297,7 @@
     <Content Include="Content\MDB\src\js\pro\touch\tap.js" />
     <Content Include="Content\MDB\src\js\pro\touch\touchUtil.js" />
     <Content Include="Content\MDB\src\js\pro\treeview.js" />
+    <Content Include="Content\PostAJob.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -518,6 +521,8 @@
     <Content Include="Views\User\LoadUsersAsync.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditJobModal.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
+    <Content Include="Views\Jobs\JobDescription.cshtml" />
+    <Content Include="Views\ModalViews\SuccessModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

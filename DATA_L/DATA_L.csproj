@@ -405,6 +405,7 @@
     <Compile Include="FirebaseCore.cs" />
     <Compile Include="JobsD\JobsD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestD\RequestD.cs" />
     <Compile Include="UserD\UserD.cs" />
   </ItemGroup>
   <ItemGroup>

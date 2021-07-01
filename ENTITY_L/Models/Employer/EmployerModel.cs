@@ -20,6 +20,7 @@ namespace ENTITY_L.Models.Employer
         [FirestoreProperty]
         public string Company { get; set; }
 
+
         [DataType(DataType.Text)]
         [FirestoreProperty]
         public string RNC { get; set; }
@@ -67,6 +68,6 @@ namespace ENTITY_L.Models.Employer
 
         [FirestoreProperty]
         [DataType(DataType.Text)]
-        public string Image { get; set; }
+        public string Logo { get; set; }
     }
 }
