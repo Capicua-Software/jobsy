@@ -7,12 +7,31 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+
+using Jobsy.Admin.Jobs;
+
 using ENTITY_L.Models.User;
+
 
 namespace Jobsy.Controllers
 {
+    
     public class AdminController : Controller
     {
+        //THIS FUNCTION VALIDATES THE USER ROLE TO GIVE ACCESS TO THE DIFFERENT METHODS IN THE CONTROLLER
+        public ActionResult ValidateRole(string view)
+        {
+            if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Admin")
+            {
+                return View(view);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Index");
+            }
+
+            return View();
+        }
 
         JobsController job = new JobsController();
         UserController user = new UserController();
@@ -21,86 +40,62 @@ namespace Jobsy.Controllers
         // GET: Admin
         public ActionResult AdminDashboard()
         {
-            try
-            {
-                // Verification.
-                if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Admin")
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Index");
-                }
-            }
-            catch (Exception ex)
-            {
-                // Info
-                Console.Write(ex);
-            }
-
             // Info.
-            return View();
+            return ValidateRole("AdminDashboard");
         }
 
 
-      
+        // GET: Admin
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> Jobs()
+        Jobs _jobs = new Jobs();
+
+        #region VIEWS
+
+        public ActionResult AdminDashboard()
         {
-            ViewBag.AllJobs = await job.AllJobs(); //Guardamos el resultado del metodo en el Viewbag
-            return View();
-        }
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Deletejob(string id)
-        {
-            try
-            {
-                job.DeleteAJob(id);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-
-            return RedirectToAction("Jobs");
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> EditJob(JobsModel model)
-        {
-            try
-            {
-                await job.Edit(model);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
-            }
-
-            return RedirectToAction("Jobs");
-        }
-
-        [HttpGet]
-        public async Task<JsonResult> GetJobById(string id)
-        {
-            var JobInfo = await job.LoadJob(id);
-
-            return Json(JobInfo, JsonRequestBehavior.AllowGet);
+            // Info.
+            return ValidateRole("AdminDashboard");
         }
 
         // Users
         public async Task<ActionResult> Users()
         {
             ViewBag.AllUsers = await user.LoadUsersAsync();
-            return View();
+             return ValidateRole("Users");
         }
+        
+
+        public ActionResult Employers()
+        {
+            return ValidateRole("Employers");
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Jobs()
+        {
+            ViewBag.AllJobs = await job.AllJobs(); //Guardamos el resultado del metodo en el Viewbag
+            return ValidateRole("Jobs");
+        }
+
+
+        public ActionResult Admins()
+        {
+            return ValidateRole("Admins");
+        }
+
+        public ActionResult Settings()
+        {
+            return ValidateRole("Settings");
+        }
+        public ActionResult Profile()
+        {
+            return ValidateRole("Profile");
+        }
+
+        #endregion
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -148,21 +143,27 @@ namespace Jobsy.Controllers
 
 
 
-        public ActionResult Admins()
+        //JOB PROCESSES
+        public async Task<ActionResult> ExecuteJobProcess(string process, string id, JobsModel model)
         {
-            return View();
-        }
+            switch (process)
+            {
+                case "Delete":
+                    job.DeleteAJob(id);
+                    break;
 
-        public ActionResult Settings()
-        {
-            return View();
-        }
-        public ActionResult Profile()
-        {
-            return View();
-        }
+                case "Edit":
+                    await job.Edit(model);
+                    //RedirectToAction("Jobs");
+                    break;
 
+                case "GetJobById":
+                    var JobInfo = await job.LoadJob(id);                 
+                    return Json(JobInfo, JsonRequestBehavior.AllowGet);
+            }
 
+            return RedirectToAction("Jobs");
+        }
 
     }
 }

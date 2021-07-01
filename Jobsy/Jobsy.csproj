@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartUp.Auth.cs" />
     <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\Jobs\Jobs.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\Category\CategoryController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
@@ -520,6 +521,9 @@
     <Content Include="Views\ModalViews\DeleteModal.cshtml" />
     <Content Include="Views\User\LoadUsersAsync.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditJobModal.cshtml" />
+
+    <Content Include="Views\Index\Searchjobs.cshtml" />
+    <Content Include="Views\Admin\ExecuteJobProcess.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
     <Content Include="Views\Jobs\JobDescription.cshtml" />
     <Content Include="Views\ModalViews\SuccessModal.cshtml" />
@@ -527,6 +531,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\TrashViews\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

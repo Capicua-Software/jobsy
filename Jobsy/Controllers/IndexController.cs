@@ -15,6 +15,7 @@ namespace Jobsy.Controllers
 
         JobsAPIController job = new JobsAPIController();
         static IEnumerable<JobsModel> LastJobs = null;
+        static IEnumerable<JobsModel> JobsFound = null;
         // GET: Index
         [HttpGet]
         [AllowAnonymous]
@@ -54,16 +55,18 @@ namespace Jobsy.Controllers
         {
             try
             {
-                LastJobs = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
-                ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
+                JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
+                ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
+                ViewBag.KeyWord = keyword;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
             }
 
-            return RedirectToAction("Index"); //Retorna la vista
+            return View(); //Retorna la vista
         }
+
 
     }
 }

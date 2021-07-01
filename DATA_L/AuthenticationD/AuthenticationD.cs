@@ -17,6 +17,7 @@ namespace DATA_L.Authentication
             model = await GetUserInfo(model);
             model.auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             model.ab = await model.auth.SignInWithEmailAndPasswordAsync(model.Email, model.Password);
+            
             model.token = model.ab.FirebaseToken;
             model.user = model.ab.User;
             return model;
