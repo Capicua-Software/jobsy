@@ -7,45 +7,49 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+using Jobsy.Admin.Jobs;
 
 namespace Jobsy.Controllers
 {
+    
     public class AdminController : Controller
     {
-        // GET: Admin
-        JobsController job = new JobsController();
-        public ActionResult AdminDashboard()
+        //THIS FUNCTION VALIDATES THE USER ROLE TO GIVE ACCESS TO THE DIFFERENT METHODS IN THE CONTROLLER
+        public ActionResult ValidateRole(string view)
         {
-            try
+            if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Admin")
             {
-                // Verification.
-                if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Admin")
-                {
-                    return View();
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Index");
-                }
+                return View(view);
             }
-            catch (Exception ex)
+            else
             {
-                // Info
-                Console.Write(ex);
+                return RedirectToAction("Index", "Index");
             }
 
-            // Info.
             return View();
+        }
+
+        // GET: Admin
+        JobsController job = new JobsController();
+
+        Jobs _jobs = new Jobs();
+
+        #region VIEWS
+
+        public ActionResult AdminDashboard()
+        {
+            // Info.
+            return ValidateRole("AdminDashboard");
         }
 
         public ActionResult Users()
         {
-            return View();
+            return ValidateRole("Users");
         }
 
         public ActionResult Employers()
         {
-            return View();
+            return ValidateRole("Employers");
         }
 
         [HttpGet]
@@ -53,63 +57,48 @@ namespace Jobsy.Controllers
         public async Task<ActionResult> Jobs()
         {
             ViewBag.AllJobs = await job.AllJobs(); //Guardamos el resultado del metodo en el Viewbag
-            return View();
-        }
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult Deletejob(string id)
-        {
-            try
-            {
-                job.DeleteAJob(id);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
-
-            return RedirectToAction("Jobs");
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> EditJob(JobsModel model)
-        {
-            try
-            {
-                await job.Edit(model);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex);
-            }
-
-            return RedirectToAction("Jobs");
-        }
-
-        [HttpGet]
-        public async Task<JsonResult> GetJobById(string id)
-        {
-            var JobInfo = await job.LoadJob(id);
-
-            return Json(JobInfo, JsonRequestBehavior.AllowGet);
+            return ValidateRole("Jobs");
         }
 
 
         public ActionResult Admins()
         {
-            return View();
+            return ValidateRole("Admins");
         }
 
         public ActionResult Settings()
         {
-            return View();
+            return ValidateRole("Settings");
         }
         public ActionResult Profile()
         {
-            return View();
+            return ValidateRole("Profile");
         }
+
+        #endregion
+
+        //JOB PROCESSES
+        public async Task<ActionResult> ExecuteJobProcess(string process, string id, JobsModel model)
+        {
+            switch (process)
+            {
+                case "Delete":
+                    job.DeleteAJob(id);
+                    break;
+
+                case "Edit":
+                    await job.Edit(model);
+                    //RedirectToAction("Jobs");
+                    break;
+
+                case "GetJobById":
+                    var JobInfo = await job.LoadJob(id);                 
+                    return Json(JobInfo, JsonRequestBehavior.AllowGet);
+            }
+
+            return RedirectToAction("Jobs");
+        }
+
+        
     }
 }

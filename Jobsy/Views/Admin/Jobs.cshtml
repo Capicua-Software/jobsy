@@ -68,10 +68,17 @@
 <!--SCRIPT FOR GETTING JOB INFO FOR EDIT-->
 <script>
 
-    function GetDetails(id) {
+    function GetDetails(Id) {
+        var URL = '@Url.Action("ExecuteJobProcess", "Admin")'
+        var Process = "GetJobById";
+
         $.ajax({
-            url: "GetJobById/" + id,
-            typr: "GET",
+            url: URL,
+            data: {
+                process: Process,
+                id: Id
+            },
+            type: "GET",
             contentType: "application/json;charset=UTF-8",
             dataType: "json",
             success: function (response) {
@@ -106,13 +113,16 @@
 
     var Delete = function () {
 
-
         var jobId = $("#hiddenTxt").val();
+        var Process = "Delete";
 
         $.ajax({
             type: "POST",
-            url: "Deletejob",
-            data: { id: jobId },
+            url: "ExecuteJobProcess",
+            data: {
+                process: Process,
+                id: jobId
+            },
             success: function (result) {
                 $("#deleteModal").modal("hide");
                 $("#row_" + jobId).remove();

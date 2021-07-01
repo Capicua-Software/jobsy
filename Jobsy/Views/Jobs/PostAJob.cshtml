@@ -9,7 +9,7 @@
 
 @using (Html.BeginForm("PostAJob", "Jobs", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+    @* Html.AntiForgeryToken() *@
 
     <div class="form-horizontal">
         <h4>JobsModel</h4>

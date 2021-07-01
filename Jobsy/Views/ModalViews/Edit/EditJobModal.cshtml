@@ -1,4 +1,4 @@
-﻿@using(Html.BeginForm("EditJob", "Admin", FormMethod.Post)){
+﻿@using(Html.BeginForm("ExecuteJobProcess", "Admin")){
 
 <div class="modal fade show" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
     <div class="modal-dialog modal-xl">
@@ -10,6 +10,8 @@
             <div class="modal-body p-4">
 
                 <form>
+                    <!--PROCESS-->
+                    <input type="text" id="process" name="process" value="Edit" hidden />
 
                     <!--ID-->
                     <input type="text" id="Id" name="Id" hidden />

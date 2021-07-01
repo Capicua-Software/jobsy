@@ -1,4 +1,9 @@
-﻿
+﻿@using System.Security.Claims;
+@{ 
+    string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+    string Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+} 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +72,8 @@
 </head>
 
 <body class="body-design">
+
+
     <div id="full-screen-example"
          class="sidenav sidenav-style bg-dark"
          data-color="dark"
@@ -87,8 +94,19 @@
             </div>
             <hr class="mb-0" />
         </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            switch (Role)
+            {
+                case "Admin":
+                    @Html.Partial("~/Views/Shared/Dashboard/Roles/AdminSideBar.cshtml")
+                    break;
 
-        @Html.Partial("~/Views/Shared/Dashboard/Roles/AdminSideBar.cshtml")
+                case "Employer":
+                    @Html.Partial("~/Views/Shared/Dashboard/Roles/EmployerSideBar.cshtml")
+                    break;
+            }
+        }
 
         <div class="text-center" style="height: 100px;">
             <hr class="mb-4 mt-0" />
@@ -144,7 +162,8 @@
                 </style>
 
 
-                <span class="navbar-user-text" style="margin-right: 2rem;">admin@admin.com</span>
+
+                <span class="navbar-user-text" style="margin-right: 2rem;">@Email</span>
 
                 <!-- Right elements -->
             </div>

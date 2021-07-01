@@ -2,20 +2,16 @@
 
 
 
-:root{
+:root {
     /*BUTTONS*/
     --primary-color: #933368;
     --primary-active: #70274f;
-
     /*BOX SHADOW*/
     --box-shadow-1: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
     /*FONTS TO USE*/
     --navbar-font: 'Raleway';
-
     /*HEADER TITLES*/
     --h1: 'Raleway';
-
     /*FONT-WEIGHT*/
     --font-medium: 500;
     --font-semi-bold: 600;
@@ -23,107 +19,94 @@
     --font-bold: 700;
 }
 
-.primary-color-button {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    box-shadow: var(--box-shadow-1);
-}
-.primary-color-button:hover{
-    background-color: var(--primary-active);
-    color: #ffffff;
-    box-shadow: var(--box-shadow-1);
-}
-    .primary-color-button:focus {
-        background-color: var(--primary-active);
-        color: #ffffff;
-        box-shadow: var(--box-shadow-1);
-    }
-
-
-body {
-    background-color: #FBFBFB;
-}
-
 /*==HEADERS==*/
-h1{
+h1 {
     font-family: var(--h1);
 }
 
 /*BUTTONS*/
-.btn{
+.btn {
     font-family: var(--navbar-font);
     font-weight: var(--font-semi-bold);
     text-transform: initial;
 }
 
-.btn-link{
+.navbar-user-text {
+    color: var(--primary-color);
+    font-family: var(--navbar-font);
+    font-weight: var(--font-bold);
+    text-transform: initial;
+}
+
+
+.btn-link {
     font-weight: var(--font-bold);
 }
-/*CHECKBOXES*/
 
 
 /*NAV BAR*/
-.navbar-links{
+.navbar-links {
     font-family: var(--navbar-font);
     font-weight: var(--font-medium);
     margin-left: 3rem;
-    
 }
 
-
-.link-active{
+.link-active {
     font-style: bold;
 }
 
 /*LINK NAVBAR BUTTON*/
-.navbar-link-button{
+.navbar-link-button {
     color: var(--primary-color);
     font-size: 15px;
 }
-.navbar-link-button:hover{
-    color: var(--primary-color);
-    background-color: #ffeff7;
-    
-}
-.navbar-link-button:focus{
-    color: var(--primary-color);
-    background-color: #ffeff7;
-    
-}
+
+    .navbar-link-button:hover {
+        color: var(--primary-color);
+        background-color: #ffeff7;
+    }
+
+    .navbar-link-button:focus {
+        color: var(--primary-color);
+        background-color: #ffeff7;
+    }
 
 
 /*OUTLINED NAVBAR BUTTON*/
-.navbar-button{
+.navbar-button {
     border-color: var(--primary-color);
     color: var(--primary-color);
     font-size: 15px;
 }
-.navbar-button:hover{
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
-    color: #ffffff;
-    box-shadow: var(--box-shadow-1);
-}
-.navbar-button:focus{
-    border-color: var(--primary-color);
-    background-color: var(--primary-active);
-    color: #ffffff;
-}
+
+    .navbar-button:hover {
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+        color: #ffffff;
+        box-shadow: var(--box-shadow-1);
+    }
+
+    .navbar-button:focus {
+        border-color: var(--primary-color);
+        background-color: var(--primary-active);
+        color: #ffffff;
+    }
 
 
 /*====HEADER BACKGROUND=====*/
-.header-title{
+.header-title {
     font-size: 60px;
     font-weight: var(--font-light);
 }
-.header-subtitle{
+
+.header-subtitle {
     font-size: 60px;
     font-weight: var(--font-bold);
 }
-.header-subtitle-thin{
+
+.header-subtitle-thin {
     font-size: 60px;
     font-weight: var(--font-light);
-    
 }
 
 
@@ -131,7 +114,8 @@ h1{
 h1 span.typed-text {
     font-weight: var(--font-bold);
     color: #fff;
-  }
+}
+
 h1 span.cursor {
     font-size: 60px;
     font-weight: var(--font-light);
@@ -140,20 +124,36 @@ h1 span.cursor {
     margin-left: 0.1rem;
     width: 3px;
     animation: blink 1s infinite;
-  }
-h1 span.cursor.typing {
-    animation: none;
-  }
-  @keyframes blink {
-    0%  { background-color: #ccc; }
-    49% { background-color: #ccc; }
-    50% { background-color: transparent; }
-    99% { background-color: transparent; }
-    100%  { background-color: #ccc; }
-  }
+}
+
+    h1 span.cursor.typing {
+        animation: none;
+    }
+
+@keyframes blink {
+    0% {
+        background-color: #ccc;
+    }
+
+    49% {
+        background-color: #ccc;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+
+    99% {
+        background-color: transparent;
+    }
+
+    100% {
+        background-color: #ccc;
+    }
+}
 
 
-  .form input {
+.form input {
     font-family: var(--navbar-font);
     font-weight: var(--font-medium);
     outline: 0;
@@ -171,19 +171,22 @@ h1 span.cursor.typing {
     transition: 0.3s;
 }
 
-.form input:hover{
-    background: #ececec;
-    transition: 0.3s;
-}
+
+    .form input:hover {
+        background: #ececec;
+        transition: 0.3s;
+    }
 
 .input-icons i {
     position: absolute;
     color: rgb(145, 145, 145);
 }
+
 .input-icons {
     width: 100%;
     margin-bottom: 10px;
 }
+
 .icon {
     padding: 14px;
     padding-left: 1.8rem;
@@ -192,97 +195,133 @@ h1 span.cursor.typing {
 }
 
 
+.form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: var(--navbar-font);
+    font-weight: var(--font-medium);
+    outline: 0;
+    background: #FBFBFB;
+    width: 100%;
+    height: 4.25rem;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 20px;
+    padding-left: 5.2rem;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: gray;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/resources%2Fcarbon_collapse-categories.svg?alt=media&token=0eab6b70-bc31-4e93-a8cb-3c0f9bf1afda);
+    background-repeat: no-repeat;
+    background-size: 1.4em auto;
+    background-position: 1.4em center;
+    /*border-radius: 35px;*/
+    border-radius: 5px;
+    box-shadow: var(--box-shadow-1);
+    transition: 0.3s;
+}
+
+option {
+    font-family: var(--navbar-font);
+    font-family: var(--font-medium);
+    font-size: 18px;
+}
+
+
+.search-btn {
+    background-color: var(--primary-color);
+}
+
+    .search-btn:hover {
+        background-color: var(--primary-active);
+    }
+
+    .search-btn:focus {
+        background-color: var(--primary-active);
+    }
+
 /*================RECENT JOBS SECTION=================*/
 
 
-  .wave-container {
+.wave-container {
     position: relative;
     color: var(--primary-color);
     text-align: center;
     overflow: hidden;
     z-index: -10;
-  }
+}
 
 
-.h1-wave{
+.h1-wave {
     position: absolute;
     padding-top: 3%;
     font-family: var(--navbar-font);
     font-weight: var(--font-bold);
     font-size: 35px;
     color: #492B6E;
-
 }
-.p-wave{
+
+.p-wave {
     position: absolute;
     margin-top: 5.8rem;
     font-family: var(--navbar-font);
     font-weight: var(--font-bold);
-    
     color: #492B6E;
 }
 
 @keyframes animateWave {
     0% {
-      transform: scale(10,1);
-    }
-    50% {
-      transform: scale(1,1);
+        transform: scale(10,1);
     }
 
-  }
-  .wave-container > svg {
+    50% {
+        transform: scale(1,1);
+    }
+}
+
+.wave-container > svg {
     display: block;
     transform-origin: top;
     animation: animateWave 5000ms;
     animation-duration: 3000ms;
-    
-  }
-.two {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    max-width: 960px;
-    margin: 5px;
 }
 
-  /*=====RECENT JOBS CARDS====*/
+/*=====RECENT JOBS CARDS====*/
 .card-jobs {
     box-shadow: rgba(0, 0, 0, 0.192) 0px 2px 4px;
     transition: 300ms;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-}
-.card-jobs:hover{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition:300ms;
-}
-.card-jobs:focus{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition:300ms;
 }
 
+    .card-jobs:hover {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: 300ms;
+    }
 
-footer{
+    .card-jobs:focus {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: 300ms;
+    }
+
+
+footer {
     background: linear-gradient(0.20turn, #C33764, #1D2671);
 }
 
 
-
-/*======LOGIN=======*/
-.login-vertical-center {
-   
-    position: relative;
-    top: 50%;
-
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+.h1-section {
+    padding-top: 2%;
+    padding-bottom: 1%;
+    font-family: var(--navbar-font);
+    font-weight: var(--font-bold);
+    font-size: 25px;
+    color: #492B6E;
 }
 
 
 
+
 .Job {
-    width: 200%;
+    width: 110%;
     height: auto;
     left: auto;
     margin-top: 10px;
@@ -295,7 +334,6 @@ footer{
 }
 
 .Company {
-
     width: auto;
     height: 15px;
     left: 186px;
@@ -323,7 +361,6 @@ footer{
 }
 
 .Subtitle {
-
     width: auto;
     height: auto;
     left: 198px;
@@ -348,6 +385,19 @@ footer{
     width: 73px;
     height: 20px;
     background: #3193F4;
+    border-radius: 2px;
+    font-family: var(--navbar-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.rectangulo2 {
+    width: 73px;
+    height: 20px;
+    background: #f4b031;
     border-radius: 2px;
     font-family: var(--navbar-font);
     font-style: normal;
