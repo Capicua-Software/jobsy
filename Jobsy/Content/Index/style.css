@@ -205,7 +205,7 @@ h1 span.cursor.typing {
 }
 
 
-.form select {
+.dropdown {
     -webkit-appearance: none;
     -moz-appearance: none;
     font-family: var(--navbar-font);
