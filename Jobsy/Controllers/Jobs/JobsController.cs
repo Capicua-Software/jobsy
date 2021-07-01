@@ -108,7 +108,7 @@ namespace Jobsy.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("EditJob");
+            return RedirectToAction("Index", "Index");
         }
 
 
