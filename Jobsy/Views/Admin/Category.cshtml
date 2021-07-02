@@ -1,0 +1,128 @@
+﻿@model List<ENTITY_L.Models.Jobs.JobsModel>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
+
+}
+
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Categorias</h1>
+
+<div class=" container" style="padding-top: 3rem">
+
+
+
+    <div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+
+        <div style="">
+            <a type="button" data-mdb-toggle="modal" data-mdb-target="#CreateModal" class="btn btn-primary m-2 ">
+                <i class="fas fa-plus"></i>
+                Crear
+            </a>
+
+        </div>
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in categories)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td class="row">
+
+                            <a data-toggle="modal" class="col-md-4 btn btn-primary btn-floating" onclick="GetDetails('@item.Id')" style="margin-left: 3%;">
+                                <i class="fas fa-pen"></i>
+                            </a>
+
+                            <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+
+
+                        </td>
+                    </tr>
+
+                }
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+@Html.Partial("~/Views/ModalViews/Create/CreateCategoryModal.cshtml")
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+@Html.Partial("~/Views/ModalViews/Edit/EditCategoryModal.cshtml")
+
+<!--SCRIPT FOR GETTING JOB INFO FOR EDIT-->
+<script>
+
+    function GetDetails(Id) {
+        var URL = '@Url.Action("ExecuteCategoryProcess", "Admin")'
+        var Process = "GetCategory";
+
+        $.ajax({
+            url: URL,
+            data: {
+                process: Process,
+                id: Id
+            },
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (response) {
+                $('#Id').val(response.Id);
+                $('#Name').val(response.Name);
+                $('#editModal').modal('show');
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        return false;
+    }
+</script>
+
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(Id) {
+        $("#hiddenTxt").val(Id);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+        var category = $("#hiddenTxt").val();
+        var Process = "DeleteCategory";
+
+        $.ajax({
+            type: "POST",
+            url: "ExecuteCategoryProcess",
+            data: {
+                process: Process,
+                id: category
+            },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + category).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+
