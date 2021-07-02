@@ -64,8 +64,7 @@ namespace ENTITY_L.Models.Employer
 
         [DataType(DataType.Text)]
         [FirestoreProperty]
-        public List<string> Chips { get; set; }
-        public string chip { get; set; }
+        public string[] Chips { get; set; }
 
         [FirestoreProperty]
         [DataType(DataType.Text)]
