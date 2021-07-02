@@ -1,5 +1,7 @@
-﻿@{ 
-
+﻿@using System.Security.Claims;
+@{
+    var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
+    var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
 }
 
 <style>
@@ -18,7 +20,7 @@
 </style>
 
 
-<span class="navbar-user-text" style="margin-right: 2rem;">@ViewBag.Name</span>
+<span class="navbar-user-text" style="margin-right: 2rem; z-index: 10000;">@Name</span>
 
 <div class="btn-group mb-2" style="border-radius: 20px;margin-top:.5%;">
 
@@ -39,7 +41,7 @@
 
     <ul class="dropdown-menu dropdown-menu-end">
 
-        <li align="center" style="margin-top: 4%;"><span class="dropdown-user-text" >@ViewBag.Role</span></li>
+        <li align="center" style="margin-top: 4%;"><span class="dropdown-user-text">@Role</span></li>
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="@Url.Action("")">Ir al Dashboard</a></li>
         <li><a class="dropdown-item" href="#">Empleos</a></li>

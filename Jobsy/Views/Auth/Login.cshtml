@@ -11,17 +11,17 @@
     <div class="bg-image "
          style="background-image: url('https://www.mediafire.com/convkey/8ef1/irtrm9kc2r9hgxb9g.jpg'); height: 100vh ">
 
-        <div class="container col-md-5 login-vertical-center"  style="margin-top:3rem;">
+        <div class="container col-md-6"  style="margin-top:3rem;">
             <!-- Pills navs -->
            
             <!-- Pills navs -->
             <!-- Pills content -->
-            @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "d-flex justify-content-center" }))
             {             
 
                 
 
-                <div  class="tab-content shadow p-5 bg-white " style="border-radius:20px;width:75%">
+                <div  class="tab-content shadow p-5 bg-white " style="border-radius:20px;width:60%; margin-top: 6rem;">
                     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                        <div class="d-flex justify-content-center">
                        <img style="margin-bottom:40px;" height="80px" src="~/Content/Index/Logo.svg">

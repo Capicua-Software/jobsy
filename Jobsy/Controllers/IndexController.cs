@@ -51,22 +51,31 @@ namespace Jobsy.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> Searchjobs(string keyword) // Metodo para devolver una vista con todos los empleaos 
+        public async Task<ActionResult> Searchjobs(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
         {
-            try
+            if(process == null && keyword != "")
             {
-                JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
-                ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
-                ViewBag.KeyWord = keyword;
+                try
+                {
+                    JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
+                    ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
+                    ViewBag.KeyWord = keyword;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+                }
             }
-            catch (Exception ex)
+            else if (process == "AllJobs" || process == null)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+                JobsFound = await job.LoadJobsAsync();
+                ViewBag.JobsFound = JobsFound;
+                ViewBag.KeyWord = "Todos los empleos";
             }
+
 
             return View(); //Retorna la vista
         }
-
 
     }
 }

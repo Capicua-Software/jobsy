@@ -155,6 +155,7 @@
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\Jobs\JobsController.cs" />
+    <Compile Include="Controllers\PrivacyController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -527,8 +528,13 @@
     <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
     <Content Include="Views\Jobs\JobDescription.cshtml" />
     <Content Include="Views\ModalViews\SuccessModal.cshtml" />
+
+    <Content Include="Views\Privacy\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Privacy\TermsAndConditions.cshtml" />
+
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\Employer\EditProfile.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
