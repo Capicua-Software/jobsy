@@ -30,13 +30,15 @@
             </div>
         </div>
     </div>
-    @using (Html.BeginForm("PostAJob", "Jobs"))
+    @using (Html.BeginForm("Edit", "Jobs"))
     {
+        <input value="@ajob.Id" name="Id" hidden>
         <input value="@Employer.Company" name="Company" hidden>
         <input value="@Employer.Email" name="Email" hidden>
         <input value="@Employer.Logo" name="Logo" hidden>
         <input value="@Employer.URL" name="URL" hidden>
         <input value="@Employer.Location" name="Location" hidden>
+
 
         <div class="container">
             <div class="card form shadow">
@@ -57,17 +59,17 @@
                                 <option value="" disabled selected>Selecciona la categoría</option>
                                 @foreach (var item in categories)
                                 {
-                                    <option @if(ajob.Category == item.Name) { @MvcHtmlString.Create("selected='selected'");} value="@item.Name">@item.Name</option>
+                                    <option @if (ajob.Category == item.Name) { @MvcHtmlString.Create("selected='selected'") ; } value="@item.Name">@item.Name</option>
                                 }
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <select class="select-input data" name="JobType"  id="categories">
+                            <select class="select-input data" name="JobType" id="categories">
                                 <option value="" disabled selected>Selecciona el tipo</option>
 
-                                <option value="Part-Time" @if(ajob.JobType == "Part-Time") { @MvcHtmlString.Create("selected='selected'");}>Part-Time</option>
-                                <option value="Full-Time" @if(ajob.JobType == "Full-Time") { @MvcHtmlString.Create("selected='selected'");}>Full-Time</option>
-                                <option value="Freelance" @if(ajob.JobType == "Freelance") { @MvcHtmlString.Create("selected='selected'");}>Freelance</option>
+                                <option value="Part-Time" @if (ajob.JobType == "Part-Time") { @MvcHtmlString.Create("selected='selected'") ; }>Part-Time</option>
+                                <option value="Full-Time" @if (ajob.JobType == "Full-Time") { @MvcHtmlString.Create("selected='selected'") ; }>Full-Time</option>
+                                <option value="Freelance" @if (ajob.JobType == "Freelance") { @MvcHtmlString.Create("selected='selected'") ; }>Freelance</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">

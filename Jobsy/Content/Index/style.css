@@ -312,6 +312,21 @@ option {
         transition: 300ms;
     }
 
+    /*SEARCHED JOBS CARD*/
+    @media screen and (max-width: 1400px) {
+        .Searched-Job{
+            width: 70rem;
+        }
+    }
+@media screen and (max-width: 1200px) {
+    .Searched-Job {
+        width: 60rem;
+    }
+    .search-divider {
+        display: none;
+    }
+}
+
 
 footer {
     background: linear-gradient(0.20turn, #C33764, #1D2671);

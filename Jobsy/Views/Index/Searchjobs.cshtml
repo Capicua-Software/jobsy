@@ -21,7 +21,7 @@
                     {
                         <div class="input-icons col">
                             <i class="ri-search-line icon"></i>
-                            <input type="text" name="keyword" placeholder="Palabras clave" value="@KeyWord">
+                            <input type="text" class="SearchInput" name="keyword" placeholder="Palabras clave" value="@KeyWord">
                         </div>
 
                         <div class=" col">
@@ -62,20 +62,28 @@
         }
     </style>
 
+    <script>
+        var mq = window.matchMedia("(max-width: 1200px)");
+        if (mq.matches) {
+            var divider = document.getElementById('divider-search');
+            divider.remove();
+        }
+    </script>
+
     <!--EMPLEO1-->
 
     @foreach (var item in JobsFound)
     {
 
         @:<div class="row-col mb-3 container d-flex justify-content-center space-between">
-            @: <div class="col-md-10 mb-3  p-3 card-jobs ripple" style="margin-right: 0%;">
+            @: <div class="col-md-10 mb-3  p-3 card-jobs ripple Searched-Job" style="margin-right: 0%;">
                 @:  <div class=" rounded-3">
                     @: <a href="" class="">
                         @:   <div class="row">
                             <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"> <img src="@item.Logo" height="110px" class="" alt="mdb logo" style="margin-left: 2rem;"> </div>
 
-                            <div class="col d-flex align-items-center" style="margin-left: 1rem;">
-                                <div class="vl"></div>
+                            <div class="col d-flex align-items-center search-divider" id="divider-search" style="margin-left: 1rem;">
+                                <div class="vl search-divider"></div>
                             </div>
                             @:   <div class="col-9" style="margin-right: 2.5rem">
                                 <h3 class="Job col">@item.Job</h3>
@@ -98,7 +106,7 @@
                                         <p class=" ">@item.JobType</p>
                                     </div>
                                     <div class="rectangulo2 " style="margin-left: 1rem; ">
-                                        <p class=" ">Remoto</p>
+                                        <p class=" ">@item.Category</p>
                                     </div>
                                 </div>
                             @: </div>

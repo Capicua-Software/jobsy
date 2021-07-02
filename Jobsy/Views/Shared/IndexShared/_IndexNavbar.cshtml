@@ -1,9 +1,11 @@
 ﻿
 @{
     Layout = null;
+
 }
 @Html.Partial("~/Views/Shared/IndexShared/Loading/Preloading.cshtml")
 @Html.Partial("~/Views/Shared/Cookies.cshtml")
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,176 +90,145 @@
         @RenderBody()
     </div>
 
+    <style>
+        .border-bottom {
+            border-bottom: 1px solid #ffffff33 !important;
+        }
+        footer {
+            color: #ffffffe8;
+        }
+        
+    </style>
+
     <!-- Footer -->
-    <footer class="text-center text-white" style="">
-        <!-- Grid container -->
-        <div class="container p-4">
-            <!-- Section: Social media -->
-            <section class="mb-4">
-                <!-- Facebook -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
+    <footer class="text-center text-lg-start">
+        <!-- Section: Social media -->
+        <section class="p-4 border-bottom" style="">
 
-                <!-- Twitter -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-twitter"></i>
-                </a>
+            <!-- Left -->
+            <!-- Right -->
+            <div class="d-flex justify-content-center">
+                <div class="footer-text">
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
 
-                <!-- Google -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-google"></i>
-                </a>
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-twitter"></i>
+                    </a>
 
-                <!-- Instagram -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-instagram"></i>
-                </a>
+                    <!-- Google -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-google"></i>
+                    </a>
 
-                <!-- Linkedin -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-instagram"></i>
+                    </a>
 
-                <!-- Github -->
-                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-            <!-- Section: Social media -->
-            <!-- Section: Form -->
-            <section class="">
-                <form action="">
-                    <!--Grid row-->
-                    <div class="row d-flex justify-content-center">
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <p class="pt-2">
-                                <strong>Suscribase a nuestro Newsletter</strong>
-                            </p>
-                        </div>
-                        <!--Grid column-->
-                        <!--Grid column-->
-                        <div class="col-md-5 col-12">
-                            <!-- Email input -->
-                            <div class="form-outline form-white mb-4">
-                                <input type="email" id="form5Example2" class="form-control" />
-                                <label class="form-label" for="form5Example2">Correo Electrónico</label>
-                            </div>
-                        </div>
-                        <!--Grid column-->
-                        <!--Grid column-->
-                        <div class="col-auto">
-                            <!-- Submit button -->
-                            <button type="submit" class="btn btn-outline-light mb-4">
-                                Subscribirse
-                            </button>
-                        </div>
-                        <!--Grid column-->
-                    </div>
-                    <!--Grid row-->
-                </form>
-            </section>
-            <!-- Section: Form -->
-            <!-- Section: Text -->
-            <!-- Section: Text -->
-            <!-- Section: Links -->
-            <section class="">
-                <!--Grid row-->
-                <div class="row">
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Links</h5>
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
 
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Links</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Links</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-                    <!--Grid column-->
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Links</h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
+                    <!-- Github -->
+                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
-                <!--Grid row-->
-            </section>
-            <!-- Section: Links -->
-        </div>
-        <!-- Grid container -->
+            </div>
+            
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/resources%2FLogo.svg?alt=media&token=ed56d8b1-3a64-43f8-9e19-23313da73c71" alt="logo" />
+                        </h6>
+                        <p>
+                            Si eliges contratar incluso a tu mascota, que los tacones de tierra se sienten en casa también. 
+                            Si quieres que tu perro sea feliz, querrás contratarte y mantenerlo feliz tanto como sea posible.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Páginas
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Inicio</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">¿Cómo funciona?</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Sobre Nosotros</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">FAQs</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Links
+                        </h6>
+                        <p>
+                            <a href="@Url.Action("PrivacyPolicy", "Privacy")" class="text-reset">Privacidad</a>
+                        </p>
+                        <p>
+                            <a href="@Url.Action("TermsAndConditions", "Privacy")" class="text-reset">Términos y condiciones</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Centro de ayuda</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Reportar un error</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Contacto
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> Santo Domingo, DN 10117, RD</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            support@jobsy.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> +1 808 800 5252</p>
+                        <p><i class="fas fa-print me-3"></i> +1 808 800 5252</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            Made with ❤️ by
-            <a class="text-white" href="">Capicúa Software</a>
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright: Hecho con ❤️ por 
+            <a class="text-reset fw-bold" href=""> Capicúa Software</a>
         </div>
         <!-- Copyright -->
     </footer>
+    <!-- Footer -->
     <!-- Footer -->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
