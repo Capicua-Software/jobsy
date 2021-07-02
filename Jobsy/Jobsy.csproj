@@ -186,6 +186,7 @@
     <Content Include="Content\Loading\logo.svg" />
     <Content Include="Content\MDB\css\mdb.min.css" />
     <Content Include="Content\MDB\css\style.css" />
+    <Content Include="Content\EditProfile.css" />
     <Content Include="Content\MDB\img\Logo.svg" />
     <Content Include="Content\MDB\js\mdb.min.js" />
     <Content Include="Content\MDB\js\mdbsnippet.min.js" />
@@ -527,8 +528,13 @@
     <Content Include="Views\ModalViews\Edit\EditUserModal.cshtml" />
     <Content Include="Views\Jobs\JobDescription.cshtml" />
     <Content Include="Views\ModalViews\SuccessModal.cshtml" />
+
     <Content Include="Views\Privacy\PrivacyPolicy.cshtml" />
     <Content Include="Views\Privacy\TermsAndConditions.cshtml" />
+
+    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\Employer\EditProfile.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
