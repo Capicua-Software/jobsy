@@ -1,4 +1,4 @@
-
+@model ENTITY_L.Models.Employer.EmployerModel
 @{
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     ViewBag.Title = "EditProfileEmployer";
@@ -21,147 +21,156 @@
 </head>
 
 <body>
-    @using (Html.BeginForm("ProfileEdit", "Employer"))
-    {
-        <header>
-            <!-- Background image -->
-            <div class="text-center floating">
-                <div class="mask transparent">
-                    <div class="d-flex justify-content-evenly align-items-evenly h-100">
+    @using (Html.BeginForm("ProfileEdit", "Employer", FormMethod.Post))
+        {
+    <header>
+        <!-- Background image -->
+        <div class="text-center floating">
+            <div class="mask transparent">
+                <div class="d-flex justify-content-evenly align-items-evenly h-100">
+                    <div class="text-white">
+                        <div class="avatar">
+                            <input id="file-uploader" type="file" name="Logo" value="" />
+                            <div class="jobimage"
+                                 style="background-image: url('@Employer.Logo');">
+                            </div>
+                            <label class="avatar-selector" for="file-uploader"><i class="fa fa-camera cam"></i></label>
+                        </div>
                         <div class="text-white">
-                            <div class="avatar">
-                                <input id="file-uploader" type="file" name="Logo" value="" />
-                                <div class="jobimage"
-                                     style="background-image: url('@Employer.Logo');">
-                                </div>
-                                <label class="avatar-selector" for="file-uploader"><i class="fa fa-camera cam"></i></label>
+                            <h2 class="mt-4 mb-3 text-start">@Employer.Company</h2>
+                            <div style="display: inline-flex;">
+                                <div class="tipo"><div class="stext">EMPRESA</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                               
                             </div>
-                            <div class="text-white">
-                                <h2 class="mt-4 mb-3 text-start">@Employer.Company</h2>
-                                <div style="display: inline-flex;">
-                                    <div class="tipo"><div class="stext">HTML</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="category"><div class="stext">CSS</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div class="tipo"><div class="stext">JS</div></div>
-                                </div>
-                            </div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
+                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Background image -->
+        </div>
+    </header>
+
+
+    <div class="container">
+        <div class="card form shadow">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="card-header title2">
+                            <span class="iconify" data-inline="false" data-icon="bi:info-lg"
+                                  style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Información de la Empresa
+                        </div>
+                    </div>
+                    @Html.ValidationMessage("ERROR", new { @class = "text-danger", @style = "" })
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 54%;">
+
+                            <input type="text" id="RNC" name="RNC" value="@Employer.RNC" class="form-control" required />
+                            <label class="form-label" for="RNC">RNC</label>
+
+                        </div>
+                        <button type="button" onclick="GetUser(1)" data-mdb-whatever='mdo' style="height:80%;margin-top:2.5%" class="btn save ">Validar</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="Company" name="Company" value="@Employer.Company" class="form-control" readonly />
+                            <label class="form-label" for="Nombre">Nombre de la empresa</label>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 34%;">
+                            <input type="text" id="Telefono" name="Tel" value="@Employer.Tel" class="form-control" />
+                            <label class="form-label" for="Telefono">Telefono</label>
+                        </div>
+                        <div class="form-outline data" style="width: 34%; margin-left: 2%;">
+                            <input type="text" id="Celular" name="Cel" value="@Employer.Cel" class="form-control" />
+                            <label class="form-label" for="Celular">Celular</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="Correo" name="Email" value="@Employer.Email" class="form-control" />
+                            <label class="form-label" for="Correo">Correo Electronico</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="Direccion" name="Location" value="@Employer.Location" class="form-control" />
+                            <label class="form-label" for="Direccion">Direccion</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <textarea class="form-control" id="Biografia" name="Bio" rows="3">@Employer.Bio</textarea>
+                            <label class="form-label" for="Biografia">Biografia</label>
                         </div>
                     </div>
                 </div>
-                <!-- Background image -->
-            </div>
-        </header>
 
-
-        <div class="container">
-            <div class="card form shadow">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-center">
-                            <div class="card-header title2">
-                                <span class="iconify" data-inline="false" data-icon="bi:info-lg"
-                                      style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Información de la Empresa
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="RNC" name="RNC" value="@Employer.RNC" class="form-control" />
-                                <label class="form-label" for="RNC">RNC</label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="Nombre" name="Company" value="@Employer.Company" class="form-control" />
-                                <label class="form-label" for="Nombre">Nombre de la empresa</label>
-                            </div>
-                        </div>
-                        <div class=" d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 34%;">
-                                <input type="text" id="Telefono" name="Tel" value="@Employer.Tel" class="form-control" />
-                                <label class="form-label" for="Telefono">Telefono</label>
-                            </div>
-                            <div class="form-outline data" style="width: 34%; margin-left: 2%;">
-                                <input type="text" id="Celular" name="Cel" value="@Employer.Cel" class="form-control" />
-                                <label class="form-label" for="Celular">Celular</label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="Correo" name="Email" value="@Employer.Email" class="form-control" />
-                                <label class="form-label" for="Correo">Correo Electronico</label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="Direccion" name="Location" value="@Employer.Location" class="form-control" />
-                                <label class="form-label" for="Direccion">Direccion</label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <textarea class="form-control" id="Biografia" name="Bio" value="@Employer.Bio" rows="3"></textarea>
-                                <label class="form-label" for="Biografia">Biografia</label>
-                            </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-center">
+                        <div class="card-header title2">
+                            <span class="iconify" data-inline="false"
+                                  data-icon="ion:share-social-outline"
+                                  style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Redes Sociales
                         </div>
                     </div>
-
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-center">
-                            <div class="card-header title2">
-                                <span class="iconify" data-inline="false"
-                                      data-icon="ion:share-social-outline"
-                                      style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Redes Sociales
-                            </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="Instagram" name="Instagram" value="@Employer.Instagram" class="form-control" />
+                            <label class="form-label" for="Instagram">Instagram URL</label>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="Instagram" name="Instagram" value="@Employer.Instagram" class="form-control" />
-                                <label class="form-label" for="Instagram">Instagram URL</label>
-                            </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="Facebook" name="Facebook" value="@Employer.Facebook" class="form-control" />
+                            <label class="form-label" for="Facebook">Facebook URL</label>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="Facebook" name="Facebook" value="@Employer.Facebook" class="form-control" />
-                                <label class="form-label" for="Facebook">Facebook URL</label>
-                            </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="text" id="LinkedIn" name="Linkedin" value="@Employer.Linkedin" class="form-control" />
+                            <label class="form-label" for="LinkedIn">LinkedIn URL</label>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 70%;">
-                                <input type="text" id="LinkedIn" name="Linkedin" value="@Employer.Linkedin" class="form-control" />
-                                <label class="form-label" for="LinkedIn">LinkedIn URL</label>
-                            </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-outline data" style="width: 70%;">
+                            <input type="url" id="URL" name="URL" value="@Employer.URL" class="form-control" />
+                            <label class="form-label" for="LinkedIn">Página Web</label>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="card-header title2">
-                                <span class="iconify" data-inline="false" data-icon="ant-design:tag-outlined" style="font-size: 25px; color: #933368; margin-right: 10px; "></span>Etiquetas
-                            </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="card-header title2">
+                            <span class="iconify" data-inline="false" data-icon="ant-design:tag-outlined" style="font-size: 25px; color: #933368; margin-right: 10px; "></span>Etiquetas
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="wrapper">
-                                <gsk-input-chips value="
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="wrapper">
+                            <gsk-input-chips value="
                             @for (int i = 0; i < Employer.Chips.Count; i++)
                             {
                                 @Employer.Chips[i]  @MvcHtmlString.Create(",");
                             }"
-                                                 name="chip" maxvalues="3" type="text" class="chips" outlined="">
-                                </gsk-input-chips>
-                            </div>
+                                             name="chip" maxvalues="3" type="text" class="chips" outlined="">
+                            </gsk-input-chips>
                         </div>
                     </div>
-
                 </div>
 
+            </div>
 
+            <input type="text" id="valido" value="@Employer.valido" name="valido" class="form-control" hidden />
 
-                <div class="d-flex justify-content-center buttons">
-                    <button class="btn back">Cancelar</button>
-                    <button type="submit" class="btn save">Guardar</button>
-                </div>
+            <div class="d-flex justify-content-center buttons">
+                <button type="reset" class="btn back">Cancelar</button>
+                <button type="submit" class="btn save">Guardar</button>
             </div>
         </div>
+    </div>
     }
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     <script id="rendered-js">
@@ -175,9 +184,52 @@
             });
         })();
     </script>
+
+    @Html.Partial("~/Views/ModalViews/RNC/SuccessModal.cshtml")
+    @Html.Partial("~/Views/ModalViews/RNC/ErrorModal.cshtml")
 </body>
 
 </html>
 <br>
 <br>
 <br>
+
+<script>
+    
+    $(document).ready(function () {
+        $('#RNC').keyup(function () {
+            $('#valido').val('false');
+        });
+    });
+
+    function GetUser(id) {
+
+        id = document.getElementById("RNC").value;
+        var url = '@Url.Action("CheckRNC", "Employer")';
+        $.ajax({
+            url: url,
+            typr: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: { id: id },
+            success: function (response) {
+                $('#Company').val(response.RAZONSC);
+                $('#valido').val('true');
+                $('#SuccessModal').modal('show');
+            },
+            error: function (response) {
+                $('#valido').val('false');
+                $('#ErrorModal').modal('show');
+            }
+        });
+        return false;
+    }
+</script>
+
+<script>
+    $(".validation-message").each(function () {
+        if ($(this).text() !== "") {
+            $(this).css("display", "block");
+        }
+    });
+</script>

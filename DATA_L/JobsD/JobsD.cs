@@ -189,6 +189,7 @@ namespace DATA_L.JobsD
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
                     JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();
+                    everyJob.Id = documentSnapshot.Id;
                     jobsfound.Add(everyJob); // Se agrega a la lista el objeto
                 }
             }

@@ -9,6 +9,7 @@ using Jobsy_API.Controllers;
 using ENTITY_L.Models.Employer;
 using System.Net;
 using System.IO;
+using ENTITY_L.Models.RNC;
 
 namespace Jobsy.Controllers
 {
@@ -150,26 +151,42 @@ namespace Jobsy.Controllers
         }
 
         public async Task<ActionResult> EditProfile()
-        {          
+        {  
             ViewBag.Employer = await EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
             return View();
         }
 
-        public async Task<ActionResult> ProfileEdit(EmployerModel model, HttpPostedFileBase Logo)
+        public async Task<ActionResult> ProfileEdit(EmployerModel model, HttpPostedFileBase Logo, string valido)
         {
-            if (Logo != null)
+
+            if (valido =="true")
             {
-                model.Logo = Logo.FileName;
-                Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+
+                if (Logo != null)
+                {
+                    model.Logo = Logo.FileName;
+                    Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+                }
+                model.Id = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+                await Employer.EditEmployer(model);
             }
-            model.Id = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
-            await Employer.EditEmployer(model);
-            return View();
+            else
+            {
+                ModelState.AddModelError("ERROR", "RNC inválido");
+            }
+
+            return RedirectToAction("EditProfile");
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> CheckRNC(int id)
+        {
+            var JobInfo = EmployerAPIController.CheckRNC(id);
+
+            return Json(JobInfo, JsonRequestBehavior.AllowGet);
         }
 
 
-       
-         
-     
+
     }
 }
