@@ -87,10 +87,14 @@
 
 
                     }
-                    else
+                    else if (!Request.IsAuthenticated)
                     {
                         <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Aplicar a este empleo</div>
                         <a class='btn apply' href="@Url.Action("Login","Auth")" data-mdb-whatever='mdo'>Realizar solicitud</a>
+                    }
+                    else
+                    {
+
                     }
 
                     <!--data-mdb-target='#JobApply'-->

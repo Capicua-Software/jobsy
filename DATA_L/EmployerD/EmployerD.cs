@@ -17,7 +17,7 @@ namespace DATA_L.EmployerD
     public class EmployerD: FirebaseCore
     {
         static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/avatar-default.png?alt=media&token=04c01539-770b-4e7f-b883-13b28d963494";
-        string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+        
         public async Task<List<EmployerModel>> LoadEmployerAsync()
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -120,7 +120,7 @@ namespace DATA_L.EmployerD
             var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Uploads\" + route);
             // Abrir la imagen
             var stream = File.Open(path, FileMode.Open);
-
+            string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
 
             //autenticancion
             var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
@@ -150,7 +150,7 @@ namespace DATA_L.EmployerD
         public async Task<List<JobsModel>> employerjobs()
         {
             OpenFirestoreConnection();
-            
+            string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
             Query Query = db.Collection("Jobs").WhereEqualTo("Email", Email);
             QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
             List<JobsModel> jobsfound = new List<JobsModel>();
