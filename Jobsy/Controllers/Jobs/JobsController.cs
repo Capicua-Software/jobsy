@@ -18,6 +18,7 @@ namespace Jobsy.Controllers
         UsersAPIController user = new UsersAPIController();
         EmployerController employer = new EmployerController();
         CategoryController category = new CategoryController();
+
         static string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
         public async Task<ActionResult> PostAJob()
         {           
@@ -92,6 +93,7 @@ namespace Jobsy.Controllers
             return ajob;
         }
 
+      
 
 
 
