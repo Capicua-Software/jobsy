@@ -100,7 +100,8 @@ namespace DATA_L.EmployerD
                 { "Facebook", model.Facebook },
                 { "Linkedin", model.Linkedin },
                 { "Chips", model.Chips },
-                { "Logo", model.Logo }
+                { "Logo", model.Logo },
+                { "valido", model.valido }
                 };
 
 
