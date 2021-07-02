@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using DATA_L.EmployerD;
 using ENTITY_L.Models.Employer;
+using ENTITY_L.Models.Jobs;
 using ENTITY_L.Models.RNC;
 using Newtonsoft.Json;
 
@@ -52,6 +53,13 @@ namespace Jobsy_API.Controllers
             employer.DeleteEmployer(id);
         }
 
+        [HttpGet]
+        [Route("api/Employer/Employerjobs")]  // Ruta de la API
+        public async Task<List<JobsModel>> employerjobs()
+        {
+            List<JobsModel> jobs = await employer.employerjobs();
+            return jobs; //Retorna una lista 
+        }
         public static RNCModel CheckRNC(int RNC)
         {
             string responseBody="";

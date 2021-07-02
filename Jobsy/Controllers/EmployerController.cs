@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Employer;
+using ENTITY_L.Models.Jobs;
 using System.Net;
 using System.IO;
 using ENTITY_L.Models.RNC;
@@ -19,13 +20,15 @@ namespace Jobsy.Controllers
         EmployerAPIController Employer = new EmployerAPIController();
 
         // GET: Employer
-        public ActionResult EmployerDashboard()
+        public async Task<ActionResult> EmployerDashboard()
         {
             try
             {
                 // Verification.
                 if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Employer")
                 {
+                    List<JobsModel> employerjobs = await Employer.employerjobs();
+                    ViewBag.employerjobs = employerjobs;
                     return View();
                 }
                 else
