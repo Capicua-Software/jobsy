@@ -31,6 +31,6 @@ namespace ENTITY_L.Models.Authentication
         public FirebaseAuthProvider auth { get; set; }
         public FirebaseAuthLink a { get; set; }
 
-        public string Logo { get; set; }
+
     }
 }
