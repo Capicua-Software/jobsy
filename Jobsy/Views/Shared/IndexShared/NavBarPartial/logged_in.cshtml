@@ -2,6 +2,7 @@
 @{
     var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
     var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+    var Logo = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Actor).Value;
 }
 
 <style>
@@ -32,7 +33,7 @@
        data-mdb-toggle="dropdown"
        data-mdb-display="static"
        aria-expanded="false">
-        <img src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+        <img src="@Logo"
              class="rounded-circle"
              height="35"
              alt=""

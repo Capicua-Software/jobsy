@@ -13,7 +13,7 @@ namespace Jobsy_API.Tests.Controllers
         AuthenticationAPIController authh = new AuthenticationAPIController();
 
         [TestMethod()]
-        public async Task<LoginModel> Login()
+        public async void Login()
         {
             LoginModel loginmodel = new LoginModel();
             loginmodel.Email = "Randy140801@gmail.com";
@@ -22,8 +22,6 @@ namespace Jobsy_API.Tests.Controllers
             LoginModel auth = await authh.Login(loginmodel);
 
             Assert.AreEqual(auth, loginmodel);
-
-            return auth;
         }
     }
 }
