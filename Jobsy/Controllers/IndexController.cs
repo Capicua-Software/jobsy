@@ -14,7 +14,6 @@ namespace Jobsy.Controllers
     {
 
         JobsAPIController job = new JobsAPIController();
-        CategoryController category = new CategoryController();
         static IEnumerable<JobsModel> LastJobs = null;
         static IEnumerable<JobsModel> JobsFound = null;
         // GET: Index
@@ -54,40 +53,28 @@ namespace Jobsy.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Searchjobs(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
         {
-            ViewBag.AllCategory = await category.LoadCategories();
-            ViewBag.JobsFound = JobsFound;
-
-            if (process == null && keyword != "" && ViewBag.JobsFound == null)
+            if(process == null && keyword != "")
             {
                 try
                 {
                     JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
-                  
                     ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
                     ViewBag.KeyWord = keyword;
-                 
                 }
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
                 }
             }
-            else if (process == "AllJobs"  || process == null && ViewBag.JobsFound == null)
+            else if (process == "AllJobs" || process == null)
             {
                 JobsFound = await job.LoadJobsAsync();
                 ViewBag.JobsFound = JobsFound;
                 ViewBag.KeyWord = "Todos los empleos";
             }
 
-            JobsFound = null;
-            return View(); //Retorna la vista
-        }
 
-        public async Task<ActionResult> SearchByCategory(string keyword)
-        {
-            JobsFound = await job.SearchJobByCategory(keyword);
-            ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
-            return RedirectToAction("Searchjobs", "Index");
+            return View(); //Retorna la vista
         }
 
     }

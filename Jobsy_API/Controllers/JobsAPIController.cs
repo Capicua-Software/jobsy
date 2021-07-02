@@ -73,12 +73,5 @@ namespace Jobsy_API.Controllers
         }
 
 
-        [HttpGet]
-        [Route("api/Jobs/SearchJobByCategory")]  // Ruta de la API
-        public async Task<List<JobsModel>> SearchJobByCategory(string categories)
-        {
-            List<JobsModel> jobsfound = await jobs.Searchbycategory(categories); // Se guarda en una lista el resultado del metodo
-            return jobsfound; //Retorna una lista 
-        }
     }
 }
