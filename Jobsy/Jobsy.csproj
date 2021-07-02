@@ -534,6 +534,11 @@
     <Content Include="Views\Employer\EditProfile.cshtml" />
     <Content Include="Views\ModalViews\RNC\SuccessModal.cshtml" />
     <Content Include="Views\ModalViews\RNC\ErrorModal.cshtml" />
+    <Content Include="Views\Request\TableRequestUser.cshtml" />
+    <Content Include="Views\Request\LoadRequest.cshtml" />
+    <Content Include="Views\ModalViews\Edit\EditCategoryModal.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\ModalViews\Create\CreateCategoryModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

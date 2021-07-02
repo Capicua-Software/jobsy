@@ -11,7 +11,7 @@ using ENTITY_L.Models.Jobs;
 using Jobsy.Admin.Jobs;
 
 using ENTITY_L.Models.User;
-
+using ENTITY_L.Models.Category;
 
 namespace Jobsy.Controllers
 {
@@ -33,6 +33,7 @@ namespace Jobsy.Controllers
 
         JobsController job = new JobsController();
         UserController user = new UserController();
+        CategoryAPIController category = new CategoryAPIController();
         EmployerController employer = new EmployerController();
 
         // GET: Admin
@@ -53,7 +54,12 @@ namespace Jobsy.Controllers
             ViewBag.AllUsers = await user.LoadUsersAsync();
              return ValidateRole("Users");
         }
-        
+        public async Task<ActionResult> Category()
+        {
+            ViewBag.AllCategory = await category.LoadCategoryAsync();
+            return ValidateRole("Category");
+        }
+
 
 
         [HttpGet]
@@ -126,7 +132,21 @@ namespace Jobsy.Controllers
         }
 
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult GetCategory(string id)
+        {
+            try
+            {
+                employer.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
 
+            return RedirectToAction("Employers");
+        }
 
         //JOB PROCESSES
         public async Task<ActionResult> ExecuteJobProcess(string process, string id, JobsModel model)
@@ -144,11 +164,41 @@ namespace Jobsy.Controllers
 
                 case "GetJobById":
                     var JobInfo = await job.LoadJob(id);                 
-                    return Json(JobInfo, JsonRequestBehavior.AllowGet);
+                    return Json(JobInfo, JsonRequestBehavior.AllowGet);            
+
             }
 
             return RedirectToAction("Jobs");
         }
+
+
+        public async Task<ActionResult> ExecuteCategoryProcess(string process, string id, CategoryModel model)
+        {
+
+            switch (process)
+            {
+                case "CreateCategory":
+                    await category.AddCategory(model);
+                    break;
+
+                case "GetCategory":
+                    var Categories = await category.LoadCategory(id);
+                    return Json(Categories, JsonRequestBehavior.AllowGet);
+
+
+                case "EditCategory":
+                    await category.EditCategory(model);
+                    break;
+
+                case "DeleteCategory":
+                     category.DeleteCategory(id);
+                     return null;                  
+
+            }
+
+            return RedirectToAction("Category");
+        }
+
 
     }
 }
