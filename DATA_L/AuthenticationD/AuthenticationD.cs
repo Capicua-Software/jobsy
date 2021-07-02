@@ -20,7 +20,6 @@ namespace DATA_L.Authentication
             model = await GetUserInfo(model);
             model.auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
             model.ab = await model.auth.SignInWithEmailAndPasswordAsync(model.Email, model.Password);
-            
             model.token = model.ab.FirebaseToken;
             model.user = model.ab.User;
             return model;
@@ -50,7 +49,7 @@ namespace DATA_L.Authentication
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     model.Role = (string)user["Role"];
                     model.UserName = (string)user["Name"];
-                    
+                    model.Logo = (string)user["Logo"];
 
 
                     return model;

@@ -21,7 +21,7 @@ namespace ENTITY_L.Models.Authentication
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-
+        public string Logo { get; set; }
         public string State { get; set; }
         public string Role { get; set; }
         public string UserName { get; set; }
