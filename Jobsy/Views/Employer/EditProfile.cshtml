@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    @using (Html.BeginForm("ProfileEdit", "Employer", FormMethod.Post))
+    @using (Html.BeginForm("ProfileEdit", "Employer", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
     <header>
         <!-- Background image -->
