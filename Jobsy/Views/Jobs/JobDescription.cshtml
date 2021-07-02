@@ -22,20 +22,30 @@
 </head>
 <body>
 
-    <div class="floating">
-        <div class="transparent">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="jobimage" style="background-image: url('@job.Logo');"></div>
-                </div>
-                <div class="col-md-10">
-                    <div class="title">@job.Job</div>
-                    <div class="tipo"><div class="stext">@job.JobType</div></div>
-                    <div class="category"><div class="stext">@job.Category</div></div>
+    <header>
+        <!-- Background image -->
+        <div class="text-center floating">
+            <div class="mask transparent">
+                <div class="d-flex justify-content-evenly align-items-evenly h-100">
+                    <div class="text-white">
+                        <div class="jobimage" style="position: relative; background-image: url('@job.Logo');"></div>
+                    </div>
+                    <div class="text-white title">
+                        <h2 class="mt-4 mb-3 text-start">@job.Job</h2>
+                        <div style="display: inline-flex;">
+                            <div class="tipo"><div class="stext">@job.JobType</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="category"><div class="stext">@job.Category</div></div>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- Background image -->
+    </header>
 
     <div class="container">
         <div class="row">

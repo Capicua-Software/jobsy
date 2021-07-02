@@ -147,5 +147,10 @@ namespace Jobsy.Controllers
             }
 
         }
+
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
     }
 }
