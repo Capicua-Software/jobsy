@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +9,8 @@ using System.Web.Http;
 using DATA_L.EmployerD;
 using ENTITY_L.Models.Employer;
 using ENTITY_L.Models.Jobs;
+using ENTITY_L.Models.RNC;
+using Newtonsoft.Json;
 
 namespace Jobsy_API.Controllers
 {
@@ -56,6 +59,37 @@ namespace Jobsy_API.Controllers
         {
             List<JobsModel> jobs = await employer.employerjobs();
             return jobs; //Retorna una lista 
+        }
+        public static RNCModel CheckRNC(int RNC)
+        {
+            string responseBody="";
+            var url = $"https://www.webapimetasalud.com/api/General/ConsultarPadron/RNC/{RNC}";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "GET";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            try
+            {
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader == null) return null;
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            responseBody = objReader.ReadToEnd();   
+                        }
+                    }
+                }
+
+                RNCModel Rnc = JsonConvert.DeserializeObject<RNCModel>(responseBody);
+                return Rnc;
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
         }
 
     }
