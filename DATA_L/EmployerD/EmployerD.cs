@@ -10,13 +10,14 @@ using Firebase.Storage;
 using System.IO;
 using Firebase.Auth;
 using System.Security.Claims;
+using ENTITY_L.Models.Jobs;
 
 namespace DATA_L.EmployerD
 {
     public class EmployerD: FirebaseCore
     {
         static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/avatar-default.png?alt=media&token=04c01539-770b-4e7f-b883-13b28d963494";
-
+        string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
         public async Task<List<EmployerModel>> LoadEmployerAsync()
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -115,7 +116,6 @@ namespace DATA_L.EmployerD
         {
             OpenFirestoreConnection();
             // Buscar la imagen en la carpeta upload del proyecto
-            var Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
             var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Uploads\" + route);
             // Abrir la imagen
             var stream = File.Open(path, FileMode.Open);
@@ -144,6 +144,25 @@ namespace DATA_L.EmployerD
 
             return downloadUrl; //Retorna el link de descarga de la foto
 
+        }
+
+        public async Task<List<JobsModel>> employerjobs()
+        {
+            OpenFirestoreConnection();
+            
+            Query Query = db.Collection("Jobs").WhereEqualTo("Email", Email);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();
+                    everyJob.Id = documentSnapshot.Id;
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+                }
+            }
+            return jobsfound;
         }
 
     }
