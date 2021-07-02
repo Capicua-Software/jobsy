@@ -4,6 +4,7 @@
     ViewBag.Title = "SearchResult";
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     IEnumerable<ENTITY_L.Models.Jobs.JobsModel> JobsFound = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.JobsFound; // Llama al metodo que se encuenta en la API
+    List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
     string KeyWord = ViewBag.KeyWord;
 }
 
@@ -28,11 +29,12 @@
 
                         <div class=" col">
                             <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
-                            <select class="dropdown" name="categories" id="categories">
+                            <select class="dropdown" name="categories" id="categories" onchange="change_url(this.value)">
                                 <option value="" disabled selected>Selecciona una categoría</option>
-                                <option value="volvo">Tecnología</option>
-                                <option value="saab">Diseño</option>
-                                <option value="opel">Marketing</option>
+                                @foreach (var item in categories)
+                                {
+                                    <option value="@Url.Action("SearchByCategory","Index", new {keyword =item.Name })">@item.Name</option>
+                                }
                             </select>
                         </div>
                         <div class="col-2">
@@ -70,6 +72,11 @@
             var divider = document.getElementById('divider-search');
             divider.remove();
         }
+
+
+        function change_url(val) {
+            window.location = val;
+        }
     </script>
 
     <!--EMPLEO1-->
@@ -80,7 +87,7 @@
         @:<div class="row-col mb-3 container d-flex justify-content-center space-between">
             @: <div class="col-md-10 mb-3  p-3 card-jobs ripple Searched-Job" style="margin-right: 0%;">
                 @:  <div class=" rounded-3">
-                    @: <a href="" class="">
+                    @:  <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
                         @:   <div class="row">
                             <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"> <img src="@item.Logo" height="110px" class="" alt="mdb logo" style="margin-left: 2rem;"> </div>
 
@@ -147,8 +154,48 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             @:  </div>
         @:   </div>
+
+
+
+
+
+
+
+
 
 
 

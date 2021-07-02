@@ -3,8 +3,7 @@
 @{
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     ENTITY_L.Models.Jobs.JobsModel job = (ENTITY_L.Models.Jobs.JobsModel)ViewBag.ajob;
-    var Email = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
-    var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+   
 }
 <br>
 <br>
@@ -66,13 +65,13 @@
                 <div class="card description shadow">
 
 
-                    @if (Request.IsAuthenticated && Role == "User")
+                    @if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "User")
                     {
                         <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Aplicar a este empleo</div>
-                        <button class='btn apply' onclick="GetUser('@Email')" data-mdb-whatever='mdo'>Realizar solicitud</button>
+                        <button class='btn apply' onclick="GetUser('@ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value')" data-mdb-whatever='mdo'>Realizar solicitud</button>
                     }
 
-                    else if (Request.IsAuthenticated && Email == job.Email && Role == "Employer")
+                    else if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value == job.Email && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Employer")
                     {
                         <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Ajustes</div>
 
@@ -87,6 +86,11 @@
                         </div>
 
 
+                    }
+                    else
+                    {
+                        <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Aplicar a este empleo</div>
+                        <a class='btn apply' href="@Url.Action("Login","Auth")" data-mdb-whatever='mdo'>Realizar solicitud</a>
                     }
 
                     <!--data-mdb-target='#JobApply'-->

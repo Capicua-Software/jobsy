@@ -18,10 +18,10 @@ namespace Jobsy.Controllers
         UsersAPIController user = new UsersAPIController();
         EmployerController employer = new EmployerController();
         CategoryController category = new CategoryController();
-        static string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+
         public async Task<ActionResult> PostAJob()
         {           
-            ViewBag.Employer= await employer.EmployerLoad(Email);
+            ViewBag.Employer= await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
             ViewBag.AllCategory = await category.LoadCategories();
             return View();
         }
@@ -73,7 +73,7 @@ namespace Jobsy.Controllers
         {
             try
             {
-                ViewBag.Employer = await employer.EmployerLoad(Email);
+                ViewBag.Employer = await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
                 ViewBag.AllCategory = await category.LoadCategories();
                 ViewBag.ajob = await LoadJob(id); 
             }
@@ -92,6 +92,7 @@ namespace Jobsy.Controllers
             return ajob;
         }
 
+      
 
 
 
