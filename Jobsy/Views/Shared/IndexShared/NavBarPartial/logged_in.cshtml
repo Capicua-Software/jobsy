@@ -43,8 +43,23 @@
 
         <li align="center" style="margin-top: 4%;"><span class="dropdown-user-text">@Role</span></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="@Url.Action("")">Ir al Dashboard</a></li>
-        <li><a class="dropdown-item" href="#">Empleos</a></li>
+        <li><a class="dropdown-item" href="@if (Role == "Admin")
+        {
+            @Url.Action("AdminDashboard", "Admin")
+        }
+        else if(Role == "Employer")
+        {
+            @Url.Action("EmployerDashboard", "Employer")
+        }                                        
+        ">Ir al Dashboard</a></li>
+        <li><a class="dropdown-item" href="@if (Role == "Admin")
+        {
+            @Url.Action("Jobs", "Admin")
+        }
+        else if(Role == "Employer")
+        {
+            @Url.Action("EmployerDashboard", "Employer")
+        }                                        ">Empleos</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li>
             <a class="dropdown-item" href="@Url.Action("LogOff", "Auth")">
