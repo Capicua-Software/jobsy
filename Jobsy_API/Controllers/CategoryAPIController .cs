@@ -23,13 +23,13 @@ namespace Jobsy_API.Controllers
 
         [HttpPost]
         [Route("api/Category/DeleteCategory")]
-        public void DeleteCategory(string Name)
+        public void DeleteCategory(string id)
         {
-            category.DeleteCategory(Name);
+            category.DeleteCategory(id);
         }
 
         [HttpGet]
-        [Route("api/Category/LoadCategory")]
+        [Route("api/Category/LoadCategoryAsync")]
         public async Task<List<CategoryModel>> LoadCategoryAsync()
         {
             List<CategoryModel> lstcategory = await category.LoadCategoryAsync(); // Se guarda en una lista el resultado del metodo
