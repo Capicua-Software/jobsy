@@ -7,7 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Employer;
-
+using ENTITY_L.Models.Jobs;
+using System.Net;
+using System.IO;
+using ENTITY_L.Models.RNC;
 
 namespace Jobsy.Controllers
 {
@@ -17,13 +20,15 @@ namespace Jobsy.Controllers
         EmployerAPIController Employer = new EmployerAPIController();
 
         // GET: Employer
-        public ActionResult EmployerDashboard()
+        public async Task<ActionResult> EmployerDashboard()
         {
             try
             {
                 // Verification.
                 if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Employer")
                 {
+                    List<JobsModel> employerjobs = await Employer.employerjobs();
+                    ViewBag.employerjobs = employerjobs;
                     return View();
                 }
                 else
@@ -148,9 +153,43 @@ namespace Jobsy.Controllers
 
         }
 
-        public ActionResult EditProfile()
-        {
+        public async Task<ActionResult> EditProfile()
+        {  
+            ViewBag.Employer = await EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
             return View();
         }
+
+        public async Task<ActionResult> ProfileEdit(EmployerModel model, HttpPostedFileBase Logo, string valido)
+        {
+
+            if (valido =="true")
+            {
+
+                if (Logo != null)
+                {
+                    model.Logo = Logo.FileName;
+                    Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+                }
+                model.Id = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+                await Employer.EditEmployer(model);
+            }
+            else
+            {
+                ModelState.AddModelError("ERROR", "RNC inválido");
+            }
+
+            return RedirectToAction("EditProfile");
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> CheckRNC(int id)
+        {
+            var JobInfo = EmployerAPIController.CheckRNC(id);
+
+            return Json(JobInfo, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }

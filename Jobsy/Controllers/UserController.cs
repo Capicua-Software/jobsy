@@ -148,8 +148,9 @@ namespace Jobsy.Controllers
 
         }
 
-        public ActionResult EditProfile() 
-        { 
+        public async Task<ActionResult> EditProfile() 
+        {
+            ViewBag.User = await UserLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
             return View(); 
         }
 
@@ -176,6 +177,20 @@ namespace Jobsy.Controllers
             return requestModel;
         }
 
+
+        public async Task<ActionResult> ProfileEdit(UserModel model, HttpPostedFileBase Logo)
+        {
+
+                if (Logo != null)
+                {
+                    model.Logo = Logo.FileName;
+                     Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
+                }
+                model.Id = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+                await user.EditUser(model);           
+
+            return RedirectToAction("EditProfile");
+        }
 
     }
 }

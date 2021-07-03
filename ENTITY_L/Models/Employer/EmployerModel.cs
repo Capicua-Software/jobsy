@@ -24,7 +24,7 @@ namespace ENTITY_L.Models.Employer
         [DataType(DataType.Text)]
         [FirestoreProperty]
         public string RNC { get; set; }
-
+        public int rncint { get; set; }
         [DataType(DataType.Text)]
         [FirestoreProperty]
         public string Tel { get; set; }
@@ -64,10 +64,15 @@ namespace ENTITY_L.Models.Employer
 
         [DataType(DataType.Text)]
         [FirestoreProperty]
-        public string[] Chips { get; set; }
+        public List<string> Chips { get; set; }
+        public string chip { get; set; }
 
         [FirestoreProperty]
         [DataType(DataType.Text)]
         public string Logo { get; set; }
+
+        [FirestoreProperty]
+        [DataType(DataType.Text)]
+        public string valido { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 
 }
 
-<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleos</h1>
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleadores</h1>
 
 <div class=" container" style="padding-top: 3rem">
 
@@ -32,7 +32,7 @@
                         <td>@item.Email</td>
                         <td>@item.RNC</td>
                         <td>@item.Tel</td>
-                        <td>@item.URL</td>
+                        <td><a href="@item.URL">Ir a la página</a></td>
                         <td>@item.Location</td>
                         <td class="row">
                             <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">

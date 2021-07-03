@@ -69,7 +69,7 @@ namespace ENTITY_L.Models.User
 
         [FirestoreProperty]
         [DataType(DataType.Text)]
-        public string Image { get; set; }
+        public string Logo { get; set; }
 
         public static implicit operator UserModel(QuerySnapshot v)
         {

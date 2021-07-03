@@ -152,6 +152,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminAPIController.cs" />
     <Compile Include="Controllers\CategoryAPIController .cs" />
     <Compile Include="Controllers\EmployerAPIController.cs" />
     <Compile Include="Controllers\RequestAPIController .cs" />
@@ -220,6 +221,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\AdminAPI\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

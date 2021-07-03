@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     ViewBag.Title = "EditProfileUser";
+    ENTITY_L.Models.User.UserModel User = (ENTITY_L.Models.User.UserModel)ViewBag.User;
 }
 <br>
 <br>
@@ -18,25 +19,25 @@
 </head>
 
 <body>
+    @using (Html.BeginForm("ProfileEdit", "User", FormMethod.Post, new { enctype = "multipart/form-data" })) {
     <header>
+
         <!-- Background image -->
         <div class="text-center floating">
             <div class="mask transparent">
                 <div class="d-flex justify-content-evenly align-items-evenly h-100">
                     <div class="text-white">
                         <div class="avatar">
-                            <input id="file-uploader" type="file" name="foto" value="" />
+                            <input id="file-uploader" type="file" name="Logo" value="" />
                             <div class="jobimage"
-                                 style="background-image: url('https://cdnmundo1.img.sputniknews.com/img/106858/20/1068582049_739:0:3842:3412_1920x0_80_0_0_e17d0b9ffdbc0ecba409001126881d8b.jpg');">
+                                 style="background-image: url('@User.Logo');">
                             </div>
                             <label class="avatar-selector" for="file-uploader"><i class="fa fa-camera cam"></i></label>
                         </div>
                         <div class="text-white">
-                            <h2 class="mt-4 mb-3 text-start">Claro la red donde todo es posible</h2>
+                            <h2 class="mt-4 mb-3 text-start">@User.Name  @User.LastName</h2>
                             <div style="display: inline-flex;">
-                                <div class="tipo"><div class="stext">HTML</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <div class="category"><div class="stext">CSS</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <div class="tipo"><div class="stext">JS</div></div>
+                                <div class="tipo"><div class="stext">Usuario</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
                         <div></div>
@@ -61,45 +62,45 @@
                     </div>
                     <div class=" d-flex justify-content-center">
                         <div class="form-outline data" style="width: 34%;">
-                            <input type="text" id="Nombre" class="form-control" />
+                            <input type="text" id="Nombre" name="Name" value="@User.Name" class="form-control" />
                             <label class="form-label" for="Nombre">Nombre</label>
                         </div>
                         <div class="form-outline data" style="width: 34%; margin-left: 2%;">
-                            <input type="text" id="Apellido" class="form-control" />
+                            <input type="text" id="Apellido" name="LastName" value="@User.LastName" class="form-control" />
                             <label class="form-label" for="Apellido">Apellido</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="Correo" class="form-control" />
+                            <input type="text" id="Correo" name="Email" value="@User.Email" class="form-control" readonly/>
                             <label class="form-label" for="Correo">Correo Electronico</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="Cedula" class="form-control" />
+                            <input type="text" id="Cedula" name="Cedula" value="@User.Cedula" class="form-control" />
                             <label class="form-label" for="Cedula">Cedula</label>
                         </div>
                     </div>
                     <div class=" d-flex justify-content-center">
                         <div class="form-outline data" style="width: 34%;">
-                            <input type="text" id="Telefono" class="form-control" />
+                            <input type="text" id="Telefono" name="Tel" value="@User.Tel" class="form-control" />
                             <label class="form-label" for="Telefono">Telefono</label>
                         </div>
                         <div class="form-outline data" style="width: 34%; margin-left: 2%;">
-                            <input type="text" id="Celular" class="form-control" />
+                            <input type="text" id="Celular" name="Cel" value="@User.Cel" class="form-control" />
                             <label class="form-label" for="Celular">Celular</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="Direccion" class="form-control" />
+                            <input type="text" id="Direccion" name="Direccion" value="@User.Direccion" class="form-control" />
                             <label class="form-label" for="Direccion">Direccion</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <textarea class="form-control" id="Biografia" rows="3"></textarea>
+                            <textarea class="form-control" id="Biografia" name="Bio" value="@User.Bio"  rows="3"></textarea>
                             <label class="form-label" for="Biografia">Biografia</label>
                         </div>
                     </div>
@@ -115,19 +116,19 @@
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="Instagram" class="form-control" />
+                            <input type="text" id="Instagram" name="Instagram" value="@User.Instagram" class="form-control" />
                             <label class="form-label" for="Instagram">Instagram URL</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="Facebook" class="form-control" />
+                            <input type="text" id="Facebook" name="Facebook" value="@User.Facebook" class="form-control" />
                             <label class="form-label" for="Facebook">Facebook URL</label>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="form-outline data" style="width: 70%;">
-                            <input type="text" id="LinkedIn" class="form-control" />
+                            <input type="text" id="LinkedIn" name="Linkedin" value="@User.Linkedin" class="form-control" />
                             <label class="form-label" for="LinkedIn">LinkedIn URL</label>
                         </div>
                     </div>
@@ -152,11 +153,13 @@
 
             <div class="d-flex justify-content-center buttons">
                 <button class="btn back">Cancelar</button>
-                <button class="btn save">Guardar</button>
+                <button type="submit" class="btn save">Guardar Cambios</button>
             </div>
         </div>
     </div>
-    </div>
+    }
+
+   
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     <script id="rendered-js">
         (() => {

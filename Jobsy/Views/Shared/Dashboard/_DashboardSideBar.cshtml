@@ -1,8 +1,10 @@
 ﻿@using System.Security.Claims;
-@{ 
+@{
     string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
     string Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
-} 
+}
+@Html.Partial("~/Views/Shared/IndexShared/Loading/Preloading.cshtml")
+@Html.Partial("~/Views/Shared/Cookies.cshtml")
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +12,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Dashboard - Admin</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
     <!-- Google Fonts Roboto -->
@@ -28,9 +27,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-
-
-
 
 
 
@@ -136,7 +132,7 @@
                     <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="margin-left: 1%;">
                         <li class="nav-item">
-                            <a class="nav-link" href="#"> Ir a Inicio</a>
+                            <a class="nav-link" href="@Url.Action("Index", "Index")"> Ir a Inicio</a>
                         </li>
 
 
@@ -233,6 +229,8 @@
 
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+    <script src="//code.tidio.co/6vjzg8cdqnaigy4dbodpaxw2erlutorc.js" async></script>
 
     <script type="text/javascript" src="~/Content/MDB/js/mdb.min.js"></script>
     <script>

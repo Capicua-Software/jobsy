@@ -80,10 +80,10 @@ namespace DATA_L.UserD
             docRef = db.Collection("Users").Document(model.Id);
             UserModel search = await LoadUser(model.Id);
 
-            if (model.Image != null) model.Image = await SaveImage(model.Id, model.Image);
-            else model.Image = search.Image;
+            if (model.Logo != null) model.Logo = await SaveImage(model.Id, model.Logo);
+            else model.Logo = search.Logo;
 
-            if (search.Image == null) model.Image = Default;
+            if (search.Logo == null) model.Logo = Default;
 
          
             Dictionary<string, object> update = new Dictionary<string, object>
@@ -100,7 +100,7 @@ namespace DATA_L.UserD
                 { "Facebook", model.Facebook },
                 { "Linkedin", model.Linkedin },
                 { "Chips", model.Chips },
-                { "Image", model.Image }
+                { "Logo", model.Logo }
                 };
 
 

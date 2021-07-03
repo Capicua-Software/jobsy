@@ -9,6 +9,7 @@ using ENTITY_L.Models.Jobs;
 using Jobsy_API.Controllers;
 using Microsoft.Owin.Security;
 using System.IO;
+using ENTITY_L.Models.Employer;
 
 namespace Jobsy.Controllers
 {
@@ -18,25 +19,30 @@ namespace Jobsy.Controllers
         UsersAPIController user = new UsersAPIController();
         EmployerController employer = new EmployerController();
         CategoryController category = new CategoryController();
-        static string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+
         public async Task<ActionResult> PostAJob()
-        {           
-            ViewBag.Employer= await employer.EmployerLoad(Email);
-            ViewBag.AllCategory = await category.LoadCategories();
+        {
+            EmployerModel employe = await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
+
+            if (employe.valido == "true")
+            {
+                ViewBag.Employer = employe;
+                ViewBag.AllCategory = await category.LoadCategories();
+                return View();
+            }
+            else
+            {
+                RedirectToAction("EditProfile", "Employer");
+            }
             return View();
         }
-            
+
         [HttpPost]
         [AllowAnonymous] 
-        public async Task<ActionResult> PostAJob(JobsModel model, HttpPostedFileBase Logo) // Este metodo se llama al enviar el formulario
-        {
-            
-                if (Logo != null) 
-                { 
-                    model.Logo = Logo.FileName;
-                    Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
-                }
-                await job.PostAJob(model); // Llama al metodo que se encuenta en la API
+        public async Task<ActionResult> PostAJob(JobsModel model) // Este metodo se llama al enviar el formulario
+        {            
+               
+             await job.PostAJob(model); // Llama al metodo que se encuenta en la API
 
             return RedirectToAction("Index", "Index");
         }
@@ -73,7 +79,7 @@ namespace Jobsy.Controllers
         {
             try
             {
-                ViewBag.Employer = await employer.EmployerLoad(Email);
+                ViewBag.Employer = await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
                 ViewBag.AllCategory = await category.LoadCategories();
                 ViewBag.ajob = await LoadJob(id); 
             }
@@ -92,6 +98,7 @@ namespace Jobsy.Controllers
             return ajob;
         }
 
+      
 
 
 
