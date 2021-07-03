@@ -16,6 +16,7 @@
            
             <!-- Pills navs -->
             <!-- Pills content -->
+
             @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "d-flex justify-content-center" }))
             {             
 
@@ -27,7 +28,8 @@
                        <img style="margin-bottom:40px;" height="80px" src="~/Content/Index/Logo.svg">
                         </div>
                        <form>
-                         
+
+
                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                            <!-- Email input -->
                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
@@ -81,10 +83,10 @@
                            </div>
 
                            <!-- Submit button -->
-                           <button type="submit"  class="btn btn-primary btn-block mb-4" style="background-color: #933368;font-family: Raleway;font-size:15px">Iniciar Sesión</button>
+                           <button type="submit" class="btn btn-primary btn-block mb-4" style="background-color: #933368;font-family: Raleway;font-size:15px">Iniciar Sesión</button>
 
                            <!-- Register buttons -->
-                           <div class="text-center" style="margin-top:50px" >
+                           <div class="text-center" style="margin-top:50px">
                                <p class="Subtitle" style="color: #757575">¿No tienes cuenta? <a style="color: #4376DA" href="#!">Registrate</a></p>
                            </div>
                            <div class="text-center mb-3">

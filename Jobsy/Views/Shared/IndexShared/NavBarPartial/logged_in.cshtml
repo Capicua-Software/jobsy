@@ -3,7 +3,21 @@
     var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
     var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
     var Logo = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Actor).Value;
+
 }
+
+@switch (Role)
+{
+    case "User":
+        @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/Roles/user_logged_in.cshtml");
+        break;
+
+    case "Employer":
+        @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/Roles/employer_logged_in.cshtml");
+        break;
+}
+
+
 
 <style>
     .navbar-user-text {

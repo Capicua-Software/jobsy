@@ -71,5 +71,9 @@ namespace ENTITY_L.Models.User
         [DataType(DataType.Text)]
         public string Logo { get; set; }
 
+        public static implicit operator UserModel(QuerySnapshot v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

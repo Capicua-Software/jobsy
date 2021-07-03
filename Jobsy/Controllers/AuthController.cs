@@ -118,6 +118,8 @@ namespace Jobsy.Controllers
                 claims.Add(new Claim(ClaimTypes.Authentication, userData.token));
                 claims.Add(new Claim(ClaimTypes.Role, userData.Role));
                 claims.Add(new Claim(ClaimTypes.Name, userData.UserName));
+
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, userData.Cedula));
                 claims.Add(new Claim(ClaimTypes.Actor, userData.Logo));
                 var claimIdenties = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
                 var ctx = Request.GetOwinContext();
@@ -200,7 +202,8 @@ namespace Jobsy.Controllers
             try
             {
                 await Auth.SignUp(model);
-                ModelState.AddModelError(string.Empty, "Verifica en tu correo electrónico.");
+                //ModelState.AddModelError(string.Empty, "Verifica en tu correo electrónico.");
+                ModelState.AddModelError("SUCCESS", "Verifica tu correo electronico");
             }
             catch (Exception ex)
             {

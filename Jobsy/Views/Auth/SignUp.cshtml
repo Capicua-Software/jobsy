@@ -11,7 +11,13 @@
          style="background-image: url('https://www.mediafire.com/convkey/8ef1/irtrm9kc2r9hgxb9g.jpg'); height: 100vh ">
 
         <div class="container col-md-6" style="margin-top:3rem;">
-          
+            <script>
+                $(".validation-message").each(function () {
+                    if ($(this).text() !== "") {
+                        $(this).css("display", "block");
+                    }
+                });
+            </script>
             <!-- Pills navs -->
             <!-- Pills content -->
             @using (Html.BeginForm("SignUp", "Auth", FormMethod.Post, new { @class = "d-flex justify-content-center" }))
@@ -42,6 +48,7 @@
                             }
                         </style>
                         <form>
+                            @Html.ValidationMessage("SUCCESS", new { @class = "text-success", @style = "" })
 
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <!-- Name input -->
@@ -69,7 +76,7 @@
                             <!-- Checkbox -->
                             <div class="row">
                                 <div class="form-check col d-flex justify-content-center mb-4">
-                                    <input   style="border-radius:5px;border-color:#442B6F" class="form-check-input me-2"
+                                    <input style="border-radius:5px;border-color:#442B6F" class="form-check-input me-2"
                                            type="checkbox"
                                            value="true"
                                            name="Employer"
