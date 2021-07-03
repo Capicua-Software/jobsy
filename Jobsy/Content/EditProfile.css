@@ -168,7 +168,7 @@ gsk-input-chips {
 
 .avatar-selector {
     position: absolute;
-    left: 16%;
+    left: 14%;
     top: 58%;
     background: linear-gradient(rgb(197, 14, 167), rgb(151, 17, 212));
     color: white;

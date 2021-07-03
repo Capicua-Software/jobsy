@@ -6,7 +6,7 @@
 
 }
 
-<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Empleos</h1>
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Usuarios</h1>
 
 <div class=" container" style="padding-top: 3rem">
 
@@ -14,13 +14,12 @@
         <table class="table mydatatable" style="width: 100%" id="mydatatable">
             <thead>
                 <tr>
-                    <th>Compañía</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
                     <th>Email</th>
-                    <th>RNC</th>
+                    <th>Cedula</th>
+                    <th>Celular</th>
                     <th>Telefono</th>
-                    <th>Pagina Web</th>
-                    <th>Ubicación</th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -33,9 +32,7 @@
                     <td>@item.Email</td>
                     <td>@item.Cedula</td>
                     <td>@item.Cel</td>
-                    <td>@item.Tel</td>
-                    <td>@item.Linkedin</td>
-                    <td>@item.Cel</td>
+                    <td>@item.Tel</td>                         
                     <td class="row">
                         <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">
                             <i class="fas fa-eye"></i>
@@ -69,7 +66,6 @@
     }
 
     var Delete = function () {
-
 
         var UserId = $("#hiddenTxt").val();
 

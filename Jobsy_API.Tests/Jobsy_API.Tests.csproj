@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Auth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
@@ -109,6 +110,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ENTITY_L\ENTITY_L.csproj">
+      <Project>{61d5ccb9-be3c-4f13-a756-34482a797dd4}</Project>
+      <Name>ENTITY_L</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jobsy\Jobsy.csproj">
+      <Project>{863bb148-db4a-400f-82db-f1bc702f8fd0}</Project>
+      <Name>Jobsy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Jobsy_API\Jobsy_API.csproj">
       <Project>{918E9D7E-BA6E-42C9-840E-2B4685682E40}</Project>
       <Name>Jobsy_API</Name>

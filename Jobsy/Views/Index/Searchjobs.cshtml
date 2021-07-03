@@ -1,11 +1,11 @@
-﻿@model ENTITY_L.Models.Jobs.JobsModel
+@model ENTITY_L.Models.Jobs.JobsModel
 
 @{
     ViewBag.Title = "SearchResult";
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     IEnumerable<ENTITY_L.Models.Jobs.JobsModel> JobsFound = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.JobsFound; // Llama al metodo que se encuenta en la API
-    string KeyWord = ViewBag.KeyWord;
     List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
+    string KeyWord = ViewBag.KeyWord;
 }
 
 <!-- Background image -->
@@ -18,7 +18,7 @@
             <div class="">
 
                 <form class="form container row" style="width: 70rem;" action="">
-                    @using (Html.BeginForm("SearchJobsWithCategory", "Index", FormMethod.Get, new { @class = "form" }))
+                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
                     {
                         <div class="input-icons col">
                             <i class="ri-search-line icon"></i>
@@ -29,11 +29,11 @@
 
                         <div class=" col">
                             <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
-                            <select class="dropdown" name="category" id="categories">
+                            <select class="dropdown" name="categories" id="categories" onchange="change_url(this.value)">
                                 <option value="" disabled selected>Selecciona una categoría</option>
-                                @foreach(var item in categories)
+                                @foreach (var item in categories)
                                 {
-                                    <option value="@item.Name">@item.Name</option>
+                                    <option value="@Url.Action("SearchByCategory","Index", new {keyword =item.Name })">@item.Name</option>
                                 }
                             </select>
                         </div>
@@ -72,6 +72,9 @@
             var divider = document.getElementById('divider-search');
             divider.remove();
         }
+        function change_url(val) {
+            window.location = val;
+        }
     </script>
 
     <!--EMPLEO1-->
@@ -82,9 +85,9 @@
         @:<div class="row-col mb-3 container d-flex justify-content-center space-between">
             @: <div class="col-md-10 mb-3  p-3 card-jobs ripple Searched-Job" style="margin-right: 0%;">
                 @:  <div class=" rounded-3">
-                    @: <a href="" class="">
+                    @:  <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
                         @:   <div class="row">
-                            <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"> <img src="@item.Logo" height="110px" class="" alt="mdb logo" style="margin-left: 2rem;"> </div>
+                                 <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"><div style="position: relative;background-image: url('@item.Logo');background-size: cover;background-repeat: no-repeat;background-position-x: center;background-position-y: center; width: 110px;height: 110px;margin-left: 2rem;"></div></div>
 
                             <div class="col d-flex align-items-center search-divider" id="divider-search" style="margin-left: 1rem;">
                                 <div class="vl search-divider"></div>
@@ -117,26 +120,7 @@
                         @: </div>
                     @:   </a>
                 @:    </div>
-
-
             @:  </div>
         @:   </div>
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
 </section>   

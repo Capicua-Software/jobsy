@@ -22,7 +22,7 @@ namespace ENTITY_L.Models.Authentication
         
         public string Password { get; set; }
         public string Cedula { get; set; }
-
+        public string Logo { get; set; }
         public string State { get; set; }
         public string Role { get; set; }
         public string UserName { get; set; }
