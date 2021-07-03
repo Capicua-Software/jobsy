@@ -27,10 +27,9 @@ namespace Jobsy.Controllers
         public async Task<ActionResult> SendRequest(RequestModel model) // Este metodo se llama al enviar el formulario
         {
 
-
             await request.SendRequest(model); // Llama al metodo que se encuenta en la API
 
-            return View();//Retorna la vista
+            return RedirectToAction("Index", "Index");//Retorna la vista
         }
 
 

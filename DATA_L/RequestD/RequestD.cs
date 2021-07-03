@@ -9,6 +9,7 @@ using Google.Cloud.Firestore;
 using Newtonsoft.Json;
 using Firebase.Auth;
 using System.Security.Claims;
+using System.Web.Helpers;
 
 namespace DATA_L.Request
 {
@@ -44,7 +45,18 @@ namespace DATA_L.Request
                 };
 
 
-                await docRef.SetAsync(request); // Guardar en la colección de Jobs el diccionario
+                List<RequestModel> lstReq = new List<RequestModel>();
+
+                List<object> listValues = request.Values.ToList();
+                string json = JsonConvert.SerializeObject(listValues);
+                RequestModel newreq = Json.Decode<RequestModel>(json.Substring(1, json.Length - 2));
+
+                Dictionary<string, object> requestOther = new Dictionary<string, object>
+                {
+                    {model.CedulaUser,  newreq}
+                };
+
+                await docRef.SetAsync(requestOther); // Guardar en la colección de Jobs el diccionario
 
                 return model; // Retorna el modelo
             }
@@ -76,20 +88,40 @@ namespace DATA_L.Request
 
 
 
-        public async Task<List<RequestModel>> Loadrequest(string idjob) // Método para cargar todos los Empleos
+        public async Task<List<RequestModel>> Loadrequest(string cedula) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection();
-            Query query = db.Collection("Solicitudes").WhereEqualTo("00102852605.EmailUser", "janna@gmail.com");
-            List<RequestModel> lstJobs = null;
+            Query query = db.Collection("Solicitudes").WhereEqualTo($"{cedula}.CedulaUser", cedula);
+            List<RequestModel> lstJobs = new List<RequestModel>();
+            Dictionary<string, object> req = null;
             QuerySnapshot requestSnapshot = await query.GetSnapshotAsync();
 
             foreach (DocumentSnapshot documentSnapshot in requestSnapshot.Documents) //Recorremos el resultado de la consulta y lo añadimos a la lista
             {
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
-                    RequestModel job = documentSnapshot.ConvertTo<RequestModel>(); // Creamos un nuevo objeto que sera igual al resultado del query
-                    job.IdJob = documentSnapshot.Id;
-                    lstJobs.Add(job); // Se agrega a la lista el objeto               
+
+                    req = documentSnapshot.ToDictionary();
+
+                    //req.Add($"{cedula}-{num}", req);
+                    
+                    List<object> listValues = req.Values.ToList();
+                    //object job = documentSnapshot.ConvertTo<object>(); 
+
+                    string json = JsonConvert.SerializeObject(listValues);
+                    //RequestModel newreq = JsonConvert.DeserializeObject<RequestModel>(json);
+                    RequestModel newreq = Json.Decode<RequestModel>(json.Substring(1, json.Length - 2));
+
+                    //RequestModel newreq = (RequestModel)Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+
+                    newreq.IdJob = documentSnapshot.Id;
+
+                    lstJobs.Add(newreq);
+
+                    // Creamos un nuevo objeto que sera igual al resultado del query
+                    //job. = documentSnapshot.Id;
+                    // lstJobs.Add(job); // Se agrega a la lista el objeto               
+
                 }
             }
             return lstJobs;

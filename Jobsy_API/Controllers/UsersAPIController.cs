@@ -6,7 +6,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using DATA_L.UserD;
+using DATA_L.Request;
 using ENTITY_L.Models.User;
+using ENTITY_L.Models.Request;
+using System.Web.Http.Results;
 
 namespace Jobsy_API.Controllers
 {
@@ -14,7 +17,7 @@ namespace Jobsy_API.Controllers
     {
         UserD user = new UserD(); // Objeto de la clase Jobs en la capa de datos
 
-        
+        RequestD request = new RequestD();
 
         [HttpGet]
         [Route("api/Users/LoadUsersAsync")]  // Ruta de la API
@@ -48,6 +51,16 @@ namespace Jobsy_API.Controllers
         {
             user.DeleteUser(id);
         }
+
+        [HttpGet]
+        [Route("api/Users/GetRequestedJobs")]  // Ruta de la API
+        public async Task<List<RequestModel>> GetRequestedJobs(string cedula)
+        {
+            List<RequestModel > requests = await request.Loadrequest(cedula);
+
+            return requests; //Retorna una lista 
+        }
+
 
 
 

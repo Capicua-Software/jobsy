@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
     IEnumerable<ENTITY_L.Models.Jobs.JobsModel> JobsFound = (IEnumerable<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.JobsFound; // Llama al metodo que se encuenta en la API
     string KeyWord = ViewBag.KeyWord;
+    List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
 }
 
 <!-- Background image -->
@@ -17,7 +18,7 @@
             <div class="">
 
                 <form class="form container row" style="width: 70rem;" action="">
-                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+                    @using (Html.BeginForm("SearchJobsWithCategory", "Index", FormMethod.Get, new { @class = "form" }))
                     {
                         <div class="input-icons col">
                             <i class="ri-search-line icon"></i>
@@ -28,11 +29,12 @@
 
                         <div class=" col">
                             <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
-                            <select class="dropdown" name="categories" id="categories">
+                            <select class="dropdown" name="category" id="categories">
                                 <option value="" disabled selected>Selecciona una categoría</option>
-                                <option value="volvo">Tecnología</option>
-                                <option value="saab">Diseño</option>
-                                <option value="opel">Marketing</option>
+                                @foreach(var item in categories)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
                             </select>
                         </div>
                         <div class="col-2">
@@ -115,36 +117,6 @@
                         @: </div>
                     @:   </a>
                 @:    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             @:  </div>

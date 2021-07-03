@@ -1,7 +1,8 @@
-﻿
+﻿@using System.Security.Claims;
 @{
     Layout = null;
-
+   
+}
 }
 @Html.Partial("~/Views/Shared/IndexShared/Loading/Preloading.cshtml")
 @Html.Partial("~/Views/Shared/Cookies.cshtml")
@@ -56,19 +57,6 @@
 
             <!-- Collapsible wrapper -->
             <div class="collapse navbar-collapse" id="navbarButtonsExample">
-                <!-- Left links -->
-                <ul class="navbar-nav navbar-links me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">Inicio</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">¿Cómo funciona?</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Index")"><span class="nav-link">Sobre nosotros</span></a>
-                    </li>
-                </ul>
-                <!-- Left links -->
 
                 @if (User.Identity.IsAuthenticated)
                 {
@@ -94,10 +82,10 @@
         .border-bottom {
             border-bottom: 1px solid #ffffff33 !important;
         }
+
         footer {
             color: #ffffffe8;
         }
-        
     </style>
 
     <!-- Footer -->
@@ -140,7 +128,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <!-- Right -->
         </section>
         <!-- Section: Social media -->
@@ -156,7 +144,7 @@
                             <img src="https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/resources%2FLogo.svg?alt=media&token=ed56d8b1-3a64-43f8-9e19-23313da73c71" alt="logo" />
                         </h6>
                         <p>
-                            Si eliges contratar incluso a tu mascota, que los tacones de tierra se sienten en casa también. 
+                            Si eliges contratar incluso a tu mascota, que los tacones de tierra se sienten en casa también.
                             Si quieres que tu perro sea feliz, querrás contratarte y mantenerlo feliz tanto como sea posible.
                         </p>
                     </div>
@@ -223,7 +211,7 @@
         <!-- Section: Links  -->
         <!-- Copyright -->
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright: Hecho con ❤️ por 
+            © 2021 Copyright: Hecho con ❤️ por
             <a class="text-reset fw-bold" href=""> Capicúa Software</a>
         </div>
         <!-- Copyright -->

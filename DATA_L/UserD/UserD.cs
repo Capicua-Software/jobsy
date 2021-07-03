@@ -146,5 +146,19 @@ namespace DATA_L.UserD
 
         }
 
+        public async Task<UserModel> GetRequestedJobs(string cedula)
+        {
+            OpenFirestoreConnection();
+            Query query = db.Collection("Solicitudes").WhereEqualTo($"{cedula}.CedulaUser", cedula);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+            var queryTest = querySnapshot;
+            UserModel user = queryTest;
+            string hi = "";
+            
+            return user;
+    
+
+
+        }
     }
 }

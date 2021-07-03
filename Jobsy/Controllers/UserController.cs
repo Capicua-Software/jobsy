@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using ENTITY_L.Models.User;
+using ENTITY_L.Models.Request;
 using Jobsy_API.Controllers;
 using Microsoft.Owin.Security;
 using System.IO;
@@ -150,6 +151,29 @@ namespace Jobsy.Controllers
         public ActionResult EditProfile() 
         { 
             return View(); 
+        }
+
+        public async Task<ActionResult> RequestViewer()
+        {
+            ViewBag.RequestedJobs = await RequestLoader();
+            try
+            {
+                ViewBag.RequestedJobs = await RequestLoader();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+            }
+
+            return View();
+        }
+
+        public async Task<List<RequestModel>> RequestLoader()
+        {
+            string Cedula = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<RequestModel> requestModel = await user.GetRequestedJobs(Cedula);
+
+            return requestModel;
         }
 
 

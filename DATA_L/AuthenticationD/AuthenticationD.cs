@@ -47,7 +47,8 @@ namespace DATA_L.Authentication
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     model.Role = (string)user["Role"];
                     model.UserName = (string)user["Name"];
-                    
+                    model.Cedula = (string)user["Cedula"];
+
 
 
                     return model;
@@ -91,7 +92,8 @@ namespace DATA_L.Authentication
                 {"Name", model.Name },
                 {"Email", model.Email },
                 {"Employer", model.Employer },
-                {"Role", model.Role }
+                {"Role", model.Role },
+                {"Cedula", model.Cedula }
             };
 
             switch (model.Employer)
