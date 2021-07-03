@@ -1,0 +1,234 @@
+﻿@model List<ENTITY_L.Models.Jobs.JobsModel>
+@using System.Security.Claims;
+@{
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    ENTITY_L.Models.Jobs.JobsModel job = (ENTITY_L.Models.Jobs.JobsModel)ViewBag.ajob;
+   
+}
+<br>
+<br>
+<br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link rel="stylesheet" href="~/Content/jobdescription.css" />
+    <title>Job Description</title>
+</head>
+<body>
+
+    <header>
+        <!-- Background image -->
+        <div class="text-center floating">
+            <div class="mask transparent">
+                <div class="d-flex justify-content-evenly align-items-evenly h-100">
+                    <div class="text-white">
+                        <div class="jobimage" style="position: relative; background-image: url('@job.Logo');"></div>
+                    </div>
+                    <div class="text-white title">
+                        <h2 class="mt-4 mb-3 text-start">@job.Job</h2>
+                        <div style="display: inline-flex;">
+                            <div class="tipo"><div class="stext">@job.JobType</div></div>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="category"><div class="stext">@job.Category</div></div>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!-- Background image -->
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card description shadow">
+                    <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="bi:info-lg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Descripción</div>
+                    <p class="p">
+                        @job.JobDescription
+                    </p>
+                    <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="ic:baseline-how-to-reg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Requerimientos</div>
+                    <p class="p">
+                        @job.Requirements
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card description shadow">
+
+
+                    @if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "User")
+                    {
+                        <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Aplicar a este empleo</div>
+                        <button class='btn apply' onclick="GetUser('@ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value')" data-mdb-whatever='mdo'>Realizar solicitud</button>
+                    }
+
+                    else if (Request.IsAuthenticated && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value == job.Email && ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value == "Employer")
+                    {
+                        <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Ajustes</div>
+
+                        <div class="row d-flex justify-content-center" style="padding-top:5px">
+                            <a class="col-md-2 btn btn-primary" href="@Url.Action("EditJob","Jobs", new {id=job.Id})" style="margin-left: 3%;">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                            <a href="" class="col-md-2 btn btn-danger" onclick="ConfirmDelete('@job.Id')" style="margin-left: 3%;">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+
+                        </div>
+
+
+                    }
+                    else if (!Request.IsAuthenticated)
+                    {
+                        <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Aplicar a este empleo</div>
+                        <a class='btn apply' href="@Url.Action("Login","Auth")" data-mdb-whatever='mdo'>Realizar solicitud</a>
+                    }
+                    else
+                    {
+
+                    }
+
+                    <!--data-mdb-target='#JobApply'-->
+
+
+                    <div class="card-header title3"><span class="iconify" data-inline="false" data-icon="ic:baseline-work-outline" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Compañia</div>
+
+                    <div class="bold">Nombre</div>
+                    <div class="gray"><span class="iconify" data-inline="false" data-icon="ph:buildings-thin" style="font-size: 25px; color: #7B7B7B; margin-right: 10px;"></span>@job.Company</div>
+                    <div class="bold">Correo</div>
+                    <div class="gray"><span class="iconify" data-inline="false" data-icon="mdi-light:email" style="font-size: 25px; color: #7B7B7B; margin-right: 10px;"></span>@job.Email</div>
+                    <div class="bold">Pagina Web</div>
+                    <div class="gray"><span class="iconify" data-inline="false" data-icon="mdi-light:cloud" style="font-size: 25px; color: #7B7B7B; margin-right: 10px;"></span><a style="color: #7B7B7B; margin-right: 10px;" href="@job.URL" target="_blank">Visitar página web</a></div>
+                    <div class="bold">Ubicación</div>
+                    <div class="gray"><span class="iconify" data-inline="false" data-icon="mdi-light:map-marker" style="font-size: 25px; color: #7B7B7B; margin-right: 10px;"></span>@job.Location</div>
+                    <div class="bold">Publicación</div>
+                    <div class="gray"><span class="iconify" data-inline="false" data-icon="mdi-light:calendar" style="font-size: 25px; color: #7B7B7B; margin-right: 10px;"></span>@job.Date</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+</body>
+</html>
+<br>
+<br>
+<br>
+<br>
+@using (Html.BeginForm("SendRequest", "Request"))
+{
+    <div class="modal fade" id="JobApply" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="font-size: 20px"><span class="iconify" data-inline="false" data-icon="mdi:paperclip" style="font-size: 25px;margin-right: 10px;"></span>APLICAR A ESTE EMPLEO</div>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label style="font-size: 20px;color: #933368;" for="recipient-name" class="col-form-label">Información Personal</label>
+                            <input type="text" class="form-control" name="IdJob" value="@job.Id" hidden />
+
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="EmailUser" id="Email" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="CedulaUser" id="Cedula" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <label style="font-size: 20px;color: #933368;" for="recipient-name" class="col-form-label">Información del Empleo</label>
+                            <input type="text" class="form-control" id="recipient-name" name="EmailCompany" value="@job.Email" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="recipient-name" name="Job" value="@job.Job" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="recipient-name" name="JobType" value="@job.JobType" readonly />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="recipient-name" name="JobDescription" value="@job.JobDescription" readonly />
+                        </div>
+
+                        <div class="mb-3">
+                            <label style="font-size: 20px;color: #933368;" for="recipient-name" class="col-form-label">Mensaje:</label>
+                            <textarea class="form-control" name="Message" id="message-text" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style="background-color: #933368;" class="btn btn-primary" data-mdb-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-secondary" style="background-color: #933368;">Enviar Solicitud</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--SCRIPT FOR GETTING JOB INFO FOR EDIT-->
+<script>
+
+    function GetUser(id) {
+        var url = '@Url.Action("GetUserById", "Jobs")';
+        $.ajax({
+            url: url,
+            typr: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            data: { id: id },
+            success: function (response) {
+                $('#Id').val(response.Id);
+                $('#Cedula').val(response.Cedula);
+                $('#Email').val(response.Email);
+                $('#JobApply').modal('show');
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        return false;
+    }
+</script>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+@Html.Partial("~/Views/ModalViews/SuccessModal.cshtml")
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(JobId) {
+        $("#hiddenTxt").val(JobId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+
+        var jobId = $("#hiddenTxt").val();
+         var url = '@Url.Action("Deletejob", "Jobs")';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { id: jobId },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#SuccessModal").modal("show");
+                $("#row_" + jobId).remove();
+            }
+        })
+
+
+    }
+
+
+
+</script>

@@ -9,34 +9,42 @@ using ENTITY_L.Models.Jobs;
 using Jobsy_API.Controllers;
 using Microsoft.Owin.Security;
 using System.IO;
+using ENTITY_L.Models.Employer;
 
 namespace Jobsy.Controllers
 {
     public class JobsController : Controller
     {
         JobsAPIController job = new JobsAPIController();
+        UsersAPIController user = new UsersAPIController();
+        EmployerController employer = new EmployerController();
+        CategoryController category = new CategoryController();
 
-
-        public ActionResult PostAJob()
+        public async Task<ActionResult> PostAJob()
         {
+            EmployerModel employe = await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
+
+            if (employe.valido == "true")
+            {
+                ViewBag.Employer = employe;
+                ViewBag.AllCategory = await category.LoadCategories();
+                return View();
+            }
+            else
+            {
+                RedirectToAction("EditProfile", "Employer");
+            }
             return View();
         }
-            
+
         [HttpPost]
         [AllowAnonymous] 
-        public async Task<ActionResult> PostAJob(JobsModel model, HttpPostedFileBase Logo) // Este metodo se llama al enviar el formulario
-        {
-            try
-            {
-                if (Logo != null)   model.Logo = Logo.FileName; Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
-                await job.PostAJob(model); // Llama al metodo que se encuenta en la API
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);//Lanza un mensaje en la consola en caso de error
-            }
+        public async Task<ActionResult> PostAJob(JobsModel model) // Este metodo se llama al enviar el formulario
+        {            
+               
+             await job.PostAJob(model); // Llama al metodo que se encuenta en la API
 
-            return View();//Retorna la vista
+            return RedirectToAction("Index", "Index");
         }
 
 
@@ -46,8 +54,8 @@ namespace Jobsy.Controllers
         {
             try
             {
-                List<JobsModel> AllJobs = await job.LoadJobsAsync(); // Llama al metodo que se encuenta en la API
-                ViewBag.AllJobs = AllJobs; //Guardamos el resultado del metodo en el Viewbag
+               
+                ViewBag.AllJobs = await AllJobs(); //Guardamos el resultado del metodo en el Viewbag
             }
             catch (Exception ex)
             {
@@ -58,23 +66,39 @@ namespace Jobsy.Controllers
         }
 
 
+        public async Task<List<JobsModel>> AllJobs()
+        {
+            List<JobsModel> AllJobs = await job.LoadJobsAsync();// Llama al metodo que se encuenta en la API;
+            return AllJobs; 
+        }
+
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> EditJob(string id) 
         {
             try
             {
-                JobsModel ajob = await job.Loadjob(id);
-                ViewBag.ajob = ajob; 
+                ViewBag.Employer = await employer.EmployerLoad(ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value);
+                ViewBag.AllCategory = await category.LoadCategories();
+                ViewBag.ajob = await LoadJob(id); 
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message); 
+                System.Diagnostics.Debug.WriteLine(ex); 
             }
 
             return View(); 
         }
 
+
+        public async Task<JobsModel> LoadJob(string id)
+        {
+            JobsModel ajob = await job.Loadjob(id);
+            return ajob;
+        }
+
+      
 
 
 
@@ -91,28 +115,57 @@ namespace Jobsy.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("LoadJobsAsync");
+            return RedirectToAction("Index", "Index");
         }
 
 
 
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public ActionResult Deletejob(string id)
         {
             try
             {
-                job.Deletejob(id);
+                DeleteAJob(id);
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("LoadJobsAsync");
+            return RedirectToAction("Index", "Index");
         }
 
-       
+        public void DeleteAJob(string id)
+        {
+          job.Deletejob(id);
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> JobDescription(string id)
+        {
+            try
+            {
+                ViewBag.ajob = await LoadJob(id);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetUserById(string id)
+        {
+            var JobInfo = await user.LoadUser(id);
+
+            return Json(JobInfo, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

@@ -1,0 +1,35 @@
+﻿@using(Html.BeginForm("ExecuteCategoryProcess", "Admin")){
+
+<div class="modal fade show" id="CreateModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Categoria</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+
+                <form>
+                    <!--PROCESS-->
+                    <input type="text" id="process" name="process" value="CreateCategory" hidden />
+
+                    <!-- COLUMNA -->
+                    <div class="row mb-4">                      
+                        <div class="col">
+                            <!-- EMAIL -->
+                            <div class="form-outline">
+                                <input type="text" id="Name" name="Name" class="form-control" placeholder="Nombre de la categoría" />
+                            </div>
+                        </div>
+                    </div>                   
+
+
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Guardar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+}

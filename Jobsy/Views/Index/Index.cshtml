@@ -15,10 +15,7 @@
 <body>
     <!-- Background image -->
     <div class="p-5 text-center bg-image"
-         style="
-            background-image: url('https://www.mediafire.com/convkey/e31f/v1g45ihj21urf7c9g.jpg');
-            height: 500px;
-        ">
+         style=" background-image: url('https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/header_wallpaper.jpg?alt=media&token=8a29c728-798d-4006-a755-87581e3172a5'); height: 500px; ">
         <canvas id="canvas"></canvas>
         <div class="mask" style="background-color: rgba(0, 0, 0, 0);">
             <div class="d-flex justify-content-center align-items-center container" style="height:35rem;">
@@ -31,9 +28,10 @@
 
                     @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
                     {
+                        
                         <div class="input-icons">
                             <i class="ri-search-line icon"></i>
-                            <input type="text" name="keyword" placeholder="Titulo, Empresa, Categoría, Ubicación">
+                            <input type="text" name="keyword" class="SearchInput" placeholder="Titulo, Empresa, Categoría, Ubicación">
                         </div>
                     }
 
@@ -64,20 +62,30 @@
             if (i == 2)
             {
                 @MvcHtmlString.Create("<div class='row-cols-2 mb-3 container d-flex justify-content-center space-between'>");
-
             }
             i++;
 
 
-            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 1%;">
+            <div class="col-md-5 mb-3  p-3 card-jobs ripple" style="margin-right: 2%;">
                 <div class=" rounded-3">
-                    <a href="@Url.Action("Details", "Jobs/Details", new {id=item.Id})" class="">
+                    <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
 
                         <div class="row">
-                            <div style="margin: 1.5rem;" class="col-sm-3 mt-5">
-                                <img src="@item.Logo" height="90px"  class="mt-2" alt="mdb logo">
+                            <div style="margin: 1rem; margin-right: 4%" class="col-sm-3 mt-5">
+                                <div style="position: relative;background-image: url('@item.Logo');background-size: cover;background-repeat: no-repeat;background-position-x: center;background-position-y: center;width: 110px;height: 110px;"></div>
                             </div>
-                            <div class="col-md-5">
+                            <style>
+                                .vl {
+                                    border-left: 1.9px solid #dedede;
+                                    height: 100%;
+                                }
+                            </style>
+
+                            <div class="col d-flex align-items-center" style="">
+                                <div class="vl"></div>
+                            </div>
+
+                            <div class="col-7" style="margin-right: 2%">
                                 @* <img src="~/Content/Index/GLogo.svg" height="80px" class="mt-2" alt="mdb logo"> *@
                                 <h3 class="Job col">@item.Job</h3>
                                 <span class="Company">@item.Company</span>
@@ -115,9 +123,17 @@
         }
 
     </section>
+    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+    {
+        <input value="AllJobs" name="process" hidden/>
+        <div class="d-grid gap-2 col-7 mx-auto mb-4">
+            <button class="btn btn-outline-primary btn-rounded me-3 navbar-button" style="border-radius: 5px;" type="submit">Ver todos los empleos &nbsp&nbsp<i class="fas fa-chevron-circle-right"></i></button>
+        </div>
+    }
 
 
-    <script type="text/javascript" src="~/Content/Index/typing-effect.js"></script>
-    <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
-</body>
+
+        <script type="text/javascript" src="~/Content/Index/typing-effect.js"></script>
+        <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
+    </body>
 </html>

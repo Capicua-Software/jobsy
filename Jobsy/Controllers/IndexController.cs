@@ -6,14 +6,18 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
+using System.Security.Claims;
+using ENTITY_L.Models.Limite;
 
 namespace Jobsy.Controllers
 {
     public class IndexController : Controller
     {
-
+        AdminAPIController admin = new AdminAPIController();
         JobsAPIController job = new JobsAPIController();
+        CategoryController category = new CategoryController();
         static IEnumerable<JobsModel> LastJobs = null;
+        static IEnumerable<JobsModel> JobsFound = null;
         // GET: Index
         [HttpGet]
         [AllowAnonymous]
@@ -23,8 +27,15 @@ namespace Jobsy.Controllers
             {
                 try
                 {
-                    IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(3); // Llama al metodo que se encuenta en la API
+                    string limite = await admin.getlimit();
+                    IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(int.Parse(limite)); // Llama al metodo que se encuenta en la API
                     ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        ViewBag.Name = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
+                        ViewBag.Role = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+                    }                    
+
                 }
                 catch (Exception ex)
                 {
@@ -43,19 +54,42 @@ namespace Jobsy.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> Searchjobs(string keyword) // Metodo para devolver una vista con todos los empleaos 
+        public async Task<ActionResult> Searchjobs(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
         {
-            try
+            ViewBag.AllCategory = await category.LoadCategories();
+            ViewBag.JobsFound = JobsFound;
+
+            if (process == null && keyword != "" && ViewBag.JobsFound == null)
             {
-                LastJobs = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
-                ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
+                try
+                {
+                    JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
+                  
+                    ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
+                    ViewBag.KeyWord = keyword;
+                 
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+                }
             }
-            catch (Exception ex)
+            else if (process == "AllJobs"  || process == null && ViewBag.JobsFound == null)
             {
-                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+                JobsFound = await job.LoadJobsAsync();
+                ViewBag.JobsFound = JobsFound;
+                ViewBag.KeyWord = "Todos los empleos";
             }
 
-            return RedirectToAction("Index"); //Retorna la vista
+            JobsFound = null;
+            return View(); //Retorna la vista
+        }
+
+        public async Task<ActionResult> SearchByCategory(string keyword)
+        {
+            JobsFound = await job.SearchJobByCategory(keyword);
+            ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
+            return RedirectToAction("Searchjobs", "Index");
         }
 
     }

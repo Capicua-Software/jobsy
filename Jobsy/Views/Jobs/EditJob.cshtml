@@ -1,112 +1,108 @@
 ﻿@model ENTITY_L.Models.Jobs.JobsModel
 
 @{
-    Layout = null;
-    ENTITY_L.Models.Jobs.JobsModel job = (ENTITY_L.Models.Jobs.JobsModel)ViewBag.ajob;
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    ViewBag.Title = "PostAJob";
+    List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
+    ENTITY_L.Models.Employer.EmployerModel Employer = (ENTITY_L.Models.Employer.EmployerModel)ViewBag.Employer;
+    ENTITY_L.Models.Jobs.JobsModel ajob = (ENTITY_L.Models.Jobs.JobsModel)ViewBag.ajob;
 }
-
+<br>
+<br>
+<br>
 <!DOCTYPE html>
-
-<html>
+<html lang="en" style="height: 110%;">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>EditJob</title>
+    <link rel="stylesheet" href="~/Content/PostAJob.css" />
+    <title>Post Job</title>
 </head>
 <body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    
-    
-    @using (Html.BeginForm("Edit","Jobs", FormMethod.Post))
+    <div class="floating">
+        <div class="transparent">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="jobimage" style="background-image: url('@Employer.Logo');"></div>
+                </div>
+                <div class="col-md-10">
+                    <div class="title">@Employer.Company</div>
+                    <div class="subtitle"><span class="iconify" data-inline="false" data-icon="cil:location-pin" style="font-size: 25px; color: #fff; margin-right: 10px;"></span>@Employer.Location</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Edit", "Jobs"))
     {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4></h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id)
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Company</label>
-                    <input class="form-control" name="Company" value= @job.Company />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Email</label>
-                    <input class="form-control" name="Email" value=@job.Email />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Job Type</label>
-                    <input class="form-control" name="JobType" value=@job.JobType />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Logo</label>
-                    <input class="form-control" name="Logo" value=@job.Logo />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">URL</label>
-                    <input class="form-control" name="URL" value=@job.URL />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Job</label>
-                    <input class="form-control" name="Job" value=@job.Job />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Location</label>
-                    <input class="form-control" name="Location" value=@job.Location />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Category</label>
-                    <input class="form-control" name="Category" value=@job.Category />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Job Description</label>
-                    <input class="form-control" name="JobDescription" value=@job.JobDescription />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-10">
-                    <label class="control-label col-md-2">Requirements</label>
-                    <input class="form-control" name="Requirements" value=@job.Requirements />
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+        <input value="@ajob.Id" name="Id" hidden>
+        <input value="@Employer.Company" name="Company" hidden>
+        <input value="@Employer.Email" name="Email" hidden>
+        <input value="@Employer.Logo" name="Logo" hidden>
+        <input value="@Employer.URL" name="URL" hidden>
+        <input value="@Employer.Location" name="Location" hidden>
+
+
+        <div class="container">
+            <div class="card form shadow">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="bi:info-lg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Descripción</div>
+                        </div>
+                        <div class=" d-flex justify-content-center">
+                            <div class="form-outline data" style="width: 90%;">
+                                <input type="text" id="Job" name="Job" value="@ajob.Job" class="form-control" />
+                                <label class="form-label" for="nombre">Nombre del puesto de trabajo</label>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <select class="combobox data" name="Category" id="categories">
+                                <option value="" disabled selected>Selecciona la categoría</option>
+                                @foreach (var item in categories)
+                                {
+                                    <option @if (ajob.Category == item.Name) { @MvcHtmlString.Create("selected='selected'") ; } value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <select class="combobox data" name="JobType" id="categories">
+                                <option value="" disabled selected>Selecciona el tipo</option>
+
+                                <option value="Part-Time" @if (ajob.JobType == "Part-Time") { @MvcHtmlString.Create("selected='selected'") ; }>Part-Time</option>
+                                <option value="Full-Time" @if (ajob.JobType == "Full-Time") { @MvcHtmlString.Create("selected='selected'") ; }>Full-Time</option>
+                                <option value="Freelance" @if (ajob.JobType == "Freelance") { @MvcHtmlString.Create("selected='selected'") ; }>Freelance</option>
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="form-outline data" style="width: 90%;">
+                                <textarea class="form-control" name="JobDescription" id="textAreaExample" rows="4">@ajob.JobDescription</textarea>
+                                <label class="form-label" for="textAreaExample">Descripción del empleo</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-center">
+                            <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="ic:baseline-how-to-reg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Requerimientos</div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="form-outline data" style="width: 90%;">
+                                <textarea class="form-control" name="Requirements" id="textAreaExample" rows="11">@ajob.Requirements</textarea>
+                                <label class="form-label" for="textAreaExample">Requisitos necesarios para aplicar</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center buttons">
+                        <button class="btn back">Cancelar</button>
+                        <button type="submit" class="btn save">Guardar Cambios</button>
+                    </div>
                 </div>
             </div>
         </div>
     }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+    <script src="~/Content/MDB/js/mdb.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 </body>
 </html>
+<br>
+<br>
+<br>

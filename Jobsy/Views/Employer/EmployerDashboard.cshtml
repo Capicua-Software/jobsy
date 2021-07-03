@@ -1,19 +1,131 @@
 ﻿@model ENTITY_L.Models.Employer.EmployerModel
-
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    List<ENTITY_L.Models.Jobs.JobsModel> Employerjobs = (List<ENTITY_L.Models.Jobs.JobsModel>)ViewBag.employerjobs;
 }
 
-<!DOCTYPE html>
+<title>Dashboard - Employer</title>
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 150;">Empleos</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>EmployerDashboard</title>
-</head>
-<body>
-    <div> 
-        <h1>Welcome Employer</h1>
+<div class=" container" style="padding-top: 1px">
+
+    <div class="container mb-1 mt-1 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
+            <thead>
+                <tr>
+                    <th>Empleo</th>
+                    <th>Tipo de trabajo</th>
+                    <th>Categoría</th>
+                    <th>Ubicación</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Employerjobs)
+                {
+                    <tr>
+                        <td>@item.Job</td>
+                        <td>@item.JobType</td>
+                        <td>@item.Category</td>
+                        <td>@item.Location</td>
+                        <td class="row">
+                            <a href="@Url.Action("JobDescription","Jobs", new {id= item.Id })" class="col-md-4 btn btn-dark btn-floating">
+                                <i class="fas fa-eye"></i>
+                            </a>
+
+                            <a data-toggle="modal" class="col-md-4 btn btn-primary btn-floating" onclick="GetDetails('@item.Id')" style="margin-left: 3%;">
+                                <i class="fas fa-pen"></i>
+                            </a>
+
+                            <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+
+
+                        </td>
+                    </tr>
+
+                }
+
+
+
+            </tbody>
+
+        </table>
+
     </div>
-</body>
-</html>
+</div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+@Html.Partial("~/Views/ModalViews/Edit/EditJobModal.cshtml")
+
+<!--SCRIPT FOR GETTING JOB INFO FOR EDIT-->
+<script>
+
+    function GetDetails(Id) {
+        var URL = '@Url.Action("ExecuteJobProcess", "Admin")'
+        var Process = "GetJobById";
+
+        $.ajax({
+            url: URL,
+            data: {
+                process: Process,
+                id: Id
+            },
+            type: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (response) {
+                $('#Id').val(response.Id);
+                $('#Company').val(response.Company);
+                $('#Email').val(response.Email);
+                $('#Job').val(response.Job);
+                $('#JobType').val(response.JobType);
+                $('#Location').val(response.Location);
+                $('#Category').val(response.Category);
+                $('#URL').val(response.URL);
+                $('#JobDescription').val(response.JobDescription);
+                $('#Requirements').val(response.Requirements);
+                $('#editModal').modal('show');
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        return false;
+    }
+</script>
+
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(JobId) {
+        $("#hiddenTxt").val(JobId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+        var jobId = $("#hiddenTxt").val();
+        var Process = "Delete";
+
+        $.ajax({
+            type: "POST",
+            url: "ExecuteJobProcess",
+            data: {
+                process: Process,
+                id: jobId
+            },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + jobId).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>

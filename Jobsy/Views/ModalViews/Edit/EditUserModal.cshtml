@@ -1,0 +1,83 @@
+﻿@using(Html.BeginForm("EditUser", "Admin", FormMethod.Post)){
+
+<div class="modal fade show" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+
+                <form>
+
+                    <!--ID-->
+                    <input type="text" id="Id" name="Id" hidden />
+
+                    <!-- COLUMNA -->
+                    <div class="row mb-4">
+                        <div class="col">
+                            <!-- COMPANY -->
+                            <div class="form-outline">
+                                <input type="text" id="Name" name="Name" class="form-control" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- COMPANY -->
+                            <div class="form-outline">
+                                <input type="text" id="LastName" name="LastName" class="form-control" placeholder="Apellidos" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- EMAIL -->
+                            <div class="form-outline">
+                                <input type="email" id="Email" name="Email" class="form-control" placeholder="Correo electrónico" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JOB -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Cedula" name="Cedula" class="form-control" placeholder="Cedula" />
+                    </div>
+
+                    <!-- JOBTYPE -->
+                    <div class="form-outline mb-4">
+                        <textarea type="text" id="Bio" name="Bio" class="form-control" placeholder="Biografia"></textarea>
+                    </div>
+
+                    <!-- CATEGORY -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Instagram" name="Instagram" class="form-control" placeholder="Instagram" />
+                    </div>
+
+                    <!-- LOCATION -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Location" name="Location" class="form-control" placeholder="Ubicación" />
+                    </div>
+
+                    <!-- URL -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Facebook" name="Facebook" class="form-control" placeholder="Facebook" />
+                    </div>
+
+                    <!-- REQUIREMENTS -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="Linkedin" name="Linkedin" class="form-control" placeholder="Linkedin" />
+                    </div>
+
+                    <!-- JOB DESCRIPTION -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="JobDescription" name="JobDescription" rows="4" placeholder="Descripción del puesto"></textarea>
+                    </div>
+
+
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Editar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -12,6 +12,9 @@ namespace DATA_L.Authentication
 {
     public class AuthenticationD:FirebaseCore
     {
+        static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
+
+
         public async Task<LoginModel> LoginAsync(LoginModel model)
         {
             model = await GetUserInfo(model);
@@ -45,7 +48,8 @@ namespace DATA_L.Authentication
                     //model = snapshot.ConvertTo<LoginModel>();
                     Dictionary<string, object> user = snapshot.ToDictionary();
                     model.Role = (string)user["Role"];
-                    
+                    model.UserName = (string)user["Name"];
+                    model.Logo = (string)user["Logo"];
 
 
                     return model;
@@ -84,12 +88,15 @@ namespace DATA_L.Authentication
         public async Task SendUserInfoToFirestore(SignUpModel model)
         {
             OpenFirestoreConnection();
+            model.Logo = Default;
+
             Dictionary<string, object> user = new Dictionary<string, object>
             {
                 {"Name", model.Name },
                 {"Email", model.Email },
                 {"Employer", model.Employer },
-                {"Role", model.Role }
+                {"Role", model.Role },
+                {"Logo", model.Logo }
             };
 
             switch (model.Employer)

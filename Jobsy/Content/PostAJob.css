@@ -1,0 +1,127 @@
+﻿.floating {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 175px;
+    background: linear-gradient(to right,#C33764, #1D2671);
+}
+
+.transparent {
+    position: relative;
+    top: 13%;
+    left: 18%;
+    width: 65%;
+    height: 75%;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 7px;
+}
+
+.jobimage {
+    position: absolute;
+    background-color: white;
+    top: 15%;
+    left: 8%;
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.title {
+    color: white;
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: x-large;
+    position: absolute;
+    top: 27%;
+    left: 23%;
+}
+
+.title2 {
+    color: #933368;
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: x-large;
+    width: 85%;
+}
+
+.subtitle {
+    color: white;
+    font-family: 'Raleway';
+    font-size: medium;
+    position: absolute;
+    top: 54%;
+    left: 23%;
+}
+
+.form {
+    margin-top: 2%;
+    width: 100%;
+    height: 450px;
+}
+
+.data {
+    margin-top: 3%;
+}
+
+.save {
+    background-color: white;
+    color: #933368;
+    border: 2px solid #933368;
+    margin-left: 1.5%;
+}
+
+    .save:hover {
+        background-color: #933368;
+        color: white;
+    }
+
+.back {
+    background-color: #933368;
+    color: white;
+}
+
+.buttons {
+    position: relative;
+    margin-top: 10px;
+    right: 6px;
+    top: 5%;
+}
+
+.back:hover {
+    color: #fff;
+}
+
+
+.combobox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: var(--navbar-font);
+    font-weight: var(--font-medium);
+    outline: 0;
+    background: #FBFBFB;
+    width: 90%;
+    height: 2.5rem;
+    border: 0;
+    padding-left: 5.2rem;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: gray;
+    border: 1px solid #B0B0B0;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/resources%2Fcarbon_collapse-categories.svg?alt=media&token=0eab6b70-bc31-4e93-a8cb-3c0f9bf1afda);
+    background-repeat: no-repeat;
+    background-size: 1.4em auto;
+    background-position: 1.4em center;
+    /*border-radius: 35px;*/
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+option {
+    font-family: var(--navbar-font);
+    font-family: var(--font-medium);
+    font-size: 18px;
+}

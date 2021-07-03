@@ -10,11 +10,13 @@ using Newtonsoft.Json;
 using Firebase.Storage;
 using System.IO;
 using Firebase.Auth;
+using System.Security.Claims;
 
 namespace DATA_L.JobsD
 {
     public class JobsD:FirebaseCore
     {
+        static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
         public async Task<JobsModel> PostJobsAsync(JobsModel model)  // Metodo para guardar un empleo en Firestore
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -22,14 +24,11 @@ namespace DATA_L.JobsD
             {
                 docRef = db.Collection("Jobs").Document(); // Creamos el documento para obtener el id
 
-                if (model.Logo != null) model.Logo = await SaveImage(docRef.Id, model.Logo);
-                else model.Logo = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
-
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
 
 
                 Dictionary<string, object> job = new Dictionary<string, object> //Diccionario de datos con los campos y sus respectivos valores
-            {
+            {               
                 { "Company", model.Company },
                 { "JobType", model.JobType },
                 { "Logo", model.Logo },
@@ -69,6 +68,7 @@ namespace DATA_L.JobsD
                 {
                     JobsModel job = documentSnapshot.ConvertTo<JobsModel>(); // Creamos un nuevo objeto que sera igual al resultado del query
                     job.Fecha = DateTime.ParseExact(job.Date, "dd/MM/yyyy", null); //Se realiza una conversion de la fecha a datetime
+                    job.Id = documentSnapshot.Id;
                     lstJobs.Add(job); // Se agrega a la lista el objeto               
                 }
             }
@@ -78,7 +78,7 @@ namespace DATA_L.JobsD
         public async Task<IEnumerable<JobsModel>> GetLastJobsAsync(int index) // Método para cargar en inicio los N ultimos empleos
         {
             List<JobsModel> jobs = await LoadJobsAsync(); // Se guarda en una lista todos los empleos que se encuentran en la bd  
-            var job = jobs.OrderByDescending(x => x.Fecha).Take(5);  // Se ordena la lista por fecha en orden descendiente y se toma N cantidad de empleos
+            var job = jobs.OrderByDescending(x => x.Fecha).Take(index);  // Se ordena la lista por fecha en orden descendiente y se toma N cantidad de empleos
             return job; // Se retorna la lista
         }
 
@@ -88,7 +88,7 @@ namespace DATA_L.JobsD
             OpenFirestoreConnection(); // Establece la conexión
             try
             {
-                DocumentReference docRef = db.Collection("Jobs").Document(id);
+                docRef = db.Collection("Jobs").Document(id);
                 DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
 
                 if (snapshot.Exists)
@@ -109,14 +109,35 @@ namespace DATA_L.JobsD
 
         }
 
-        public async Task<JobsModel> Editjob(JobsModel job) // Método para cargar todos los Empleos
+        public async Task<JobsModel> Editjob(JobsModel model) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection(); // Establece la conexión
             try
             {
-                DocumentReference jobRef = db.Collection("Jobs").Document(job.Id);
-                var _job = await jobRef.SetAsync(job, SetOptions.Overwrite);
-                return job;
+                docRef = db.Collection("Jobs").Document(model.Id);
+              
+                model.Date = DateTime.Now.ToString("dd/MM/yyyy");
+
+             
+                Dictionary<string, object> update = new Dictionary<string, object>
+                {
+                { "Company", model.Company },
+                { "JobType", model.JobType },
+                { "Logo", model.Logo },
+                { "URL", model.URL },
+                { "Job", model.Job },
+                { "Location", model.Location },
+                { "Category", model.Category },
+                { "JobDescription", model.JobDescription },
+                { "Requirements", model.Requirements },
+                { "Email", model.Email },
+                { "Date", model.Date }
+                };
+              
+
+
+                await docRef.UpdateAsync(update);
+                return model; // Retorna el modelo
             }
             catch
             {
@@ -167,46 +188,15 @@ namespace DATA_L.JobsD
             {
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
-                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();                   
+                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();
+                    everyJob.Id = documentSnapshot.Id;
                     jobsfound.Add(everyJob); // Se agrega a la lista el objeto
                 }
             }
             return jobsfound;
         }
+  
 
-
-        public async Task<string>  SaveImage(string ID, string route)
-        {
-            OpenFirestoreConnection();
-            // Buscar la imagen en la carpeta upload del proyecto
-            var path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Uploads\" + route);
-            // Abrir la imagen
-            var stream = File.Open(path, FileMode.Open);
-
-            
-            //autenticancion
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
-            var a = await auth.SignInWithEmailAndPasswordAsync("jannabelramos@gmail.com", "hannah27");
-
-            // Constructor FirebaseStorage, define la ruta de FirebaseStorage donde se guardara el archivo
-            var task = new FirebaseStorage(
-                Bucket,
-            
-                 new FirebaseStorageOptions
-                 {
-                     AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
-                     ThrowOnCancel = true,
-                 })
-                .Child("Jobs")
-                .Child(ID)
-                .PutAsync(stream);
-          
-
-            var downloadUrl = await task;
-
-            return downloadUrl; //Retorna el link de descarga de la foto
-
-        }
 
     }
 }

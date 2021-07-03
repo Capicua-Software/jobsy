@@ -1,0 +1,74 @@
+﻿@using System.Security.Claims;
+@{
+    var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
+    var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
+    var Logo = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Actor).Value;
+}
+
+<style>
+    .navbar-user-text {
+        color: var(--primary-color);
+        font-family: var(--navbar-font);
+        font-weight: var(--font-bold);
+        text-transform: initial;
+    }
+
+    .dropdown-user-text {
+        font-family: var(--navbar-font);
+        font-weight: var(--font-semi-bold);
+        text-transform: initial;
+    }
+</style>
+
+
+<span class="navbar-user-text" style="margin-right: 2rem; z-index: 10000;">@Name</span>
+
+<div class="btn-group mb-2" style="border-radius: 20px;margin-top:.5%;">
+
+
+    <!-- Avatar -->
+    <a class="dropdown-toggle hidden-arrow"
+       href="#"
+       role="button"
+       data-mdb-toggle="dropdown"
+       data-mdb-display="static"
+       aria-expanded="false">
+        <img src="@Logo"
+             class="rounded-circle"
+             height="35"
+             alt=""
+             loading="lazy" />
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-end">
+
+        <li align="center" style="margin-top: 4%;"><span class="dropdown-user-text">@Role</span></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item" href="@if (Role == "Admin")
+        {
+            @Url.Action("AdminDashboard", "Admin")
+        }
+        else if(Role == "Employer")
+        {
+            @Url.Action("EmployerDashboard", "Employer")
+        }                                        
+        ">Ir al Dashboard</a></li>
+        <li><a class="dropdown-item" href="@if (Role == "Admin")
+        {
+            @Url.Action("Jobs", "Admin")
+        }
+        else if(Role == "Employer")
+        {
+            @Url.Action("EmployerDashboard", "Employer")
+        }                                        ">Empleos</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+            <a class="dropdown-item" href="@Url.Action("LogOff", "Auth")">
+                <i class="fas fa-sign-out-alt"></i>
+                Cerrar sesión
+            </a>
+        </li>
+    </ul>
+
+
+</div>

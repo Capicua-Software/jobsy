@@ -1,0 +1,87 @@
+﻿@model List<ENTITY_L.Models.User.UserModel>
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    List<ENTITY_L.Models.User.UserModel> AllUsers = (List<ENTITY_L.Models.User.UserModel>)ViewBag.AllUsers; // Llama al metodo que se encuenta en la API
+
+}
+
+<h1 class="container d-flex justify-content-center mt-5" style="font-weight: 300;">Usuarios</h1>
+
+<div class=" container" style="padding-top: 3rem">
+
+    <div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" data-hover="true">
+        <table class="table mydatatable" style="width: 100%" id="mydatatable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Cedula</th>
+                    <th>Celular</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in AllUsers)
+                {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Cedula</td>
+                    <td>@item.Cel</td>
+                    <td>@item.Tel</td>                         
+                    <td class="row">
+                        <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                }
+
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+
+
+<!--SCRIPT FOR DELETING JOBS-->
+<script>
+
+    function ConfirmDelete(UserId) {
+        $("#hiddenTxt").val(UserId);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+        var UserId = $("#hiddenTxt").val();
+
+        $.ajax({
+            type: "POST",
+            url: "DeleteUser",
+            data: { id: UserId },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + UserId).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+

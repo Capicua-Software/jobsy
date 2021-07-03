@@ -1,0 +1,22 @@
+﻿@model ENTITY_L.Models.Limite.LimiteModel
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/Dashboard/_DashboardSideBar.cshtml";
+    string limite = (string)ViewBag.limite;
+}
+
+<h2 class="text-center" style="margin-top: 15%">Configuracion</h2>
+
+@using (Html.BeginForm("EditLimit", "Admin")){
+<div class="d-flex justify-content-center" style="margin-top: 2%">
+    <div class="form-outline data" style="width: 54%;">
+
+        <input type="number" id="limite" name="lim" value="@limite" class="form-control" required />
+        <label class="form-label" for="limite">Limite de empleos en el index</label>
+
+    </div>
+</div>
+<div class="d-flex justify-content-center">
+    <button type="submit" style="height:80%;margin-top:2.5%" class="btn save ">Guardar</button>
+</div>
+}

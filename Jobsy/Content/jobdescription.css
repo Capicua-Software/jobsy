@@ -1,0 +1,135 @@
+﻿.floating {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 175px;
+    background: linear-gradient(to right,#C33764, #1D2671);
+}
+
+.transparent {
+    position: relative;
+    top: 13%;
+    left: 18%;
+    width: 65%;
+    height: 75%;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 7px;
+}
+
+.jobimage {
+    position: absolute;
+    background-color: white;
+    top: 15%;
+    left: 8%;
+    width: 95px;
+    height: 95px;
+    border-radius: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.title {
+    color: white;
+    font-family: 'Raleway';
+    font-weight: bold;
+}
+
+.title2 {
+    color: #933368;
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: x-large;
+    width: 85%;
+    align-self: center;
+}
+
+.title3 {
+    color: #933368;
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: medium;
+    width: 85%;
+    align-self: center;
+    margin-top: 12px;
+}
+
+.tipo {
+    position: relative;
+    background-color: #3193F4;
+    border-radius: 2.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
+
+.category {
+    position: relative;
+    background-color: #EB8F3A;
+    border-radius: 2.5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
+
+.stext {
+    color: white;
+    font-family: 'Raleway';
+    font-size: x-small;
+}
+
+.description {
+    position: relative;
+    top: 9%;
+    width: 100%;
+    height: 530px;
+}
+
+.p {
+    position: relative;
+    top: 5%;
+    margin-bottom: 5%;
+    align-self: center;
+    text-align: justify;
+    width: 80%;
+}
+
+.gray {
+    position: relative;
+    font-family: 'Raleway';
+    top: 2%;
+    left: 14%;
+    margin-bottom: 2%;
+    width: 80%;
+    color: #7B7B7B;
+}
+
+.bold {
+    position: relative;
+    font-family: 'Raleway';
+    top: 2%;
+    left: 14%;
+    font-weight: bold;
+    margin-bottom: 2%;
+    width: 80%;
+    color: #000;
+}
+
+.apply {
+    position: relative;
+    top: 3%;
+    margin-bottom: 5%;
+    font-family: 'Raleway';
+    background-color: #933368;
+    color: white;
+    border-radius: 7px;
+    width: 80%;
+    align-self: center;
+}
+
+    .apply:hover {
+        color: white;
+    }

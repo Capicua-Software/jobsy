@@ -10,64 +10,45 @@
     <div class="bg-image"
          style="background-image: url('https://www.mediafire.com/convkey/8ef1/irtrm9kc2r9hgxb9g.jpg'); height: 100vh ">
 
-        <div class="container col-md-5 login-vertical-center" style="margin-top:3rem;">
-            <!-- Pills navs -->
-            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link"
-                       id="tab-login"
-                       href="@Url.Action("Login", "Auth")"
-                       role="tab"
-                       aria-controls="pills-login"
-                       aria-selected="false">Login</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active"
-                       id="tab-register"
-                       data-mdb-toggle="pill"
-                       href="#pills-register"
-                       role="tab"
-                       aria-controls="pills-register"
-                       aria-selected="true">Register</a>
-                </li>
-            </ul>
+        <div class="container col-md-6" style="margin-top:3rem;">
+          
             <!-- Pills navs -->
             <!-- Pills content -->
-            @using (Html.BeginForm("SignUp", "Auth", FormMethod.Post))
+            @using (Html.BeginForm("SignUp", "Auth", FormMethod.Post, new { @class = "d-flex justify-content-center" }))
             {
-                <div class="tab-content shadow p-5 rounded bg-white">
+                <div class="tab-content shadow p-5 bg-white" style="border-radius:20px;width:60%; margin-top: 6rem;">
 
-                    <div class="tab-pane fade show active"
-                         id="pills-register"
-                         role="tabpanel"
-                         aria-labelledby="tab-register">
+                    <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                        <div class="d-flex justify-content-center">
+                            <img style="margin-bottom:40px;" height="80px" src="~/Content/Index/Logo.svg">
+                        </div>
+                        <style>
+                            .form-check-input[type=checkbox]:checked {
+                                background-image: none;
+                                background-color: #442B6F;
+                            }
+
+                                .form-check-input[type=checkbox]:checked:focus {
+                                    background-image: none;
+                                    background-color: #442B6F;
+                                }
+
+                            .form-control:focus {
+                                -webkit-box-shadow: none;
+                                box-shadow: none;
+                                border-color: #442B6F;
+                                -webkit-box-shadow: inset 0 0 0 1px #442B6F;
+                                box-shadow: inset 0 0 0 1px #442B6F;
+                            }
+                        </style>
                         <form>
-                            <div class="text-center mb-3">
-                                <p>Sign up with:</p>
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-facebook-f"></i>
-                                </button>
 
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-google"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-primary btn-floating mx-1">
-                                    <i class="fab fa-github"></i>
-                                </button>
-                            </div>
-
-                            <p class="text-center">or:</p>
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <!-- Name input -->
                             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             <div class="form-outline mb-4">
                                 <input type="text" id="registerName" name="Name" class="form-control" />
-                                <label class="form-label" for="registerName">Nombre</label>
+                                <label style="color: #757575;font-family:Raleway;" class="form-label" for="registerName">Nombre Personal o de la Compañía</label>
                             </div>
 
                             <!-- Email input -->
@@ -88,25 +69,25 @@
                             <!-- Checkbox -->
                             <div class="row">
                                 <div class="form-check col d-flex justify-content-center mb-4">
-                                    <input class="form-check-input me-2"
+                                    <input   style="border-radius:5px;border-color:#442B6F" class="form-check-input me-2"
                                            type="checkbox"
                                            value="true"
                                            name="Employer"
                                            id="registerCheck"
                                            aria-describedby="registerCheckHelpText" />
-                                    <label class="form-check-label" for="registerCheck">
+                                    <label style="color: #757575;font-family:Raleway;" class="form-check-label" for="registerCheck">
                                         Soy empleador
                                     </label>
                                 </div>
 
                                 <div class="form-check col d-flex justify-content-center mb-4">
-                                    <input class="form-check-input me-2"
+                                    <input style="border-radius:5px;border-color:#442B6F" class="form-check-input me-2"
                                            type="checkbox"
                                            value=""
                                            id="registerCheck2"
                                            checked
                                            aria-describedby="registerCheckHelpText" />
-                                    <label class="form-check-label" for="registerCheck2">
+                                    <label style="color: #757575;font-family:Raleway;" class="form-check-label" for="registerCheck2">
                                         Acepto los términos y condiciones
                                     </label>
                                 </div>
@@ -114,7 +95,20 @@
 
 
                             <!-- Submit button -->
-                            <button type="submit" class="btn btn-primary btn-block mb-3">Registrarse</button>
+                            <button type="submit" style="background-color: #933368;font-family: Raleway;font-size:15px" class="btn btn-primary btn-block mb-3">Registrarse</button>
+
+                            <div class="text-center mb-3">
+                                <p class="Subtitle">o registrate con:</p>
+
+                                <button type="button" style="background-color:#D85543;" class="btn btn-primary btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-black btn-floating mx-1">
+                                    <i class="fab fa-github" style="font-size:20px"></i>
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
