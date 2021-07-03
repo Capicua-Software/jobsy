@@ -399,6 +399,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminD\AdminD.cs" />
     <Compile Include="AuthenticationD\AuthenticationD.cs" />
     <Compile Include="Category\CategoryD.cs" />
     <Compile Include="EmployerD\EmployerD.cs" />

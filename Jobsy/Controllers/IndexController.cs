@@ -7,12 +7,13 @@ using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
 using System.Security.Claims;
+using ENTITY_L.Models.Limite;
 
 namespace Jobsy.Controllers
 {
     public class IndexController : Controller
     {
-
+        AdminAPIController admin = new AdminAPIController();
         JobsAPIController job = new JobsAPIController();
         CategoryController category = new CategoryController();
         static IEnumerable<JobsModel> LastJobs = null;
@@ -26,7 +27,8 @@ namespace Jobsy.Controllers
             {
                 try
                 {
-                    IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(3); // Llama al metodo que se encuenta en la API
+                    string limite = await admin.getlimit();
+                    IEnumerable<JobsModel> LastJobs = await job.GetLastJobsAsync(int.Parse(limite)); // Llama al metodo que se encuenta en la API
                     ViewBag.LastJobs = LastJobs; //Guardamos el resultado del metodo en el Viewbag
                     if (User.Identity.IsAuthenticated)
                     {

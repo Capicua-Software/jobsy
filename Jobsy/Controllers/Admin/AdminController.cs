@@ -7,10 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Jobsy_API.Controllers;
 using ENTITY_L.Models.Jobs;
-
 using Jobsy.Admin.Jobs;
-
 using ENTITY_L.Models.User;
+using ENTITY_L.Models.Limite;
 
 
 namespace Jobsy.Controllers
@@ -34,6 +33,7 @@ namespace Jobsy.Controllers
         JobsController job = new JobsController();
         UserController user = new UserController();
         EmployerController employer = new EmployerController();
+        AdminAPIController admin = new AdminAPIController();
 
         // GET: Admin
 
@@ -78,8 +78,10 @@ namespace Jobsy.Controllers
             return ValidateRole("Employers");
         }
 
-        public ActionResult Settings()
+        public async Task<ActionResult> Settings()
         {
+            string limite = await admin.getlimit();
+            ViewBag.limite = limite;
             return ValidateRole("Settings");
         }
         public ActionResult Profile()
@@ -104,6 +106,22 @@ namespace Jobsy.Controllers
             }
 
             return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditLimit(LimiteModel edit)
+        {
+            try
+            {
+                await admin.editlimit(edit);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+
+            return await Settings();
         }
 
 
