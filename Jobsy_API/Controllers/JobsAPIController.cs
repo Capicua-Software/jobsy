@@ -12,7 +12,7 @@ namespace Jobsy_API.Controllers
 {
     public class JobsAPIController : ApiController
     {
-        JobsD jobs = new JobsD(); // Objeto de la clase Jobs en la capa de datos
+        Jobs jobs = new Jobs(); // Objeto de la clase Jobs en la capa de datos
 
         [HttpPost]
         [Route("api/Jobs/PostAJob")]  // Ruta de la API
@@ -80,13 +80,14 @@ namespace Jobsy_API.Controllers
             return jobsfound; //Retorna una lista 
         }
 
-
         [HttpGet]
-        [Route("api/Jobs/SearchJobByCategory")]  // Ruta de la API
-        public async Task<List<JobsModel>> SearchJobByCategory(string categories)
+        [Route("api/Jobs/Searchbycategoryandkeyword")]  // Ruta de la API
+        public async Task<List<JobsModel>> Searchbycategoryandkeyword(string categories, string keyword)
         {
-            List<JobsModel> jobsfound = await jobs.Searchbycategory(categories); // Se guarda en una lista el resultado del metodo
+            List<JobsModel> jobsfound = await jobs.Searchbycategoryandkeyword(categories, keyword); // Se guarda en una lista el resultado del metodo
             return jobsfound; //Retorna una lista 
         }
+
+        
     }
 }
