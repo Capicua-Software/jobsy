@@ -14,7 +14,7 @@ using System.Security.Claims;
 
 namespace DATA_L.JobsD
 {
-    public class JobsD:FirebaseCore
+    public class Jobs:FirebaseCore
     {
         static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/Jobs%2Fjobdefault.png?alt=media&token=95eb6412-f9df-4ce1-ad2b-9ed878923b8a";
         public async Task<JobsModel> PostJobsAsync(JobsModel model)  // Metodo para guardar un empleo en Firestore
@@ -146,6 +146,35 @@ namespace DATA_L.JobsD
         }
 
 
+        public async Task<JobsModel> EditjobLogo(string logo, string Company) // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                List<JobsModel>  alljobscompany = await  SearchbyCompany(Company);
+
+                foreach (var item in alljobscompany)
+                {
+                    docRef = db.Collection("Jobs").Document(item.Id);
+
+                    Dictionary<string, object> update = new Dictionary<string, object>
+                    {
+                    { "Logo", logo }
+                    };
+
+                    await docRef.UpdateAsync(update);
+                }
+                   
+                
+                return null; // Retorna el modelo
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
         public void Deletejob(string id)
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -159,6 +188,26 @@ namespace DATA_L.JobsD
                 throw;
             }
         }
+
+
+        public async Task<List<JobsModel>> SearchbyCompany(string key)
+        {
+            string keyword = key.ToLower();
+            OpenFirestoreConnection();
+            List<JobsModel> jobs = await LoadJobsAsync(); // Una lista
+            List<JobsModel> jobsfound = new List<JobsModel>();
+
+            foreach (JobsModel item in jobs) // Recorremos los datos que se encuentran en la lista
+            {
+                // Comparamos los campos con lo que ingreso el usuario
+                if (string.Equals(keyword, item.Company.ToLower()))
+                {
+                    jobsfound.Add(item); // Se agrega a la lista el objeto
+                }
+            }
+            return jobsfound; // Retornamos la lista
+        }
+
 
         public async Task<List<JobsModel>> Searchjob(string key)
         {
@@ -178,6 +227,7 @@ namespace DATA_L.JobsD
             return jobsfound; // Retornamos la lista
         }
 
+       
         public async Task<List<JobsModel>> Searchbycategory(string keyword)
         {
             OpenFirestoreConnection();
@@ -195,7 +245,37 @@ namespace DATA_L.JobsD
             }
             return jobsfound;
         }
-  
+
+        public async Task<List<JobsModel>> Searchbycategoryandkeyword(string categories, string keyword)
+        {
+            OpenFirestoreConnection();
+            Query Query = db.Collection("Jobs").WhereEqualTo("Category", categories);
+            QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();
+            List<JobsModel> jobsfound = new List<JobsModel>();
+            List<JobsModel> alljobsfound = new List<JobsModel>();
+            foreach (DocumentSnapshot documentSnapshot in QuerySnapshot.Documents)
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    JobsModel everyJob = documentSnapshot.ConvertTo<JobsModel>();
+                    everyJob.Id = documentSnapshot.Id;
+                    jobsfound.Add(everyJob); // Se agrega a la lista el objeto
+                }
+            }
+
+
+            foreach (JobsModel item in jobsfound) // Recorremos los datos que se encuentran en la lista
+            {
+                // Comparamos los campos con lo que ingreso el usuario
+                if (string.Equals(keyword, item.Job.ToLower()) || string.Equals(keyword, item.Company.ToLower()) || string.Equals(keyword, item.Category.ToLower()) || string.Equals(keyword, item.Location.ToLower()))
+                {
+                    alljobsfound.Add(item); // Se agrega a la lista el objeto
+                }
+            }
+
+            return alljobsfound;
+        }
+
 
 
     }

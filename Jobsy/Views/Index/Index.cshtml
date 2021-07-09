@@ -26,9 +26,9 @@
                         <h1 class="mb-6 header-subtitle"><span class="typed-text"></span><span class="header-subtitle-thin cursor">&nbsp;</span></h1>
                     </div>
 
-                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+                    @using (Html.BeginForm("Search", "Index", FormMethod.Get, new { @class = "form" }))
                     {
-                        
+
                         <div class="input-icons">
                             <i class="ri-search-line icon"></i>
                             <input type="text" name="keyword" class="SearchInput" placeholder="Titulo, Empresa, Categoría, Ubicación">
@@ -123,9 +123,9 @@
         }
 
     </section>
-    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+    @using (Html.BeginForm("SearchjobsAsync", "Index", FormMethod.Get, new { @class = "form" }))
     {
-        <input value="AllJobs" name="process" hidden/>
+        <input value="AllJobs" name="process" hidden />
         <div class="d-grid gap-2 col-7 mx-auto mb-4">
             <button class="btn btn-outline-primary btn-rounded me-3 navbar-button" style="border-radius: 5px;" type="submit">Ver todos los empleos &nbsp&nbsp<i class="fas fa-chevron-circle-right"></i></button>
         </div>
@@ -133,7 +133,7 @@
 
 
 
-        <script type="text/javascript" src="~/Content/Index/typing-effect.js"></script>
-        <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
-    </body>
+    <script type="text/javascript" src="~/Content/Index/typing-effect.js"></script>
+    <script type="text/javascript" src="~/Content/Index/nodes-animation.js"></script>
+</body>
 </html>
