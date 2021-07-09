@@ -77,5 +77,7 @@ namespace ENTITY_L.Models.User
         }
 
         public static string image;
+
+        public static string NameC;
     }
 }

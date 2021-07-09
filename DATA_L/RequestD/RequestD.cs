@@ -31,9 +31,7 @@ namespace DATA_L.Request
                 { "CedulaUser", model.CedulaUser },
                 { "EmailUser", model.EmailUser },
                 { "EmailCompany", model.EmailCompany },
-                { "Job", model.Job },
-                { "JobType", model.JobType },               
-                { "JobDescription", model.JobDescription },
+                { "Job", model.Job },               
                 { "Message", model.Message },
                 { "Estatus", model.Estatus },
                 { "Date", model.Date }

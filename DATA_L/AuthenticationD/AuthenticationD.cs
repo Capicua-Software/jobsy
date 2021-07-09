@@ -23,7 +23,7 @@ namespace DATA_L.Authentication
             model.token = model.ab.FirebaseToken;
             model.user = model.ab.User;
             ENTITY_L.Models.Employer.EmployerModel.image = model.Logo;
-            ENTITY_L.Models.User.UserModel.image = model.Logo;
+            ENTITY_L.Models.Employer.EmployerModel.NameC = model.UserName;
             return model;
         }
 
@@ -101,7 +101,8 @@ namespace DATA_L.Authentication
                 {"Employer", model.Employer },
                 {"Role", model.Role },
                 {"Cedula", model.Cedula },
-                {"Logo", model.Logo }
+                {"Logo", model.Logo },
+                {"valido", "false"}
             };
 
             switch (model.Employer)

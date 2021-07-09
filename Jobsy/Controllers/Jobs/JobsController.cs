@@ -32,9 +32,9 @@ namespace Jobsy.Controllers
             }
             else
             {
-                RedirectToAction("EditProfile", "Employer");
+                return RedirectToAction("EditProfile", "Employer");
             }
-            return View();
+
         }
 
         [HttpPost]

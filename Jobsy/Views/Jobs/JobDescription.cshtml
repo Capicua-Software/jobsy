@@ -141,23 +141,32 @@
 
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="EmailUser" id="Email" readonly />
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Email:</label>
+                            <input type="text" class="form-control active" name="EmailUser" id="Email" readonly />
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" name="CedulaUser" id="Cedula" readonly required/>
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Cédula:</label>
+                            <input type="text" class="form-control active" name="CedulaUser" id="Cedula" readonly required />
                         </div>
                         <div class="mb-3">
                             <label style="font-size: 20px;color: #933368;" for="recipient-name" class="col-form-label">Información del Empleo</label>
-                            <input type="text" class="form-control" id="recipient-name" name="EmailCompany" value="@job.Email" readonly />
+                            <input type="text" class="form-control active" id="recipient-name" name="EmailCompany" value="@job.Email" readonly />
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="recipient-name" name="Job" value="@job.Job" readonly />
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Titulo:</label>
+                            <input type="text" class="form-control active" id="recipient-name" name="Job" value="@job.Job" readonly />
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="recipient-name" name="JobType" value="@job.JobType" readonly />
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Tipo de Empleo:</label>
+                            <input type="text" class="form-control active" id="recipient-name"  value="@job.JobType" readonly />
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="recipient-name" name="JobDescription" value="@job.JobDescription" readonly />
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Descripción:</label>
+                            <textarea class="form-control active" id="message-text" readonly rows="4" required>@job.JobDescription</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label style="font-size: 16px;color: #000000;" for="recipient-name" class="col-form-label">Requerimientos:</label>
+                            <textarea class="form-control active" id="message-text" readonly rows="4" required>@job.Requirements</textarea>
                         </div>
 
                         <div class="mb-3">
