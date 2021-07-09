@@ -168,7 +168,6 @@
     <Content Include="Content\Dashboard\style.css" />
     <Content Include="Content\Cookies\scricookies.js" />
     <Content Include="Content\Cookies\stylecookies.css" />
-    <Content Include="Content\img\favicon.png" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -534,8 +533,6 @@
     <Content Include="Views\User\RequestViewer.cshtml" />
     <Content Include="Views\ModalViews\RNC\SuccessModal.cshtml" />
     <Content Include="Views\ModalViews\RNC\ErrorModal.cshtml" />
-    <Content Include="Views\Request\TableRequestUser.cshtml" />
-    <Content Include="Views\Request\LoadRequest.cshtml" />
     <Content Include="Views\ModalViews\Edit\EditCategoryModal.cshtml" />
     <Content Include="Views\Admin\Category.cshtml" />
     <Content Include="Views\ModalViews\Create\CreateCategoryModal.cshtml" />
@@ -546,6 +543,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Uploads\" />
     <Folder Include="Views\TrashViews\" />
   </ItemGroup>
   <ItemGroup>
