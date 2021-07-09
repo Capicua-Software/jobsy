@@ -61,27 +61,36 @@
 
         <li align="center" style="margin-top: 4%;"><span class="dropdown-user-text">@Role</span></li>
         <li><hr class="dropdown-divider" /></li>
-        <li>
-            <a class="dropdown-item" href="@if (Role == "Admin")
+        @if (Role == "Employer")
         {
-            @Url.Action("Jobs", "Admin")
+            <li>
+                <a class="dropdown-item" href="@Url.Action("EditProfile", "Employer")">Perfil</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="@Url.Action("Requests", "Employer")">Solicitudes</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="@Url.Action("EmployerDashboard", "Employer")">Ir al Dashboard</a>
+            </li>
         }
-        else if(Role == "Employer")
+        else if (Role == "User")
         {
-            @Url.Action("EmployerDashboard", "Employer")
+            <li>
+                <a class="dropdown-item" href="@Url.Action("EditProfile", "User")">Perfil</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="@Url.Action("RequestViewer", "User")">Solicitudes</a>
+            </li>
         }
-        ">Ir al Dashboard</a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="@if (Role == "Admin")
+        else
         {
-            @Url.Action("Jobs", "Admin")
+            <li>
+                <a class="dropdown-item" href="@Url.Action("Jobs", "Admin")">Ir al Dashboard</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="@Url.Action("Settings", "Admin")">Configuración</a>
+            </li>
         }
-        else if(Role == "Employer")
-        {
-            @Url.Action("EmployerDashboard", "Employer")
-        }                                        ">Empleos</a>
-        </li>
         <li><hr class="dropdown-divider" /></li>
         <li>
             <a class="dropdown-item" href="@Url.Action("LogOff", "Auth")">
