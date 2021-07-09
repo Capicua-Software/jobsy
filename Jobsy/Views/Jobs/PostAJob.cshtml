@@ -1,116 +1,130 @@
 @model ENTITY_L.Models.Jobs.JobsModel
 
-@{
-    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
-    ViewBag.Title = "PostAJob";
-    List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
-    ENTITY_L.Models.Employer.EmployerModel Employer = (ENTITY_L.Models.Employer.EmployerModel)ViewBag.Employer;
-
+@{ Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+ViewBag.Title = "PostAJob";
+List<ENTITY_L.Models.Category.CategoryModel> categories = (List<ENTITY_L.Models.Category.CategoryModel>)ViewBag.AllCategory;
+ENTITY_L.Models.Employer.EmployerModel Employer = (ENTITY_L.Models.Employer.EmployerModel)ViewBag.Employer; 
 }
+
 <br>
 <br>
 <br>
 <!DOCTYPE html>
 <html lang="en" style="height: 110%;">
+
 <head>
-    <link rel="stylesheet" href="~/Content/PostAJob.css" />
-    <title>Post Job</title>
+<link rel="stylesheet" href="~/Content/PostAJob.css" />
+<title>Post Job</title>
 </head>
+
 <body>
-    <header>
-        <!-- Background image -->
-        <div class="text-center floating">
-            <div class="mask transparent">
-                <div class="d-flex justify-content-evenly align-items-evenly h-100">
-                    <div class="text-white">
-                        <div class="jobimage" style="position: relative; background-image: url('@Employer.Logo');"></div>
-                    </div>
-                    <div class="text-white">
-                        <h2 class="mt-2 mb-3 Title">@Employer.Company</h2>
-                        <div class="subtitle"><span class="iconify" data-inline="false" data-icon="cil:location-pin" style="font-size: 25px; color: #fff; margin-right: 10px;"></span>@Employer.Location</div>
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+<header>
+    <!-- Background image -->
+    <div class="text-center floating">
+        <div class="mask transparent">
+            <div class="d-flex justify-content-evenly align-items-evenly h-100">
+                <div class="text-white">
+                    <div class="jobimage"
+                        style="position: relative; background-image: url('@Employer.Logo');"></div>
                 </div>
+                <div class="text-white">
+                    <h2 class="mt-2 mb-3 Title">@Employer.Company</h2>
+                    <div class="subtitle"><span class="iconify" data-inline="false"
+                            data-icon="cil:location-pin"
+                            style="font-size: 25px; color: #fff; margin-right: 10px;"></span>@Employer.Location
+                    </div>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
-        <!-- Background image -->
-    </header>
-    @using (Html.BeginForm("PostAJob", "Jobs"))
-    {
-        <input value="@Employer.Company" name="Company" hidden>
-        <input value="@Employer.Email" name="Email" hidden>
-        <input value="@Employer.Logo" name="Logo" hidden>
-        <input value="@Employer.URL" name="URL" hidden>
-        <input value="@Employer.Location" name="Location" hidden>
+    </div>
+    <!-- Background image -->
+</header>
+@using (Html.BeginForm("PostAJob", "Jobs"))
+{
+<input value="@Employer.Company" name="Company" hidden>
+<input value="@Employer.Email" name="Email" hidden>
+<input value="@Employer.Logo" name="Logo" hidden>
+<input value="@Employer.URL" name="URL" hidden>
+<input value="@Employer.Location" name="Location" hidden>
 
-        <div class="container">
-            <div class="card form shadow">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-center">
-                            <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="bi:info-lg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Descripción</div>
-                        </div>
-                        <div class=" d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 90%;">
-                                <input type="text" id="Job"  name="Job" class="form-control" required />
-                                <label class="form-label" for="nombre">Nombre del puesto de trabajo</label>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <select class="data combobox" name="Category" id="categories" required>
-                                <option value="" disabled selected>Selecciona la categoría</option>
-                                @foreach (var item in categories)
-                                {
-                                    <option value="@item.Name">@item.Name</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <select class="data combobox" name="JobType" id="categories" required>
-                                <option value="" disabled selected>Selecciona el tipo</option>
-                                <option value="Part-Time">Part-Time</option>
-                                <option value="Full-Time">Full-Time</option>
-                                <option value="Freelance">Freelance</option>
-                            </select>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 90%;">
-                                <textarea class="form-control" name="JobDescription" id="textAreaExample" rows="4" required></textarea>
-                                <label class="form-label" for="textAreaExample">Descripción del empleo</label>
-                            </div>
-                        </div>
+<div class="container">
+    <div class="card form shadow">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex justify-content-center">
+                    <div class="card-header title2"><span class="iconify" data-inline="false"
+                            data-icon="bi:info-lg"
+                            style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Descripción
                     </div>
-
-                    <div class="col-md-6">
-                        <div class="d-flex justify-content-center">
-                            <div class="card-header title2"><span class="iconify" data-inline="false" data-icon="ic:baseline-how-to-reg" style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Requerimientos</div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="form-outline data" style="width: 90%;">
-                                <textarea class="form-control" name="Requirements" id="textAreaExample" rows="11" required></textarea>
-                                <label class="form-label" for="textAreaExample">Requisitos necesarios para aplicar</label>
-                            </div>
-                        </div>
+                </div>
+                <div class=" d-flex justify-content-center">
+                    <div class="form-outline data" style="width: 90%;">
+                        <input type="text" id="Job" name="Job" class="form-control" required />
+                        <label class="form-label" for="nombre">Nombre del puesto de trabajo</label>
                     </div>
-
-                    <div class="d-flex justify-content-center buttons">
-                        <button class="btn back">Cancelar</button>
-                        <button type="submit" class="btn save">Publicar</button>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <select class="data combobox" name="Category" id="categories" required>
+                        <option value="" disabled selected>Selecciona la categoría</option>
+                        @foreach (var item in categories)
+                        {
+                        <option value="@item.Name">@item.Name</option>}
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <select class="data combobox" name="JobType" id="categories" required>
+                        <option value="" disabled selected>Selecciona el tipo</option>
+                        <option value="Part-Time">Part-Time</option>
+                        <option value="Full-Time">Full-Time</option>
+                        <option value="Freelance">Freelance</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="form-outline data" style="width: 90%;">
+                        <textarea class="form-control" name="JobDescription" id="textAreaExample" rows="4"
+                            required></textarea>
+                        <label class="form-label" for="textAreaExample">Descripción del empleo</label>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="d-flex justify-content-center">
+                    <div class="card-header title2"><span class="iconify" data-inline="false"
+                            data-icon="ic:baseline-how-to-reg"
+                            style="font-size: 25px; color: #933368; margin-right: 10px;"></span>Requerimientos
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div class="form-outline data" style="width: 90%;">
+                        <textarea class="form-control" name="Requirements" id="textAreaExample" rows="11"
+                            required></textarea>
+                        <label class="form-label" for="textAreaExample">Requisitos necesarios para
+                            aplicar</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center buttons">
+                <button class="btn back">Cancelar</button>
+                <button type="submit" class="btn save">Publicar</button>
+            </div>
         </div>
-    }
-    <script src="~/Content/MDB/js/mdb.min.js"></script>
-    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+    </div>
+</div>
+}
+<script src="~/Content/MDB/js/mdb.min.js"></script>
+<script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
 </body>
+
 </html>
 <br>
 <br>

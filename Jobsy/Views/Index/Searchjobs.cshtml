@@ -17,8 +17,7 @@
         <div class="d-flex justify-content-center align-items-center container" style="height:27rem;">
             <div class="">
 
-                <form class="form container row" style="width: 70rem;" action="">
-                    @using (Html.BeginForm("Searchjobs", "Index", FormMethod.Get, new { @class = "form" }))
+                    @using(Html.BeginForm("Search", "Index", FormMethod.Get, new { @class = "form container row"}))
                     {
                         <div class="input-icons col">
                             <i class="ri-search-line icon"></i>
@@ -29,11 +28,11 @@
 
                         <div class=" col">
                             <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
-                            <select class="dropdown" name="categories" id="categories" onchange="change_url(this.value)">
+                            <select class="dropdown" name="categories" id="categories" >
                                 <option value="" disabled selected>Selecciona una categoría</option>
                                 @foreach (var item in categories)
                                 {
-                                    <option value="@Url.Action("SearchByCategory","Index", new {keyword =item.Name })">@item.Name</option>
+                                    <option value="@item.Name">@item.Name</option>
                                 }
                             </select>
                         </div>
@@ -41,10 +40,10 @@
                             <button type="submit" class="btn btn-primary btn-lg search-btn" style="height: 4.25rem; width: 10rem;">Buscar</button>
                         </div>
                     }
-                    </form>
+                    </div>
                
                 </div>
-        </div>
+ 
 
     </div>
 </div>

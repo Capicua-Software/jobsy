@@ -532,7 +532,6 @@
     <Content Include="Views\Privacy\TermsAndConditions.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\Employer\EditProfile.cshtml" />
-
     <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\user_logged_in.cshtml" />
     <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\employer_logged_in.cshtml" />
     <Content Include="Views\User\RequestViewer.cshtml" />
