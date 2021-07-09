@@ -22,6 +22,8 @@ namespace DATA_L.Authentication
             model.ab = await model.auth.SignInWithEmailAndPasswordAsync(model.Email, model.Password);
             model.token = model.ab.FirebaseToken;
             model.user = model.ab.User;
+            ENTITY_L.Models.Employer.EmployerModel.image = model.Logo;
+            ENTITY_L.Models.User.UserModel.image = model.Logo;
             return model;
         }
 

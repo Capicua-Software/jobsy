@@ -165,13 +165,10 @@
     <Compile Include="StartUp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Dashboard\style.css" />
     <Content Include="Content\Cookies\scricookies.js" />
     <Content Include="Content\Cookies\stylecookies.css" />
+    <Content Include="Content\img\favicon.png" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -555,10 +552,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />

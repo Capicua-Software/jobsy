@@ -109,7 +109,7 @@ namespace DATA_L.EmployerD
 
 
             await docRef.UpdateAsync(update);
-
+            ENTITY_L.Models.Employer.EmployerModel.image = model.Logo;
             await Jobs.EditjobLogo(model.Logo, model.Company);
             return model; // Retorna el modelo
 

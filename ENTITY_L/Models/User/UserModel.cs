@@ -75,5 +75,7 @@ namespace ENTITY_L.Models.User
         {
             throw new NotImplementedException();
         }
+
+        public static string image;
     }
 }

@@ -103,9 +103,8 @@ namespace DATA_L.UserD
                 { "Logo", model.Logo }
                 };
 
-
-
             await docRef.UpdateAsync(update);
+            ENTITY_L.Models.Employer.EmployerModel.image = model.Logo;
             return model; // Retorna el modelo
 
         }
