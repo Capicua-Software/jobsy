@@ -169,6 +169,10 @@ namespace Jobsy.Controllers
                 if (Logo != null)
                 {
                     model.Logo = Logo.FileName;
+                    bool exists = System.IO.Directory.Exists(Server.MapPath("~/Uploads/"));
+
+                    if (!exists) System.IO.Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
+                   
                     Logo.SaveAs(Server.MapPath("~/Uploads/" + model.Logo));
                 }
                 model.Id = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
