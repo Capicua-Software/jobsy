@@ -18,6 +18,8 @@ namespace Jobsy.Controllers
         CategoryController category = new CategoryController();
         static IEnumerable<JobsModel> LastJobs = null;
         static IEnumerable<JobsModel> JobsFound = null;
+        public static string KeyWord; 
+
         // GET: Index
         [HttpGet]
         [AllowAnonymous]
@@ -58,6 +60,7 @@ namespace Jobsy.Controllers
         {
             ViewBag.AllCategory = await category.LoadCategories();
             ViewBag.JobsFound = JobsFound;
+            ViewBag.KeyWord = KeyWord;
             return View();
         }
 
@@ -68,16 +71,17 @@ namespace Jobsy.Controllers
             if (categories != null && keyword != "")
             {
                await Searchbycategoryandkeyword(categories, keyword);
+                KeyWord = keyword;
             }
             else if (categories != null && keyword == "")
             {
                await SearchByCategory(categories);
+                KeyWord = categories;
             }
             else if (keyword != "" && categories == null)
             {
-                await SearchjobsAsync(keyword, process);
+               KeyWord = await SearchjobsAsync(keyword, process);
             }
-
 
             return RedirectToAction("Searchjobs", "Index");
 
@@ -85,7 +89,7 @@ namespace Jobsy.Controllers
 
 
 
-        public async Task SearchjobsAsync(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
+        public async Task<string> SearchjobsAsync(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
         {
           
             if (process == null && keyword != "" )
@@ -94,21 +98,24 @@ namespace Jobsy.Controllers
                 {
                     JobsFound = null;
                     JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API 
-                    ViewBag.KeyWord = keyword;
+                    
                  
                 }
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
                 }
+                
             }
             else if (process == "AllJobs"  || process == null && ViewBag.JobsFound == null)
             {
                 JobsFound = null;
-                JobsFound = await job.LoadJobsAsync();             
-                ViewBag.KeyWord = "Todos los empleos";
+                JobsFound = await job.LoadJobsAsync();
+                return "Todos los empleos";
+
             }
-           
+
+            return keyword;
         }
 
         public async Task SearchByCategory(string category)

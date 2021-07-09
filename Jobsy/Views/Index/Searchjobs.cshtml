@@ -17,33 +17,33 @@
         <div class="d-flex justify-content-center align-items-center container" style="height:27rem;">
             <div class="">
 
-                    @using(Html.BeginForm("Search", "Index", FormMethod.Get, new { @class = "form container row"}))
-                    {
-                        <div class="input-icons col">
-                            <i class="ri-search-line icon"></i>
+                @using (Html.BeginForm("Search", "Index", FormMethod.Get, new { @class = "form container row" }))
+                {
+                    <div class="input-icons col">
+                        <i class="ri-search-line icon"></i>
 
-                            <input type="text" class="SearchInput" name="keyword" placeholder="Palabras clave" value="@KeyWord">
+                        <input type="text" class="SearchInput" name="keyword" placeholder="Palabras clave" value="@KeyWord">
 
-                        </div>
-
-                        <div class=" col">
-                            <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
-                            <select class="dropdown" name="categories" id="categories" >
-                                <option value="" disabled selected>Selecciona una categoría</option>
-                                @foreach (var item in categories)
-                                {
-                                    <option value="@item.Name">@item.Name</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="col-2">
-                            <button type="submit" class="btn btn-primary btn-lg search-btn" style="height: 4.25rem; width: 10rem;">Buscar</button>
-                        </div>
-                    }
                     </div>
-               
-                </div>
- 
+
+                    <div class=" col">
+                        <!-- <i class="fas fa-list-ul icon mt-2"></i>-->
+                        <select class="dropdown" name="categories" id="categories">
+                            <option value="" disabled selected>Selecciona una categoría</option>
+                            @foreach (var item in categories)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-primary btn-lg search-btn" style="height: 4.25rem; width: 10rem;">Buscar</button>
+                    </div>
+                }
+            </div>
+
+        </div>
+
 
     </div>
 </div>
@@ -86,7 +86,7 @@
                 @:  <div class=" rounded-3">
                     @:  <a href="@Url.Action("JobDescription", "Jobs", new {id=item.Id})" class="">
                         @:   <div class="row">
-                                 <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"><div style="position: relative;background-image: url('@item.Logo');background-size: cover;background-repeat: no-repeat;background-position-x: center;background-position-y: center; width: 110px;height: 110px;margin-left: 2rem;"></div></div>
+                            <div style="margin: 0rem; margin-right: 0%;" class="col mt-5"><div style="position: relative;background-image: url('@item.Logo');background-size: cover;background-repeat: no-repeat;background-position-x: center;background-position-y: center; width: 110px;height: 110px;margin-left: 2rem;"></div></div>
 
                             <div class="col d-flex align-items-center search-divider" id="divider-search" style="margin-left: 1rem;">
                                 <div class="vl search-divider"></div>
@@ -122,4 +122,4 @@
             @:  </div>
         @:   </div>
     }
-</section>   
+</section> 
