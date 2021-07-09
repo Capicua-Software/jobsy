@@ -98,7 +98,7 @@ namespace DATA_L.Authentication
                 {"Email", model.Email },
                 {"Employer", model.Employer },
                 {"Role", model.Role },
-                {"Cedula", model.Cedula }
+                {"Cedula", model.Cedula },
                 {"Logo", model.Logo }
             };
 

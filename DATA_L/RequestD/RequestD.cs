@@ -21,7 +21,7 @@ namespace DATA_L.Request
             OpenFirestoreConnection(); // Establece la conexión
             try
             {
-                docRef = db.Collection("Solicitudes").Document(model.IdJob);
+                docRef = db.Collection("Solicitudes").Document();
 
                 model.Date = DateTime.Now.ToString("dd/MM/yyyy");
                 model.Estatus = "En Espera";
@@ -39,24 +39,26 @@ namespace DATA_L.Request
                 { "Date", model.Date }
                 };
 
+                /*
                 Dictionary<string, object> request = new Dictionary<string, object>
                 {
                     {model.CedulaUser,  jobRequest}
                 };
+                */
 
-
+                /*
                 List<RequestModel> lstReq = new List<RequestModel>();
 
-                List<object> listValues = request.Values.ToList();
+                List<object> listValues = jobRequest.Values.ToList();
                 string json = JsonConvert.SerializeObject(listValues);
                 RequestModel newreq = Json.Decode<RequestModel>(json.Substring(1, json.Length - 2));
 
                 Dictionary<string, object> requestOther = new Dictionary<string, object>
                 {
                     {model.CedulaUser,  newreq}
-                };
+                };*/
 
-                await docRef.SetAsync(requestOther); // Guardar en la colección de Jobs el diccionario
+                await docRef.SetAsync(jobRequest); // Guardar en la colección de Jobs el diccionario
 
                 return model; // Retorna el modelo
             }
@@ -88,10 +90,10 @@ namespace DATA_L.Request
 
 
 
-        public async Task<List<RequestModel>> Loadrequest(string cedula) // Método para cargar todos los Empleos
+        public async Task<List<RequestModel>> Loadrequest(string Email) // Método para cargar todos los Empleos
         {
             OpenFirestoreConnection();
-            Query query = db.Collection("Solicitudes").WhereEqualTo($"{cedula}.CedulaUser", cedula);
+            Query query = db.Collection("Solicitudes").WhereEqualTo("EmailUser", Email);
             List<RequestModel> lstJobs = new List<RequestModel>();
             Dictionary<string, object> req = null;
             QuerySnapshot requestSnapshot = await query.GetSnapshotAsync();
@@ -100,27 +102,9 @@ namespace DATA_L.Request
             {
                 if (documentSnapshot.Exists) // Si el documento existe
                 {
-
-                    req = documentSnapshot.ToDictionary();
-
-                    //req.Add($"{cedula}-{num}", req);
-                    
-                    List<object> listValues = req.Values.ToList();
-                    //object job = documentSnapshot.ConvertTo<object>(); 
-
-                    string json = JsonConvert.SerializeObject(listValues);
-                    //RequestModel newreq = JsonConvert.DeserializeObject<RequestModel>(json);
-                    RequestModel newreq = Json.Decode<RequestModel>(json.Substring(1, json.Length - 2));
-
-                    //RequestModel newreq = (RequestModel)Newtonsoft.Json.JsonConvert.DeserializeObject(json);
-
-                    newreq.IdJob = documentSnapshot.Id;
-
-                    lstJobs.Add(newreq);
-
-                    // Creamos un nuevo objeto que sera igual al resultado del query
-                    //job. = documentSnapshot.Id;
-                    // lstJobs.Add(job); // Se agrega a la lista el objeto               
+                    RequestModel job = documentSnapshot.ConvertTo<RequestModel>();
+                    job.JobId = documentSnapshot.Id;
+                    lstJobs.Add(job);
 
                 }
             }

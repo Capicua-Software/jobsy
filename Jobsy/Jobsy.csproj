@@ -532,7 +532,6 @@
     <Content Include="Views\Privacy\TermsAndConditions.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\Employer\EditProfile.cshtml" />
-
     <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\user_logged_in.cshtml" />
     <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\employer_logged_in.cshtml" />
     <Content Include="Views\User\RequestViewer.cshtml" />
@@ -543,6 +542,8 @@
     <Content Include="Views\ModalViews\Edit\EditCategoryModal.cshtml" />
     <Content Include="Views\Admin\Category.cshtml" />
     <Content Include="Views\ModalViews\Create\CreateCategoryModal.cshtml" />
+    <Content Include="Views\Employer\RequestViewer.cshtml" />
+    <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\admin_logged_in.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

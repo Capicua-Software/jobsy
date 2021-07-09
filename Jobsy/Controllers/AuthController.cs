@@ -141,11 +141,11 @@ namespace Jobsy.Controllers
             switch (Role)
             {
                 case "Admin":
-                    return this.RedirectToAction("AdminDashboard", "Admin");
+                    return this.RedirectToAction("Jobs", "Admin");
                 case "Employer":
                     return this.RedirectToAction("EmployerDashboard", "Employer");
                 case "User":
-                    return this.RedirectToAction("UserDashboard", "User");
+                    return this.RedirectToAction("Index", "Index");
             }
 
             return RedirectToAction("Index", "Index");
@@ -161,11 +161,11 @@ namespace Jobsy.Controllers
                     switch (Role)
                     {
                         case "Admin":
-                            return this.RedirectToAction("AdminDashboard", "Admin");
+                            return this.RedirectToAction("Jobs", "Admin");
                         case "Employer":
                             return this.RedirectToAction("EmployerDashboard", "Employer");
                         case "User":
-                            return this.RedirectToAction("UserDashboard", "User");
+                            return this.RedirectToAction("Index", "Index");
                     }
                     
                 }

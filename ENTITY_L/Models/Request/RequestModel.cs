@@ -14,7 +14,7 @@ namespace ENTITY_L.Models.Request
     {
         [DataType(DataType.Text)]
         [FirestoreProperty]
-        public string IdJob { get; set; }
+        public string JobId { get; set; }
 
         [Required]
         [DataType(DataType.Text)]

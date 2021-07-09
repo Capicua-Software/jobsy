@@ -35,9 +35,6 @@
                         <td><a href="@item.URL">Ir a la página</a></td>
                         <td>@item.Location</td>
                         <td class="row">
-                            <a href="@Url.Action("","")" class="col-md-4 btn btn-dark btn-floating">
-                                <i class="fas fa-eye"></i>
-                            </a>
                             <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.Id')" style="margin-left: 3%;" data-mdb-toggle="modal">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
