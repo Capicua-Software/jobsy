@@ -11,6 +11,7 @@ using System.IO;
 using Firebase.Auth;
 using System.Security.Claims;
 using ENTITY_L.Models.Jobs;
+using ENTITY_L.Models.Request;
 using DATA_L.JobsD;
 
 namespace DATA_L.EmployerD
@@ -168,5 +169,61 @@ namespace DATA_L.EmployerD
             return jobsfound;
         }
 
+
+        public async Task<List<RequestModel>> Loadrequest(string Email) // Método para cargar todos los Empleos
+        {
+            OpenFirestoreConnection();
+            Query query = db.Collection("Solicitudes").WhereEqualTo("EmailCompany", Email);
+            List<RequestModel> lstJobs = new List<RequestModel>();
+            //Dictionary<string, object> req = null;
+            QuerySnapshot requestSnapshot = await query.GetSnapshotAsync();
+
+            foreach (DocumentSnapshot documentSnapshot in requestSnapshot.Documents) //Recorremos el resultado de la consulta y lo añadimos a la lista
+            {
+                if (documentSnapshot.Exists) // Si el documento existe
+                {
+                    RequestModel job = documentSnapshot.ConvertTo<RequestModel>();
+                    job.JobId = documentSnapshot.Id;
+                    lstJobs.Add(job);
+
+                }
+            }
+            return lstJobs;
+        }
+
+        public void DeleteRequest(string id)
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                DocumentReference empRef = db.Collection("Solicitudes").Document(id);
+                empRef.DeleteAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async void ChangeRequestStatus(string id, string status)
+        {
+            OpenFirestoreConnection(); // Establece la conexión
+            try
+            {
+                docRef = db.Collection("Solicitudes").Document(id);
+
+                Dictionary<string, object> update = new Dictionary<string, object>
+                {
+                { "Estatus", status }
+                };
+
+                await docRef.UpdateAsync(update);
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

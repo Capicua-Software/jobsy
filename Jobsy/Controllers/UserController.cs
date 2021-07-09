@@ -171,8 +171,8 @@ namespace Jobsy.Controllers
 
         public async Task<List<RequestModel>> RequestLoader()
         {
-            string Cedula = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
-            List<RequestModel> requestModel = await user.GetRequestedJobs(Cedula);
+            string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+            List<RequestModel> requestModel = await user.GetRequestedJobs(Email);
 
             return requestModel;
         }

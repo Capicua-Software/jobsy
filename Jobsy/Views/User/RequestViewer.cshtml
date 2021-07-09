@@ -6,14 +6,19 @@
     List<ENTITY_L.Models.Request.RequestModel> RequestedJobs = (List<ENTITY_L.Models.Request.RequestModel>)ViewBag.RequestedJobs; // Llama al metodo que se encuenta en la API
 
 }
-<h1 style="" align="center">Empleos a los que ha aplicado</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<div class="card container d-flex justify-content-center mb-5" style="margin-top: 10rem;">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+<h1 style="margin-top: 7rem;" align="center">Mis solicitudes</h1>
+
+<div class="card container mb-3 mt-5 shadow p-4 rounded bg-white table-bordered ps--scrolling-x mb-3" style="margin-top: 5rem;">
 
 
-    <table class="table">
+    <table class="table mydatatable" id="mydatatable">
         <thead>
-            <tr class="table-dark">
+            <tr class="">
                 <th scope="col"><strong>Empleo</strong></th>
                 <th scope="col"><strong>Estatus</strong></th>
                 <th scope="col"><strong>Email de empresa</strong></th>
@@ -35,5 +40,19 @@
     </table>
 </div>
 
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('.mydatatable').DataTable();
+</script>
 
 

@@ -11,6 +11,7 @@ using ENTITY_L.Models.Jobs;
 using System.Net;
 using System.IO;
 using ENTITY_L.Models.RNC;
+using ENTITY_L.Models.Request;
 
 namespace Jobsy.Controllers
 {
@@ -187,6 +188,42 @@ namespace Jobsy.Controllers
             var JobInfo = EmployerAPIController.CheckRNC(id);
 
             return Json(JobInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        public async Task<ActionResult> RequestViewer()
+        {
+            ViewBag.RequestedJobs = await RequestLoader();
+            try
+            {
+                ViewBag.RequestedJobs = await RequestLoader();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message); //Lanza un mensaje en la consola en caso de error
+            }
+
+            return View();
+        }
+
+        public async Task<List<RequestModel>> RequestLoader()
+        {
+            string Email = ClaimsPrincipal.Current.FindFirst(ClaimTypes.Email).Value;
+            List<RequestModel> requestModel = await Employer.GetRequestedJobs(Email);
+
+            return requestModel;
+        }
+
+
+        public async Task<ActionResult> ChangeRequestStatus(string id, string status)
+        {
+            Employer.ChangeRequestStatus(id, status);
+            return RedirectToAction("RequestViewer");
+        }
+
+        public async Task<ActionResult> DeleteRequest(string id)
+        {
+            Employer.DeleteRequest(id);
+            return RedirectToAction("RequestViewer");
         }
 
 

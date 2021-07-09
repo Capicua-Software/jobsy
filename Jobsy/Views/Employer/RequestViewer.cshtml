@@ -1,0 +1,127 @@
+﻿@model ENTITY_L.Models.Request.RequestModel
+
+@{
+    ViewBag.Title = "RequestViewer";
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    List<ENTITY_L.Models.Request.RequestModel> RequestedJobs = (List<ENTITY_L.Models.Request.RequestModel>)ViewBag.RequestedJobs; // Llama al metodo que se encuenta en la API
+
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+<h1 style="" align="center">Empleos a los que ha aplicado</h1>
+
+<div class="container mb-3 mt-3 shadow p-4 rounded bg-white table-bordered ps--scrolling-x" style="margin-top: 10rem;">
+
+
+    <table class="table mydatatable p-3" id="mydatatable">
+        <thead>
+            <tr class="">
+                <th scope="col"><strong>Cedula</strong></th>
+                <th scope="col"><strong>Email de postulante</strong></th>
+                <th scope="col"><strong>Estatus</strong></th>
+                <th scope="col"><strong>Empleo</strong></th>
+                <th scope="col"><strong>Fecha</strong></th>
+                <th scope="col"><strong>Mensaje</strong></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in RequestedJobs)
+            {
+                <tr id="row_">
+                    <th>@item.CedulaUser</th>
+                    <th>@item.EmailUser</th>
+                    <td>@item.Estatus</td>
+                    <td>@item.Job</td>
+                    <td>@item.Date</td>
+                    <td>@item.Message</td>
+
+                    <td>
+                        <a data-toggle="modal" class="col-md-4 btn btn-success btn-floating" onclick="ChangeStatus('@item.JobId', 'Aprobado')" style="margin-left: 3%;">
+                            <i class="fas fa-check"></i>
+                        </a>
+
+                        <a href="" class="col-md-4 btn btn-warning btn-floating" onclick="ChangeStatus('@item.JobId', 'Rechazado')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                            <i class="fas fa-times"></i>
+                        </a>
+                        <a href="" class="col-md-4 btn btn-danger btn-floating" onclick="ConfirmDelete('@item.JobId')" style="margin-left: 3%;" data-mdb-toggle="modal">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.Partial("~/Views/ModalViews/DeleteModal.cshtml")
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('.mydatatable').DataTable();
+</script>
+
+<script>
+
+    function ConfirmDelete(Id) {
+        $("#hiddenTxt").val(Id);
+        $("#deleteModal").modal("show");
+    }
+
+    var Delete = function () {
+
+        var Id = $("#hiddenTxt").val();
+
+        $.ajax({
+            type: "POST",
+            url: "DeleteRequest",
+            data: {
+                id: Id
+            },
+            success: function (result) {
+                $("#deleteModal").modal("hide");
+                $("#row_" + category).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>
+
+<script>
+
+    var ChangeStatus = function (Id, Status) {
+
+        //var Id = $("#hiddenTxt").val();
+        //var _Status = Status;
+
+        $.ajax({
+            type: "POST",
+            url: "ChangeRequestStatus",
+            data: {
+                id: Id,
+                status: Status
+
+            },
+            success: function (result) {
+                //$("#deleteModal").modal("hide");
+                //$("#row_" + category).remove();
+            }
+        })
+
+        location.reload();
+    }
+
+
+</script>

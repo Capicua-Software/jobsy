@@ -246,8 +246,10 @@ namespace DATA_L.JobsD
             return jobsfound;
         }
 
-        public async Task<List<JobsModel>> Searchbycategoryandkeyword(string categories, string keyword)
+        public async Task<List<JobsModel>> Searchbycategoryandkeyword(string categories, string key)
         {
+            string keyword = key.ToLower();
+
             OpenFirestoreConnection();
             Query Query = db.Collection("Jobs").WhereEqualTo("Category", categories);
             QuerySnapshot QuerySnapshot = await Query.GetSnapshotAsync();

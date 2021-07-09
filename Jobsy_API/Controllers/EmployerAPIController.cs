@@ -9,6 +9,7 @@ using System.Web.Http;
 using DATA_L.EmployerD;
 using ENTITY_L.Models.Employer;
 using ENTITY_L.Models.Jobs;
+using ENTITY_L.Models.Request;
 using ENTITY_L.Models.RNC;
 using Newtonsoft.Json;
 
@@ -90,7 +91,36 @@ namespace Jobsy_API.Controllers
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return null;
             }
+
         }
+
+        [HttpGet]
+        [Route("api/Employer/GetRequestedJobs")]  // Ruta de la API
+        public async Task<List<RequestModel>> GetRequestedJobs(string Email)
+        {
+            List<RequestModel> requests = await employer.Loadrequest(Email);
+
+            return requests; //Retorna una lista 
+        }
+
+
+        [HttpGet]
+        [Route("api/Employer/DeleteRequest")]  // Ruta de la API
+        public void DeleteRequest(string id)
+        {
+            employer.DeleteRequest(id);
+
+
+        }
+
+        
+        [HttpPost]
+        [Route("api/Employer/ChangeRequestStatus")]  // Ruta de la API
+        public void ChangeRequestStatus(string id, string status)
+        {
+            employer.ChangeRequestStatus(id, status);
+        }
+
 
     }
 }
