@@ -74,5 +74,7 @@ namespace ENTITY_L.Models.Employer
         [FirestoreProperty]
         [DataType(DataType.Text)]
         public string valido { get; set; }
+
+        public static string image;
     }
 }

@@ -2,8 +2,7 @@
 @{
     var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
     var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
-    var Logo = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Actor).Value;
-
+   
 }
 
 @switch (Role)
@@ -51,10 +50,10 @@
        data-mdb-toggle="dropdown"
        data-mdb-display="static"
        aria-expanded="false">
-        <div style="background-image: url(@Logo); width:50px; height:50px; background-position-x:center; background-position-y:center; background-size:cover"
+        <div style="background-image: url(@ENTITY_L.Models.Employer.EmployerModel.image); width:50px; height:50px; background-position-x:center; background-position-y:center; background-size:cover"
              class="rounded-circle"
              alt=""
-             loading="lazy" ></div>
+             loading="lazy"></div>
     </a>
 
     <ul class="dropdown-menu dropdown-menu-end">
