@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,20 +52,48 @@ namespace Jobsy.Controllers
             return View(); //Retorna la vista
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<ActionResult> Searchjobs(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
+
+
+        public async Task<ActionResult> Searchjobs()
         {
             ViewBag.AllCategory = await category.LoadCategories();
             ViewBag.JobsFound = JobsFound;
+            return View();
+        }
 
-            if (process == null && keyword != "" && ViewBag.JobsFound == null)
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<ActionResult> Search(string categories, string keyword, string process)
+        {
+            if (categories != null && keyword != "")
+            {
+               await Searchbycategoryandkeyword(categories, keyword);
+            }
+            else if (categories != null && keyword == "")
+            {
+               await SearchByCategory(categories);
+            }
+            else if (keyword != "" && categories == null)
+            {
+                await SearchjobsAsync(keyword, process);
+            }
+
+
+            return RedirectToAction("Searchjobs", "Index");
+
+        }
+
+
+
+        public async Task SearchjobsAsync(string keyword, string process) // Metodo para devolver una vista con todos los empleaos 
+        {
+          
+            if (process == null && keyword != "" )
             {
                 try
                 {
-                    JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API
-                  
-                    ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
+                    JobsFound = null;
+                    JobsFound = await job.Searchjob(keyword); // Llama al metodo que se encuenta en la API 
                     ViewBag.KeyWord = keyword;
                  
                 }
@@ -76,20 +104,23 @@ namespace Jobsy.Controllers
             }
             else if (process == "AllJobs"  || process == null && ViewBag.JobsFound == null)
             {
-                JobsFound = await job.LoadJobsAsync();
-                ViewBag.JobsFound = JobsFound;
+                JobsFound = null;
+                JobsFound = await job.LoadJobsAsync();             
                 ViewBag.KeyWord = "Todos los empleos";
             }
-
-            JobsFound = null;
-            return View(); //Retorna la vista
+           
         }
 
-        public async Task<ActionResult> SearchByCategory(string keyword)
+        public async Task SearchByCategory(string category)
         {
-            JobsFound = await job.SearchJobByCategory(keyword);
-            ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag
-            return RedirectToAction("Searchjobs", "Index");
+            JobsFound = await job.SearchJobByCategory(category);
+            ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag           
+        }
+
+        public async Task Searchbycategoryandkeyword(string categories, string keyword)
+        {
+            JobsFound = await job.Searchbycategoryandkeyword(categories,keyword);
+            ViewBag.JobsFound = JobsFound; //Guardamos el resultado del metodo en el Viewbag           
         }
 
     }

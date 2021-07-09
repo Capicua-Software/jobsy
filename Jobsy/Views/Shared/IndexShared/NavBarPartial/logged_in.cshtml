@@ -3,7 +3,21 @@
     var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
     var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
     var Logo = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Actor).Value;
+
 }
+
+@switch (Role)
+{
+    case "User":
+        @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/Roles/user_logged_in.cshtml");
+        break;
+
+    case "Employer":
+        @Html.Partial("~/Views/Shared/IndexShared/NavBarPartial/Roles/employer_logged_in.cshtml");
+        break;
+}
+
+
 
 <style>
     .navbar-user-text {
@@ -33,11 +47,10 @@
        data-mdb-toggle="dropdown"
        data-mdb-display="static"
        aria-expanded="false">
-        <img src="@Logo"
+        <div style="background-image: url(@Logo); width:50px; height:50px; background-position-x:center; background-position-y:center; background-size:cover"
              class="rounded-circle"
-             height="35"
              alt=""
-             loading="lazy" />
+             loading="lazy" ></div>
     </a>
 
     <ul class="dropdown-menu dropdown-menu-end">

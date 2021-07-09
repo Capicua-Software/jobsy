@@ -11,13 +11,14 @@ using System.IO;
 using Firebase.Auth;
 using System.Security.Claims;
 using ENTITY_L.Models.Jobs;
+using DATA_L.JobsD;
 
 namespace DATA_L.EmployerD
 {
     public class EmployerD: FirebaseCore
     {
         static string Default = "https://firebasestorage.googleapis.com/v0/b/jobsy-e4cf0.appspot.com/o/avatar-default.png?alt=media&token=04c01539-770b-4e7f-b883-13b28d963494";
-        
+        Jobs Jobs = new Jobs();
         public async Task<List<EmployerModel>> LoadEmployerAsync()
         {
             OpenFirestoreConnection(); // Establece la conexión
@@ -106,8 +107,9 @@ namespace DATA_L.EmployerD
                 };
 
 
-
             await docRef.UpdateAsync(update);
+
+            await Jobs.EditjobLogo(model.Logo, model.Company);
             return model; // Retorna el modelo
 
         }

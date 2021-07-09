@@ -1,0 +1,39 @@
+﻿@model List<ENTITY_L.Models.Request.RequestModel>
+
+@{
+    ViewBag.Title = "RequestViewer";
+    Layout = "~/Views/Shared/IndexShared/_IndexNavbar.cshtml";
+    List<ENTITY_L.Models.Request.RequestModel> RequestedJobs = (List<ENTITY_L.Models.Request.RequestModel>)ViewBag.RequestedJobs; // Llama al metodo que se encuenta en la API
+
+}
+<h1 style="" align="center">Empleos a los que ha aplicado</h1>
+
+<div class="card container d-flex justify-content-center mb-5" style="margin-top: 10rem;">
+
+
+    <table class="table">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col"><strong>Empleo</strong></th>
+                <th scope="col"><strong>Estatus</strong></th>
+                <th scope="col"><strong>Email de empresa</strong></th>
+                <th scope="col"><strong>Mensaje</strong></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in RequestedJobs)
+            {
+                <tr>
+                    <th>@item.Job</th>
+                    <td>@item.Estatus</td>
+                    <td>@item.EmailCompany</td>
+                    <td>@item.Message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -11,16 +11,17 @@ namespace ENTITY_L.Models.Authentication
 {
     public class LoginModel
     {
-        [Required]
+        [Required (ErrorMessage = "Este campo es requerido")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este campo es requerido")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
+        
         public string Password { get; set; }
-
+        public string Cedula { get; set; }
         public string Logo { get; set; }
         public string State { get; set; }
         public string Role { get; set; }
