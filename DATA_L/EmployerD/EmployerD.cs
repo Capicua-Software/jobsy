@@ -93,6 +93,7 @@ namespace DATA_L.EmployerD
                 {
                 { "Id", model.Id },
                 { "Company", model.Company },
+                { "Name", model.Company },
                 { "URL", model.URL },
                 { "RNC", model.RNC },
                 { "Tel", model.Tel },
@@ -110,6 +111,7 @@ namespace DATA_L.EmployerD
 
             await docRef.UpdateAsync(update);
             ENTITY_L.Models.Employer.EmployerModel.image = model.Logo;
+            ENTITY_L.Models.Employer.EmployerModel.NameC = model.Company;
             await Jobs.EditjobLogo(model.Logo, model.Company);
             return model; // Retorna el modelo
 

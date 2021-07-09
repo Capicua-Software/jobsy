@@ -2,7 +2,7 @@
 @{
     var Name = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Name).Value;
     var Role = @ClaimsPrincipal.Current.FindFirst(ClaimTypes.Role).Value;
-   
+
 }
 
 @switch (Role)
@@ -38,7 +38,7 @@
 </style>
 
 
-<span class="navbar-user-text" style="margin-right: 2rem; z-index: 10000;">@Name</span>
+<span class="navbar-user-text" style="margin-right: 2rem; z-index: 10000;">@ENTITY_L.Models.Employer.EmployerModel.NameC</span>
 
 <div class="btn-group mb-2" style="border-radius: 20px;margin-top:.5%;">
 
