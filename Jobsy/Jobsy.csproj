@@ -541,6 +541,7 @@
     <Content Include="Views\ModalViews\Create\CreateCategoryModal.cshtml" />
     <Content Include="Views\Employer\RequestViewer.cshtml" />
     <Content Include="Views\Shared\IndexShared\NavBarPartial\Roles\admin_logged_in.cshtml" />
+    <Content Include="Views\Employer\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

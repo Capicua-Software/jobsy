@@ -226,7 +226,11 @@ namespace Jobsy.Controllers
             return RedirectToAction("RequestViewer");
         }
 
-
+        public async Task<ActionResult> Requests()
+        {
+            ViewBag.requestModel = await RequestLoader();
+            return View();
+        }
 
     }
 }
