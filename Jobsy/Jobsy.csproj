@@ -166,8 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Dashboard\style.css" />
-    <Content Include="Content\Cookies\scricookies.js" />
-    <Content Include="Content\Cookies\stylecookies.css" />
     <Content Include="Content\Index\GLogo.svg" />
     <Content Include="Content\Index\header_wallpaper.png" />
     <Content Include="Content\Index\Logo.svg" />
@@ -510,7 +508,6 @@
     <Content Include="Views\Admin\Admins.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
-    <Content Include="Views\Shared\Cookies.cshtml" />
     <Content Include="Views\Category\LoadCategoryAsync.cshtml" />
     <Content Include="Views\Category\PostCategory.cshtml" />
     <Content Include="Views\Category\EditCategory.cshtml" />
